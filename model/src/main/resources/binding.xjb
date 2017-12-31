@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" jaxb:version="2.1"
+	xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+	 xmlns:annox="http://annox.dev.java.net"
+	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm"
+	jaxb:extensionBindingPrefixes="hj orm annox">
+
+
+	<!-- Annotate the following classes with XmlRootElement -->
+
+	<jaxb:bindings schemaLocation="common.xsd" node="/xs:schema">
+
+		<hj:persistence>
+			<hj:default-one-to-many fetch="EAGER">
+				<orm:join-column />
+				<orm:cascade>
+					<orm:cascade-all />
+				</orm:cascade>
+			</hj:default-one-to-many>
+			<hj:default-many-to-many fetch="EAGER">
+				<orm:join-table />
+				<orm:cascade>
+					<orm:cascade-merge />
+				</orm:cascade>
+			</hj:default-many-to-many>
+			<hj:default-element-collection fetch="EAGER" />
+		</hj:persistence>
+
+	</jaxb:bindings>
+	
+	
+</jaxb:bindings>

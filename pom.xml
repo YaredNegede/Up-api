@@ -1,0 +1,191 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sira</groupId>
+	<artifactId>sira</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>sira</name>
+	<description>sira</description>
+
+	<modules>
+		<module>model</module>
+		<module>api</module>
+		<module>server</module>
+		<module>gateway</module>
+	</modules>
+
+	<properties>
+		<hibernate.version>5.0.5.Final</hibernate.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
+		<spring.version>4.2.3.RELEASE</spring.version>
+		<slf4j.version>1.7.12</slf4j.version>
+		<atomikos.version>4.0.0M4</atomikos.version>
+		<jmockit.version>1.17</jmockit.version>
+		<junit.version>4.12</junit.version>
+		<gson.version>2.3.1</gson.version>
+		<sira.version>0.0.1-SNAPSHOT</sira.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jvnet.hyperjaxb3</groupId>
+					<artifactId>maven-hyperjaxb3-plugin</artifactId>
+					<version>0.6.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<variant>jpa2</variant>
+						<args>
+							<arg>-Xannotate</arg>
+							<arg>-Xinject-code</arg>
+						</args>
+						<extension>true</extension>
+						<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+
+						<roundtripTestClassName>RoundtripTest</roundtripTestClassName>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>hibernate3-maven-plugin</artifactId>
+					<version>3.0</version>
+					<executions>
+						<execution>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>hbm2ddl</goal>
+							</goals>
+						</execution>
+					</executions>
+
+					<dependencies>
+						<dependency>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-entitymanager</artifactId>
+							<version>3.6.7.Final</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+		<plugins>
+
+
+		</plugins>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.sira</groupId>
+				<artifactId>gateway</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sira</groupId>
+				<artifactId>model</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+			</dependency>
+
+			<!-- Database -->
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>2.3.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>1.0.0.Final</version>
+			</dependency>
+			<!-- Test dependencies -->
+			<!-- Roundtrip -->
+			<dependency>
+				<groupId>org.jvnet.hyperjaxb3</groupId>
+				<artifactId>hyperjaxb3-ejb-roundtrip</artifactId>
+				<version>0.6.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hibernate.javax.persistence</groupId>
+						<artifactId>hibernate-jpa-2.0-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- Hibernate Dependencies -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>5.0.2.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jmockit</groupId>
+				<artifactId>jmockit</artifactId>
+				<version>${jmockit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jmockit</groupId>
+				<artifactId>jmockit-coverage</artifactId>
+				<version>${jmockit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit-coverage</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
+	jaxb:extensionBindingPrefixes="hj orm annox"
+	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	elementFormDefault="qualified">
+
+	<xs:element name="project" type="Project" />
+
+	<xs:complexType name="Project">
+		<xs:choice>
+			<xs:element name="id" type="ID" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="tasks" type="Task" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="Task">
+		<xs:choice>
+			<xs:element name="id" type="ID" />
+			<xs:element name="name" type="xs:string" />
+		</xs:choice>
+	</xs:complexType>
+
+</xs:schema>

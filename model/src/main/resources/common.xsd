@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
+	jaxb:extensionBindingPrefixes="hj orm annox"
+	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	elementFormDefault="qualified">
+
+	<xs:element name="Address" />
+
+	<xs:simpleType name="ID">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				The ITG assigned 5 digit
+				employee identification
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="12" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Country">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" default="ETHIOPIA" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:language">
+			<xs:annotation>
+				<xs:documentation>The registered IANA country code of the format
+					xx-xx. For example: en-us.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:simpleType name="City">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Zip">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:maxInclusive value="99999" />
+			<xs:minInclusive value="00001" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="City" type="City">
+				<xs:annotation>
+					<xs:documentation>City of residence</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Zip" type="xs:int" />
+				<xs:element name="postalCode" type="xs:string" />
+			</xs:choice>
+			<xs:element name="Country" type="Country">
+				<xs:annotation>
+					<xs:documentation>The country of origin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Office">
+				<xs:annotation>
+					<xs:documentation>The building and room number, for example 5/7562
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d+/\d+" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Phone">
+				<xs:annotation>
+					<xs:documentation>The telephone number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(\(\d\d\d\)|\d\d\d)[ \t]*\d\d\d[- \t]\d\d\d\d" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="Account">
+		<xs:sequence>
+			<xs:element name="type" type="xs:string" />
+			<xs:element name="number" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Profile">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="skills" type="Skill" minOccurs="1"
+				maxOccurs="20" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Skill">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="Description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+</xs:schema>
