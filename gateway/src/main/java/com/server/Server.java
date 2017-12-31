@@ -32,9 +32,7 @@ public class Server extends HttpServlet {
 	@Override
 	public void init(){
 
-		this.applicationContext =  WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
-		
-		this.setContext((Context) applicationContext.getBean("context"));
+		this.context = new Context(WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext()));
 
 	}
 
@@ -61,7 +59,7 @@ public class Server extends HttpServlet {
 
 	protected JsonElement dispach(String jeElement){
 
-		return getContext().process();
+		return this.getContext().process();
 		
 	}
 
