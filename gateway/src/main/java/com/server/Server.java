@@ -8,11 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.google.gson.JsonElement;
-import com.red.api.request.Context;
+import com.sira.api.request.Context;
 
 /**
  * Servlet implementation class Sever.
@@ -25,12 +23,12 @@ public class Server extends HttpServlet {
 
 	private static Logger logger = Logger.getLogger(Server.class);
 
-	private ApplicationContext applicationContext;
-
 	private Context context;
 
 	@Override
 	public void init(){
+		
+		logger.info("Initialization of server");
 
 		this.context = new Context(WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext()));
 
@@ -41,37 +39,24 @@ public class Server extends HttpServlet {
 			throws ServletException, 
 			IOException{
 		
-		JsonElement responce = null;
-		
-		String request = req.getReader().readLine();
-		
 		try {
 			
-			responce = this.dispach(request);
+			this.getContext().process(req.getReader());
 			
 		} catch (Exception e) {
 
-			responce = this.getContext().getGson().toJsonTree(responce);
+			logger.error(e);
+			
+			resp.getWriter().write(this.getContext().getGson().toJsonTree(e).toString());
 			
 		}
 		
-	}
-
-	protected JsonElement dispach(String jeElement){
-
-		return this.getContext().process();
 		
 	}
 
 	public Context getContext() {
 
 		return this.context;
-
-	}
-
-	public void setContext(Context context) {
-
-		this.context = context;
 
 	}
 

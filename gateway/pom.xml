@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>gateway</artifactId>
 	<packaging>jar</packaging>
-	
+
 	<parent>
 		<groupId>com.sira</groupId>
 		<artifactId>sira</artifactId>
@@ -12,6 +12,11 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>com.sira</groupId>
+			<artifactId>model</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

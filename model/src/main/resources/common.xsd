@@ -88,7 +88,6 @@
 		</xs:sequence>
 	</xs:complexType>
 
-
 	<xs:complexType name="Account">
 		<xs:sequence>
 			<xs:element name="type" type="xs:string" />
@@ -110,6 +109,5 @@
 			<xs:element name="Description" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
-
 
 </xs:schema>

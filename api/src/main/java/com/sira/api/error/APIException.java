@@ -1,4 +1,4 @@
-package com.red.api.error;
+package com.sira.api.error;
 
 public class APIException extends Exception{
 

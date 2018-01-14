@@ -1,5 +1,6 @@
-package com.red.api.request;
+package com.sira.api.request;
 
+import java.io.BufferedReader;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -19,20 +20,31 @@ public class Context {
 	
 	}
 
-	public JsonElement process() {
+	/**
+	 * read from input stream and create responce
+	 * @param in
+	 * @return
+	 */
+	public JsonElement process(BufferedReader in) {
 		return null;
 	}
 
 	public Gson getGson() {
+		
 		return new Gson();
+		
 	}
 
 	public Map<API, String> getDataAccess() {
+		
 		return this.dataAccess;
+		
 	}
 
-	public void setDataAccess(Map<API, String> dataAccess) {
-		this.dataAccess = dataAccess;
+	public ApplicationContext getApplicationContext() {
+
+		return applicationContext;
+		
 	}
 
 }

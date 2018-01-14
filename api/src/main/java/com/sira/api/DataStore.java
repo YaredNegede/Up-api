@@ -1,7 +1,7 @@
-package com.red.api;
+package com.sira.api;
 
 import com.google.gson.JsonElement;
-import com.red.api.error.APIException;
+import com.sira.api.error.APIException;
 
 public interface DataStore {
 

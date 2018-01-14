@@ -1,4 +1,4 @@
-package com.red.api;
+package com.sira.api;
 
 public abstract class Query {
 
