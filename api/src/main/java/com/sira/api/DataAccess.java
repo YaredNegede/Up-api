@@ -18,13 +18,13 @@ public abstract class DataAccess extends Query{
 	private Security security;
 
 	private Request request;	
-	
+
 	public DataAccess(EntityManager entitimanager, Security security,Request request) {
 
 		this.entitimanager = entitimanager;
 
 		this.security = security;
-		
+
 		this.request = request;
 
 	}
@@ -147,4 +147,10 @@ public abstract class DataAccess extends Query{
 
 	}
 
+	public JsonElement process(JsonElement data) throws APIException{
+		
+		return data;
+		
+	}
+	
 }

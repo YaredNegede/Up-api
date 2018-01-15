@@ -52,7 +52,11 @@
 		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 
-	<bean id="chebEntityManagerFactoryBean"
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
+	</bean>
+
+	<bean id="entityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 
 		<property name="dataSource" ref="siraDataSource" />
@@ -61,5 +65,4 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 	</bean>
-
 </beans>

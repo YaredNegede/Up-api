@@ -1,4 +1,4 @@
-package com.server;
+package com.server.error;
 
 public class GateException extends Exception {
 

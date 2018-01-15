@@ -6,7 +6,6 @@ import java.util.Map;
 import com.sira.api.EmployeeInfo;
 import com.sira.api.EmployerInfo;
 import com.sira.api.ProjectInfo;
-import com.sira.api.SkillInfo;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Project;
@@ -26,8 +25,6 @@ public class APIFactory {
 		
 		mapping.put(RequestEntity.Project, ProjectInfo.class);
 		
-		mapping.put(RequestEntity.Skill, SkillInfo.class);
-		
 	}
 	
 	public void initAPI() {
@@ -37,8 +34,6 @@ public class APIFactory {
 		mapping.put(RequestEntity.Employer, EmployerInfo.class);
 		
 		mapping.put(RequestEntity.Project, ProjectInfo.class);
-		
-		mapping.put(RequestEntity.Skill, SkillInfo.class);
 		
 	}
 	
