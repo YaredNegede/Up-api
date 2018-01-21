@@ -1,12 +1,12 @@
 package com.sira.api;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
 import com.sira.api.error.MSG;
-import com.sira.api.request.Request;
 import com.sira.api.security.Security;
 
 public abstract class DataAccess extends Query{
@@ -17,15 +17,15 @@ public abstract class DataAccess extends Query{
 
 	private Security security;
 
-	private Request request;	
+	private Class type;
 
-	public DataAccess(EntityManager entitimanager, Security security,Request request) {
+	public DataAccess(EntityManagerFactory entitimanager, Security security, String type) throws ClassNotFoundException {
 
-		this.entitimanager = entitimanager;
+		this.entitimanager = entitimanager.createEntityManager();
 
 		this.security = security;
-
-		this.request = request;
+		
+		this.type = Class.forName(type);
 
 	}
 
@@ -45,19 +45,14 @@ public abstract class DataAccess extends Query{
 		return gson;
 	}
 
-	public Request getRequest() {
-		return request;
-	}
 
 	public void Add(JsonElement data) throws APIException {
 
-		Request request = this.getGson().fromJson(data, Request.class);
-
 		try {
 
-			this.getSecurity().check(request);
+			this.getSecurity().check();
 
-			this.getEntitimanager().persist(this.getGson().fromJson(request.getData(), request.getType()));
+			this.getEntitimanager().persist(this.getGson().fromJson(data, this.getType()));
 
 		}catch (Exception e) {
 
@@ -67,15 +62,19 @@ public abstract class DataAccess extends Query{
 
 	}
 
-	public void Update(JsonElement data) throws APIException {
+	private Class getType() {
 
-		Request request = this.getGson().fromJson(data, Request.class);
+		return this.type;
+	
+	}
+
+	public void Update(JsonElement data) throws APIException {
 
 		try {
 
-			this.getSecurity().check(request);
+			this.getSecurity().check();
 
-			this.getEntitimanager().merge(this.getGson().fromJson(request.getData(), request.getType()));
+			this.getEntitimanager().merge(this.getGson().fromJson(data, this.getType()));
 
 		} catch (Exception e) {
 
@@ -87,13 +86,13 @@ public abstract class DataAccess extends Query{
 
 	public void Delete(JsonElement data) throws APIException {
 
-		Request request = this.getGson().fromJson(data, Request.class);
-
 		try {
 
-			this.getSecurity().check(request);
+			this.getSecurity().check();
 
-			this.getEntitimanager().remove(request.getId());
+			Object entity = this.getEntitimanager().find(this.getType(),Long.parseLong(data.getAsString()));
+
+			this.getEntitimanager().remove(entity);
 
 		} catch (Exception e) {
 
@@ -105,15 +104,13 @@ public abstract class DataAccess extends Query{
 
 	public JsonElement View(JsonElement data) throws APIException {
 
-		Request request = this.getGson().fromJson(data, Request.class);
-
 		Object result;
 
 		try {
 
-			this.getSecurity().check(request);
+			this.getSecurity().check();
 
-			result = this.getEntitimanager().find(request.getType(),request.getId());
+			result = this.getEntitimanager().find(this.getType(),data.getAsLong());
 
 		}catch (Exception e) {
 
@@ -127,15 +124,13 @@ public abstract class DataAccess extends Query{
 
 	public JsonElement ViewAll(JsonElement data) throws APIException {
 
-		Request request = this.getGson().fromJson(data, Request.class);
-
 		Object result;
 
 		try {
 
-			this.getSecurity().check(request);
+			this.getSecurity().check();
 
-			result = this.getEntitimanager().find(request.getType(),request.getId());
+			result = this.getEntitimanager().find(this.getType(),data.getAsLong());
 
 		} catch (Exception e) {
 
@@ -147,10 +142,4 @@ public abstract class DataAccess extends Query{
 
 	}
 
-	public JsonElement process(JsonElement data) throws APIException{
-		
-		return data;
-		
-	}
-	
 }

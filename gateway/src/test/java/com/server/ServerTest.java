@@ -1,25 +1,24 @@
 package com.server;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.server.controller.EmployeeController;
-import com.sira.api.request.Request;
-
-import mockit.Expectations;
-import mockit.Mocked;
+import com.sira.api.request.Context;
+import com.sira.model.stateschema.model.Employee;
 
 public class ServerTest {
+
+	private static Logger logger = Logger.getLogger(ServerTest.class);
 
 	Gson gson = new Gson();
 
@@ -36,42 +35,36 @@ public class ServerTest {
 
 	}
 
-	@Test(expected=Exception.class)
+	@Test
 	public void test002() throws ServletException, IOException {
-
-		EmployeeController server = new EmployeeController();
-		long id  = 12;
-
-		Request request = new Request(id, "");
 
 		MockHttpServletResponse resp = new MockHttpServletResponse();
 
 		MockHttpServletRequest req = new MockHttpServletRequest();
 
-		req.setContent(gson.toJson(request).getBytes());
+		Employee employee = new Employee();
 
-		server.doPost(req , resp);
+		employee.setUsername("username");
 
-	}
+		employee.setPassword("password");
 
-//	@Test
-	public void test003(@Mocked final HttpServletRequest req) throws ServletException, IOException {
+		JsonElement element = gson.toJsonTree(employee);
 
-		EmployeeController server = new EmployeeController();
+		ResourceRequest resourceRequest = new ResourceRequest(element);
+
+		String resres = gson.toJson(resourceRequest);
 		
-		MockHttpServletResponse resp = new MockHttpServletResponse();
-
-//		final MockHttpServletRequest req = new MockHttpServletRequest();
+		logger.info("reuest is "+resres);
 		
-		String file = "src/test/resources/com/server/request/employee/AddEmployee.json";
-		Reader in = new FileReader(file );
-		final BufferedReader rd = new BufferedReader(in );
+		byte[] content = resres.getBytes();
 
-		new Expectations () {{
-			req.getReader();this.result = rd;
-		}};
+		req.setContent(content);
 
-		server.doPost(req , resp);
+		Server server = new  EmployeeController();
+
+		server.context = new Context(new ClassPathXmlApplicationContext("/applicationContext.xml"));
+		
+		server.doPost(req, resp);
 
 	}
 

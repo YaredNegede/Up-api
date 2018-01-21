@@ -1,16 +1,13 @@
 package com.sira.api;
 
-import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
-import com.sira.api.request.Request;
 import com.sira.api.security.Security;
 
 public class EmployerInfo extends DataAccess{
 
-	public EmployerInfo(EntityManager entitimanager, Security security, Request request) {
-		
-		super(entitimanager, security, request);
-		
+	public EmployerInfo(EntityManagerFactory entitimanager, Security security, String type) throws ClassNotFoundException {
+		super(entitimanager, security,type);
 	}
 
 }

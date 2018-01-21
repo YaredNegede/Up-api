@@ -23,11 +23,14 @@ import com.sira.api.request.Context;
  */
 public abstract class Server extends HttpServlet  implements Controller{
 
-	private static final long serialVersionUID = 5983443603268366839L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(Server.class);
 
-	private Context context;
+	protected Context context;
 
 	@Override
 	public void init(){

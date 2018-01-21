@@ -1,12 +1,28 @@
 package com.server;
 
+import java.io.Serializable;
+
 import com.google.gson.JsonElement;
 
-public class ResourceRequest {
+public class ResourceRequest implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private JsonElement element;
+
+	public ResourceRequest(JsonElement element) {
+
+		this.element = element;
+		
+	}
 
 	public JsonElement getJsonElement() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.element;
+	
 	}
 
 }

@@ -12,8 +12,11 @@ import com.sira.api.request.RequestEntity;
 
 public class ProjectController extends Server {
 
-	private static final long serialVersionUID = 7963058373408515467L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(ProjectController.class);
 	
 	public ResourceResponce add(ResourceRequest resourceRequest) throws GateException {

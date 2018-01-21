@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3.0.1.xsd"
 	version="3.0.1">
 
-	<display-name>cheb-server</display-name>
+	<display-name>server</display-name>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -13,22 +13,41 @@
 	</context-param>
 
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
 	</listener>
-	
+
 	<servlet>
-		<servlet-name>server</servlet-name>
-		<servlet-class>com.server.Server</servlet-class>
+		<servlet-name>employee</servlet-name>
+		<servlet-class>com.server.controller.EmployeeController
+		</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>employer</servlet-name>
+		<servlet-class>com.server.controller.EmployerController
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>project</servlet-name>
+		<servlet-class>com.server.controller.ProjectController</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
-		<servlet-name>server</servlet-name>
-		<url-pattern>/server</url-pattern>
+		<servlet-name>employee</servlet-name>
+		<url-pattern>/server/employee</url-pattern>
 	</servlet-mapping>
-	
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
+
+	<servlet-mapping>
+		<servlet-name>employer</servlet-name>
+		<url-pattern>/server/employer</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>project</servlet-name>
+		<url-pattern>/server/project</url-pattern>
+	</servlet-mapping>
 
 </web-app>

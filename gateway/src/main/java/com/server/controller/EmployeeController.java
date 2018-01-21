@@ -12,7 +12,10 @@ import com.sira.api.request.RequestEntity;
 
 public class EmployeeController extends Server{
 
-	private static final long serialVersionUID = 8759857597025366877L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
 

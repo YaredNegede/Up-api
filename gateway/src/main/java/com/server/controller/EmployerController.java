@@ -12,8 +12,10 @@ import com.sira.api.request.RequestEntity;
 
 public class EmployerController extends Server {
 
-	private static final long serialVersionUID = -2940743089982677664L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 	
 	public ResourceResponce add(ResourceRequest resourceRequest) throws GateException {

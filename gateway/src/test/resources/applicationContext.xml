@@ -52,17 +52,40 @@
 		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 
-	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
-	</bean>
-
 	<bean id="siraEntityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-
 		<property name="dataSource" ref="siraDataSource" />
 		<property name="persistenceUnitName" value="sirapu" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 	</bean>
+
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
+	</bean>
+
+
+	<!-- API classes -->
+
+	<bean id="security" class="com.sira.api.security.Security" />
+
+	<bean id="Employee" class="com.sira.api.EmployeeInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
+	</bean>
+
+	<bean id="Employer" class="com.sira.api.EmployerInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
+	</bean>
+
+	<bean id="Project" class="com.sira.api.ProjectInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Project" />
+	</bean>
+
 </beans>
