@@ -2,6 +2,7 @@ package com.server.controller;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
 import com.server.ResourceResponce;
 import com.server.Server;
@@ -20,55 +21,94 @@ public class EmployeeController extends Server{
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
 
 	@Override
-	public ResourceResponce add(ResourceRequest resourceRequest) throws GateException {
+	public void add(ResourceRequest resourceRequest) throws GateException {
 	
-		ResourceResponce resourceResponce = new ResourceResponce();
+		DataAccess dataAccess = null;
 		
 		try {
+			
+			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employee.name());
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employee.name());
+			dataAccess.getEntitimanager().getTransaction().begin();
+			
+			logger.info(resourceRequest.getJsonElement());
 			
 			dataAccess.Add(resourceRequest.getJsonElement());
 			
+			dataAccess.getEntitimanager().getTransaction().commit();
+			
 		} catch (APIException e) {
 
-			logger.error(e);
+			dataAccess.getEntitimanager().getTransaction().rollback();
 			
-			resourceResponce.setMessage(e.getMessage());
-			
+			throw new GateException(e.getLocalizedMessage());
 			
 		}
 		
-		return resourceResponce;
 	}
 
 	@Override
-	public ResourceResponce view(ResourceRequest resourceRequest) throws GateException {
+	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
 	
-		ResourceResponce resourceResponce = new ResourceResponce();
+		JsonElement je;
 		
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employee.name());
 			
-			dataAccess.View(resourceRequest.getJsonElement());
+			 je = dataAccess.View(resourceRequest.getJsonElement());
+			 
 			
 		} catch (APIException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
+			throw new GateException(e.getLocalizedMessage());
+			
+		}
+		
+		return je;
+	}
+
+	@Override
+	public JsonElement viewAll(ResourceRequest resourceRequest) throws GateException {
+	
+		JsonElement je;
+		
+		ResourceResponce resourceResponce ;
+		
+		DataAccess dataAccess = null;
+		
+		try {
+
+			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employee.name());
+			
+			dataAccess.getEntitimanager().getTransaction().begin();
+			
+			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
+			
+			resourceResponce = new ResourceResponce("", "OK", je);
+			
+			dataAccess.getEntitimanager().getTransaction().commit();
+			
+		} catch (APIException e) {
+
+			logger.error(e);
+			
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+			
+			dataAccess.getEntitimanager().getTransaction().rollback();
+			
+			throw new GateException(e.getLocalizedMessage());
 			
 			
 		}
 		
-		return resourceResponce;
+		return je;
 	}
 
 	@Override
-	public ResourceResponce update(ResourceRequest resourceRequest) throws GateException {
-		
-		ResourceResponce resourceResponce = new ResourceResponce();
+	public void update(ResourceRequest resourceRequest) throws GateException {
 		
 		try {
 
@@ -76,23 +116,19 @@ public class EmployeeController extends Server{
 			
 			dataAccess.Update(resourceRequest.getJsonElement());
 			
+			
 		} catch (APIException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-			
+			throw new GateException(e.getLocalizedMessage());
 			
 		}
 		
-		return resourceResponce;
-	
 	}
 
 	@Override
-	public ResourceResponce delete(ResourceRequest resourceRequest) throws GateException {
-		
-		ResourceResponce resourceResponce = new ResourceResponce();
+	public void delete(ResourceRequest resourceRequest) throws GateException {
 		
 		try {
 
@@ -100,39 +136,17 @@ public class EmployeeController extends Server{
 			
 			dataAccess.Delete(resourceRequest.getJsonElement());
 			
-		} catch (APIException e) {
-
-			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
-			
-			
-		}
-		
-		return resourceResponce;
-	}
-
-	@Override
-	public ResourceResponce viewAll(ResourceRequest resourceRequest) throws GateException {
-	
-		ResourceResponce resourceResponce = new ResourceResponce();
-		
-		try {
-
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employee.name());
-			
-			dataAccess.ViewAll(resourceRequest.getJsonElement());
 			
 		} catch (APIException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
+			throw new GateException(e.getLocalizedMessage());
 			
 			
 		}
 		
-		return resourceResponce;
 	}
+
 
 }

@@ -2,6 +2,7 @@ package com.server.controller;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
 import com.server.ResourceResponce;
 import com.server.Server;
@@ -17,10 +18,8 @@ public class EmployerController extends Server {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(EmployerController.class);
-	
-	public ResourceResponce add(ResourceRequest resourceRequest) throws GateException {
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+	public void add(ResourceRequest resourceRequest) throws GateException {
 
 		try {
 
@@ -32,41 +31,35 @@ public class EmployerController extends Server {
 
 			logger.error(e);
 
-			resourceResponce.setMessage(e.getMessage());
-
+			throw new GateException(e.getLocalizedMessage());
+			
 
 		}
 
-		return resourceResponce;
 	}
 
 	@Override
-	public ResourceResponce view(ResourceRequest resourceRequest) throws GateException {
+	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
 
-		ResourceResponce resourceResponce = new ResourceResponce();
-
+		JsonElement je = null;
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
 
-			dataAccess.View(resourceRequest.getJsonElement());
+			je = dataAccess.View(resourceRequest.getJsonElement());
 
 		} catch (APIException e) {
 
 			logger.error(e);
-
-			resourceResponce.setMessage(e.getMessage());
-
-
+			
+			throw new GateException(e.getLocalizedMessage());
+			
 		}
-
-		return resourceResponce;
+		return je;
 	}
 
 	@Override
-	public ResourceResponce update(ResourceRequest resourceRequest) throws GateException {
-
-		ResourceResponce resourceResponce = new ResourceResponce();
+	public void update(ResourceRequest resourceRequest) throws GateException {
 
 		try {
 
@@ -78,19 +71,14 @@ public class EmployerController extends Server {
 
 			logger.error(e);
 
-			resourceResponce.setMessage(e.getMessage());
-
-
+			throw new GateException(e.getLocalizedMessage());
+			
 		}
-
-		return resourceResponce;
 
 	}
 
 	@Override
-	public ResourceResponce delete(ResourceRequest resourceRequest) throws GateException {
-
-		ResourceResponce resourceResponce = new ResourceResponce();
+	public void delete(ResourceRequest resourceRequest) throws GateException {
 
 		try {
 
@@ -102,35 +90,32 @@ public class EmployerController extends Server {
 
 			logger.error(e);
 
-			resourceResponce.setMessage(e.getMessage());
-
-
+			throw new GateException(e.getLocalizedMessage());
+			
 		}
 
-		return resourceResponce;
 	}
 
 	@Override
-	public ResourceResponce viewAll(ResourceRequest resourceRequest) throws GateException {
+	public JsonElement viewAll(ResourceRequest resourceRequest) throws GateException {
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		JsonElement je = null;
 
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
 
-			dataAccess.ViewAll(resourceRequest.getJsonElement());
+			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 
 		} catch (APIException e) {
 
 			logger.error(e);
-
-			resourceResponce.setMessage(e.getMessage());
-
+			
+			throw new GateException(e.getLocalizedMessage());
 
 		}
 
-		return resourceResponce;
+		return je;
 	}
 
 }

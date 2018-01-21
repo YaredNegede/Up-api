@@ -6,7 +6,6 @@ import javax.persistence.EntityManagerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
-import com.sira.api.error.MSG;
 import com.sira.api.security.Security;
 
 public abstract class DataAccess extends Query{
@@ -55,8 +54,8 @@ public abstract class DataAccess extends Query{
 			this.getEntitimanager().persist(this.getGson().fromJson(data, this.getType()));
 
 		}catch (Exception e) {
-
-			throw new APIException(MSG.ERROR_SAVING);
+			e.printStackTrace();
+			throw new APIException(e.getMessage());
 
 		}
 
@@ -78,7 +77,7 @@ public abstract class DataAccess extends Query{
 
 		} catch (Exception e) {
 
-			throw new APIException(MSG.ERROR_UPDATE);
+			throw new APIException(e.getMessage());
 
 		}
 
@@ -96,7 +95,7 @@ public abstract class DataAccess extends Query{
 
 		} catch (Exception e) {
 
-			throw new APIException(MSG.ERROR_REMOVING);
+			throw new APIException(e.getMessage());
 
 		}	
 
@@ -114,7 +113,7 @@ public abstract class DataAccess extends Query{
 
 		}catch (Exception e) {
 
-			throw new APIException(MSG.ERROR_LOOKUP);
+			throw new APIException(e.getMessage());
 
 		}
 
@@ -134,7 +133,7 @@ public abstract class DataAccess extends Query{
 
 		} catch (Exception e) {
 
-			throw new APIException(MSG.ERROR_LOOKUP);
+			throw new APIException(e.getMessage());
 
 		}
 

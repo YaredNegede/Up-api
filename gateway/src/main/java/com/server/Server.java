@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.server.controller.Controller;
@@ -56,33 +57,37 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		ResourceRequest resourceRequest = null;
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		ResourceResponce resourceResponce ;
+
+		JsonElement js = null;
 
 		try {
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			resourceResponce = this.add(resourceRequest);
-			
+			 this.add(resourceRequest);
+
 		} catch (JsonSyntaxException e) {
 
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
+
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
 		} catch (JsonIOException e) {
-			
+
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
+
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
 		} catch (GateException e) {
 
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
-			
+
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
+
 		}
+
+		resourceResponce = new ResourceResponce("", "OK", js);
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
@@ -93,32 +98,31 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		ResourceRequest resourceRequest = null;
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		ResourceResponce resourceResponce = null ;
 
 		try {
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			resourceResponce = this.view(resourceRequest);
-			
+			this.view(resourceRequest);
+
 		} catch (JsonSyntaxException e) {
 
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
+
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
 		} catch (JsonIOException e) {
-			
+
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
+
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
 		} catch (GateException e) {
 
 			logger.error(e);
-			
-			resourceResponce.setMessage(e.getMessage());
-			
+
+
 		}
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
@@ -130,32 +134,32 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		ResourceRequest resourceRequest = null;
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		ResourceResponce resourceResponce = null ;
 
 		try {
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			resourceResponce = this.update(resourceRequest);
-			
+			this.update(resourceRequest);
+
 		} catch (JsonSyntaxException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
+			resourceResponce = new ResourceResponce("", "ERROR", null);
 
 		} catch (JsonIOException e) {
-			
+
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+			
 		} catch (GateException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-			
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+
 		}
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
@@ -168,32 +172,32 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		ResourceRequest resourceRequest = null;
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		ResourceResponce resourceResponce = null ;
 
 		try {
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			resourceResponce = this.delete(resourceRequest);
-			
+			this.delete(resourceRequest);
+
 		} catch (JsonSyntaxException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
+			resourceResponce = new ResourceResponce("", "ERROR", null);
 
 		} catch (JsonIOException e) {
-			
+
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+			
 		} catch (GateException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-			
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+
 		}
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
@@ -206,48 +210,52 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		ResourceRequest resourceRequest = null;
 
-		ResourceResponce resourceResponce = new ResourceResponce();
+		ResourceResponce resourceResponce = null ;
 
+		JsonElement je;
+		
 		try {
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			resourceResponce = this.viewAll(resourceRequest);
+			 je = this.viewAll(resourceRequest);
 			
-		} catch (JsonSyntaxException e) {
+			resourceResponce = new ResourceResponce("", "OK", je);
+
+		}catch (JsonSyntaxException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
+			resourceResponce = new ResourceResponce("", "ERROR", null);
 
 		} catch (JsonIOException e) {
-			
+
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-
+			resourceResponce = new ResourceResponce("", "ERROR", null);
+			
 		} catch (GateException e) {
 
 			logger.error(e);
 			
-			resourceResponce.setMessage(e.getMessage());
-			
-		}
+			resourceResponce = new ResourceResponce("", "ERROR", null);
 
+		}
+		
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
 
 	}
 
-	public abstract ResourceResponce viewAll(ResourceRequest resourceRequest)  throws GateException ;
+	public abstract JsonElement viewAll(ResourceRequest resourceRequest)  throws GateException ;
 
-	public abstract ResourceResponce add(ResourceRequest resourceRequest) throws GateException ;
+	public abstract void add(ResourceRequest resourceRequest) throws GateException ;
 
-	public abstract ResourceResponce view(ResourceRequest resourceRequest) throws GateException ;
+	public abstract JsonElement view(ResourceRequest resourceRequest) throws GateException ;
 
-	public abstract ResourceResponce update(ResourceRequest resourceRequest) throws GateException ;
+	public abstract void update(ResourceRequest resourceRequest) throws GateException ;
 
-	public abstract ResourceResponce delete(ResourceRequest resourceRequest) throws GateException ;
+	public abstract void delete(ResourceRequest resourceRequest) throws GateException ;
 
 	public Context getContext() {
 

@@ -2,13 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>model</artifactId>
-	
+
 	<parent>
 		<groupId>com.sira</groupId>
 		<artifactId>sira</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 
 	<properties>
 		<persistenceunit>siraPersistenceUnitName</persistenceunit>
@@ -40,19 +40,22 @@
 			<plugin>
 				<groupId>org.jvnet.hyperjaxb3</groupId>
 				<artifactId>maven-hyperjaxb3-plugin</artifactId>
-
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<args>
 						<arg>-Xannotate</arg>
 						<arg>-enableIntrospection</arg>
 					</args>
 					<packageName>com.sira.jaxb</packageName>
-
 					<schemaDirectory>src/main/resources</schemaDirectory>
 					<bindingDirectory>src/main/resources</bindingDirectory>
-
 					<generateDirectory>${project.build.directory}/</generateDirectory>
-
 					<specVersion>2.2</specVersion>
 					<extension>true</extension>
 					<variant>jpa2</variant>
@@ -101,6 +104,7 @@
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
