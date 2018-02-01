@@ -1,15 +1,15 @@
 package com.server.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.RequestEntity;
 
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.error.APIException;
-import com.sira.api.request.RequestEntity;
+import com.sira.api.request.RequestedEntity;
 
 public class ProjectController extends Server {
 
@@ -24,7 +24,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Add(resourceRequest.getJsonElement());
 
@@ -45,7 +45,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			je = dataAccess.View(resourceRequest.getJsonElement());
 
@@ -65,7 +65,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Update(resourceRequest.getJsonElement());
 
@@ -85,7 +85,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Delete(resourceRequest.getJsonElement());
 
@@ -107,7 +107,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 

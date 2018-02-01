@@ -16,3 +16,7 @@
 /server/.project
 /server/.settings
 /server/target
+/api/tmlog43.log
+/api/tmlog.lck
+/gateway/tmlog.lck
+/gateway/tmlog3.log

@@ -1,15 +1,15 @@
 package com.server.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.RequestEntity;
 
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.error.APIException;
-import com.sira.api.request.RequestEntity;
+import com.sira.api.request.RequestedEntity;
 
 public class EmployerController extends Server {
 
@@ -23,7 +23,7 @@ public class EmployerController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			dataAccess.Add(resourceRequest.getJsonElement());
 
@@ -44,7 +44,7 @@ public class EmployerController extends Server {
 		JsonElement je = null;
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			je = dataAccess.View(resourceRequest.getJsonElement());
 
@@ -63,7 +63,7 @@ public class EmployerController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			dataAccess.Update(resourceRequest.getJsonElement());
 
@@ -82,7 +82,7 @@ public class EmployerController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			dataAccess.Delete(resourceRequest.getJsonElement());
 
@@ -101,9 +101,11 @@ public class EmployerController extends Server {
 
 		JsonElement je = null;
 
+		logger.info("View all requested");
+		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
 			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 

@@ -52,19 +52,28 @@
 		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 
-	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
-	</bean>
-
 	<bean id="siraEntityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-
 		<property name="dataSource" ref="siraDataSource" />
 		<property name="persistenceUnitName" value="sirapu" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+			</props>
+		</property>
 	</bean>
+
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
+	</bean>
+
+
+	<!-- API classes -->
 
 	<bean id="security" class="com.sira.api.security.Security" />
 

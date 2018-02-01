@@ -14,9 +14,9 @@
 
 	<xs:complexType name="Employee">
 		<xs:sequence>
-			<xs:element name="First" type="xs:string" />
-			<xs:element name="Middle" type="xs:string" />
-			<xs:element name="LastName" type="xs:string" />
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="middleName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
 			<xs:element name="username" type="xs:string" />
 			<xs:element name="password" type="xs:string" />
 			<xs:element name="address" type="Address" />

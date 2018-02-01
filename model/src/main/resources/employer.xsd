@@ -16,6 +16,7 @@
 
 	<xs:complexType name="Employer">
 		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
 			<xs:element name="address" type="Address" />
 			<xs:element name="account" type="Account" />
 			<xs:element name="profile" type="Profile" />

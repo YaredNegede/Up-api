@@ -31,7 +31,7 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 	private static Logger logger = Logger.getLogger(Server.class);
 
-	protected Context context;
+	public Context context;
 
 	@Override
 	public void init(){
@@ -63,31 +63,19 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 		try {
 
-			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
+			 resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
 			 this.add(resourceRequest);
 
-		} catch (JsonSyntaxException e) {
+			 resourceResponce = new ResourceResponce("", "OK", js);
+			 
+		} catch (Exception e) {
 
 			logger.error(e);
 
 			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
-		} catch (JsonIOException e) {
-
-			logger.error(e);
-
-			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
-
-		} catch (GateException e) {
-
-			logger.error(e);
-
-			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
-
-		}
-
-		resourceResponce = new ResourceResponce("", "OK", js);
+		} 
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
@@ -104,26 +92,17 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
-			this.view(resourceRequest);
+			JsonElement je = this.view(resourceRequest);
+			
+			resourceResponce = new ResourceResponce("", "OK", je);
 
-		} catch (JsonSyntaxException e) {
-
-			logger.error(e);
-
-			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
-
-		} catch (JsonIOException e) {
+		}  catch (Exception e) {
 
 			logger.error(e);
 
 			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
-		} catch (GateException e) {
-
-			logger.error(e);
-
-
-		}
+		} 
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
@@ -141,26 +120,16 @@ public abstract class Server extends HttpServlet  implements Controller{
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
 			this.update(resourceRequest);
+			
+			resourceResponce = new ResourceResponce("", "OK", null);
 
-		} catch (JsonSyntaxException e) {
+		}  catch (Exception e) {
 
 			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
 
-		} catch (JsonIOException e) {
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-			
-		} catch (GateException e) {
-
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-
-		}
+		} 
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
@@ -179,26 +148,16 @@ public abstract class Server extends HttpServlet  implements Controller{
 			resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
 
 			this.delete(resourceRequest);
+			
+			resourceResponce = new ResourceResponce("", "OK", null);
 
-		} catch (JsonSyntaxException e) {
+		}  catch (Exception e) {
 
 			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
 
-		} catch (JsonIOException e) {
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-			
-		} catch (GateException e) {
-
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-
-		}
+		} 
 
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 
@@ -222,25 +181,13 @@ public abstract class Server extends HttpServlet  implements Controller{
 			
 			resourceResponce = new ResourceResponce("", "OK", je);
 
-		}catch (JsonSyntaxException e) {
+		}  catch (Exception e) {
 
 			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
 
-		} catch (JsonIOException e) {
+			resourceResponce = new ResourceResponce(e.getLocalizedMessage(), "ERROR", null);
 
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-			
-		} catch (GateException e) {
-
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-
-		}
+		} 
 		
 		resp.getWriter().write(this.getContext().getGson().toJson(resourceResponce));
 

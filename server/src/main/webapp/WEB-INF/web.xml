@@ -21,7 +21,7 @@
 		<servlet-name>employee</servlet-name>
 		<servlet-class>com.server.controller.EmployeeController
 		</servlet-class>
-		<load-on-startup>0</load-on-startup>
+		
 	</servlet>
 
 	<servlet>
@@ -35,19 +35,35 @@
 		<servlet-class>com.server.controller.ProjectController</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>skill</servlet-name>
+		<servlet-class>com.server.controller.SkillController</servlet-class>
+	</servlet>
+
+	<!--***************************** Controller mapping ***************************** -->
+
 	<servlet-mapping>
 		<servlet-name>employee</servlet-name>
-		<url-pattern>/server/employee</url-pattern>
+		<url-pattern>/employee</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>employer</servlet-name>
-		<url-pattern>/server/employer</url-pattern>
+		<url-pattern>/employer</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>project</servlet-name>
-		<url-pattern>/server/project</url-pattern>
+		<url-pattern>/project</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>skill</servlet-name>
+		<url-pattern>/skill</url-pattern>
+	</servlet-mapping>
+
+	<!--***************************** Controller mapping end ***************************** -->
+	<welcome-file-list id="WelcomeFileList">
+		<welcome-file>index.html</welcome-file>		
+	</welcome-file-list>
 </web-app>

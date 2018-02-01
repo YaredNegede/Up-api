@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+
+	<title>Home</title>
+
+<script type="text/js" src="minAjax.js"></script>
+
+<style type="text/css">
+
+	.header {
+		width: 100%;
+		background-color: blue;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+	<div id="header"></div>
+
+
+	<div id="content">
+
+	<hr/>
+
+		<center>
+
+			<p>
+				<form method="post" action="/server/employer">
+					<button type="submit" value="submit" onclick="postEmployer()">employer</button>
+				</form>
+
+			</p>
+			<p>
+
+				<form method="post" action="/server/employee">
+					<button type="submit" value="submit">employee</button>
+				</form>
+			</p>
+			<p>
+				<form method="post" action="/server/project">
+					<button type="submit" value="submit">project</button>
+				</form>
+
+			</p>
+
+
+		</center>
+		
+		<hr/>
+		
+		<center>
+
+			<p>
+				<form method="get" action="/server/employer">
+					<button type="submit" value="submit">employer</button>
+				</form>
+
+			</p>
+			<p>
+
+				<form method="get" action="/server/employee">
+					<button type="submit" value="submit">employee</button>
+				</form>
+			</p>
+			<p>
+				<form method="get" action="/server/project">
+					<button type="submit" value="submit">project</button>
+				</form>
+
+			</p>
+
+
+		</center>
+
+	<hr/>
+
+	</div>
+
+	<div id="footer" class="header"></div>
+<script>
+	
+	function postEmployer() {
+		alert();
+	}
+
+</script>
+</body>
+
+</html>

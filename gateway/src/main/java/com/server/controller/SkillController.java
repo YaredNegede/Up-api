@@ -8,7 +8,7 @@ import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.error.APIException;
-import com.sira.api.request.RequestEntity;
+import com.sira.api.request.RequestedEntity;
 
 public class SkillController extends Server {
 
@@ -23,7 +23,7 @@ public class SkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Skill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 
 			dataAccess.Add(resourceRequest.getJsonElement());
 
@@ -44,7 +44,7 @@ public class SkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Skill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 
 			je = dataAccess.View(resourceRequest.getJsonElement());
 
@@ -64,7 +64,7 @@ public class SkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Skill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 
 			dataAccess.Update(resourceRequest.getJsonElement());
 
@@ -84,7 +84,7 @@ public class SkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Skill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 
 			dataAccess.Delete(resourceRequest.getJsonElement());
 
@@ -106,7 +106,7 @@ public class SkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestEntity.Skill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 
 			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 
