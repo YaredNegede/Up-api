@@ -42,12 +42,18 @@ public class EmployeeController extends Server{
 	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
 	
 		JsonElement je;
-		
+
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
 			
-			je = dataAccess.View(resourceRequest.getJsonElement());
+			JsonElement jem = dataAccess.View(resourceRequest.getJsonElement());
+			
+			ResourceResponce resourceResponce = new ResourceResponce("Employee foound ", "OK", jem);
+			
+			je = this.getContext().getGson().toJsonTree(resourceResponce);
+			
+			logger.debug(jem);
 			 
 		} catch (APIException e) {
 
@@ -73,21 +79,17 @@ public class EmployeeController extends Server{
 
 			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
 			
-			dataAccess.getEntitimanager().getTransaction().begin();
-			
 			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 			
 			resourceResponce = new ResourceResponce("", "OK", je);
 			
-			dataAccess.getEntitimanager().getTransaction().commit();
+			logger.debug(je);
 			
 		} catch (APIException e) {
 
 			logger.error(e);
 			
 			resourceResponce = new ResourceResponce("", "ERROR", null);
-			
-			dataAccess.getEntitimanager().getTransaction().rollback();
 			
 			throw new GateException(e.getLocalizedMessage());
 			
@@ -103,6 +105,8 @@ public class EmployeeController extends Server{
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
+			
+			logger.debug(resourceRequest.getJsonElement());
 			
 			dataAccess.Update(resourceRequest.getJsonElement());
 			
@@ -123,6 +127,8 @@ public class EmployeeController extends Server{
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
+			
+			logger.debug(resourceRequest.getJsonElement());
 			
 			dataAccess.Delete(resourceRequest.getJsonElement());
 			

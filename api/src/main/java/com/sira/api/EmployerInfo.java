@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import com.google.gson.JsonElement;
+import com.server.ResourceResponce;
 import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.model.Employer;
@@ -72,11 +73,9 @@ public class EmployerInfo extends DataAccess{
 
 		try {
 
+			Query query = this.getEntitimanager().createQuery("from Employer as empr where empr.name='"+employer.getName()+"'");
 
-			Query query = this.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
-
-			employer = (Employer) query.getResultList().get(0);
-
+			employer = (Employer) query.getSingleResult();
 
 		} catch (Exception e) {
 
