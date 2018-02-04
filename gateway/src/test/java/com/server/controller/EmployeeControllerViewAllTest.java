@@ -16,89 +16,113 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
+import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
-import com.sira.api.EmployerInfo;
+import com.sira.api.EmployeeInfo;
 import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Country;
+import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 
-public class EmployerControllerAddTest {
+public class EmployeeControllerViewAllTest {
 
-	private static Logger logger = Logger.getLogger(EmployerControllerAddTest.class);
+	private static Logger logger = Logger.getLogger(EmployeeControllerViewAllTest.class);
 
 	private static ApplicationContext appcont = new ClassPathXmlApplicationContext("/applicationContext.xml");
 
 	Gson gson = new Gson();
 
-	static EmployerInfo employerInfo = (EmployerInfo) appcont.getBean("Employer");
+	static EmployeeInfo employeeInfo = (EmployeeInfo) appcont.getBean("Employee");
 
 	@Before
 	public  void setup(){
-		if(!employerInfo.getEntitimanager().getTransaction().isActive()){
-			employerInfo.getEntitimanager().getTransaction().begin();
+		if(!employeeInfo.getEntitimanager().getTransaction().isActive()){
+			employeeInfo.getEntitimanager().getTransaction().begin();
 		}
 	}
 
 	@Test
-	public void testAdd() throws GateException, APIException {
+	public void testView() throws GateException, APIException {
 
-		Server server = new EmployerController();
+		Server server = new EmployeeController();
 
 		server.context = new Context(appcont );
 
-		Employer employer = new Employer();
+		Employee employee = new Employee();
 
-		employer.setName("sira");
+		employee.setUsername("username");
+
+		employee.setPassword("password");
+
+		employee.setFirstName("Yared");
+
+		employee.setMiddleName("Negede");
+
+		employee.setLastName("Yeshitla");
+
 		Account account = new Account();
-		account.setNumber("123");
+
+		account.setNumber("1231");
+
 		account.setType("premium");
-		employer.setAccount(account );
+
+		employee.setAccount(account );
 
 		Address address = new Address();
-		address.setCity("Addis ababa");
 
-		Country ethiopia = new Country();
-		ethiopia.setCode("ET");
-		ethiopia.setName("Ethiopia");
-		address.setCountry(ethiopia );
-		employer.setAddress(address );
+		address.setCity("Addis Ababa");
+
+		Country country = new Country();
+
+		country.setCode("123");
+
+		country.setName("Ethiopia");
+
+		address.setCountry(country );
+
+		employee.setAddress(address );
 
 		Profile profile = new Profile();
-		profile.setName("Language");
+
+		profile.setName("javascript");
 
 		List<Skill> skills = new ArrayList<Skill>();
+
 		Skill skill = new Skill();
-		skill.setDescription("Very good");
-		skill.setName("javascript");
+
+		skill.setDescription("very good in javacript");
+
 		skills.add(skill );
 
 		profile.setSkills(skills );
-		employer.setProfile(profile );
-		JsonElement element = gson.toJsonTree(employer);
+
+		employee.setProfile(profile );
+
+		employeeInfo.getEntitimanager().persist(employee);
+		
+		employee.setFirstName("Daniel");
+		JsonElement element = gson.toJsonTree(employee);
 
 		logger.info(element.toString());
 		ResourceRequest resourceRequest = new ResourceRequest(element);
-		server.add(resourceRequest );
+		JsonElement js = server.viewAll(resourceRequest );
 		
-		Query q = employerInfo.getEntitimanager().createQuery("from Employer as emplr where emplr.name='"+employer.getName()+"'");
-		Employer e = (Employer) q.getSingleResult();
-		Assert.assertTrue(e.equals(employer));
-
+		Assert.assertNotNull(js);
 	}
 
 	boolean exp = false;
 	@After
 	public  void tearDown(){
 		if(!exp){
-			employerInfo.getEntitimanager().getTransaction().commit();;
+			employeeInfo.getEntitimanager().getTransaction().commit();;
 		} else {
-			employerInfo.getEntitimanager().getTransaction().rollback();
+			employeeInfo.getEntitimanager().getTransaction().rollback();
 		}
 	}
 

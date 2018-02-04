@@ -3,8 +3,6 @@ package com.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;

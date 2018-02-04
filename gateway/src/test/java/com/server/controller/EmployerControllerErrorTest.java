@@ -8,13 +8,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.EmployerInfo;
-import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
-import com.sira.model.stateschema.model.Employer;
 
 public class EmployerControllerErrorTest {
 
