@@ -16,6 +16,10 @@ public class ServerTest {
 	Gson gson = new Gson();
 
 	@Test
-	public void test001() throws  GateException, JsonSyntaxException, UnsupportedEncodingException {}
+	public void test001() throws  GateException, JsonSyntaxException, UnsupportedEncodingException {
+		
+		logger.info("***********************************");
+		
+	}
 
 }

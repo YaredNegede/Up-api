@@ -8,7 +8,6 @@ import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.error.APIException;
 import com.sira.api.request.RequestedEntity;
 
 public class EmployeeController extends Server{
@@ -30,7 +29,7 @@ public class EmployeeController extends Server{
 			
 			dataAccess.Add(resourceRequest.getJsonElement());
 			
-		} catch (APIException e) {
+		} catch (Exception e) {
 
 			throw new GateException(e.getLocalizedMessage());
 			
@@ -55,7 +54,7 @@ public class EmployeeController extends Server{
 			
 			logger.debug(jem);
 			 
-		} catch (APIException e) {
+		} catch (Exception e) {
 
 			logger.error(e);
 			
@@ -85,7 +84,7 @@ public class EmployeeController extends Server{
 			
 			logger.debug(je);
 			
-		} catch (APIException e) {
+		} catch (Exception e) {
 
 			logger.error(e);
 			
@@ -111,7 +110,7 @@ public class EmployeeController extends Server{
 			dataAccess.Update(resourceRequest.getJsonElement());
 			
 			
-		} catch (APIException e) {
+		} catch (Exception e) {
 
 			logger.error(e);
 			
@@ -133,7 +132,7 @@ public class EmployeeController extends Server{
 			dataAccess.Delete(resourceRequest.getJsonElement());
 			
 			
-		} catch (APIException e) {
+		} catch (Exception e) {
 
 			logger.error(e);
 			

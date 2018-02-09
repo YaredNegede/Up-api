@@ -11,8 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import com.server.controller.Controller;
 import com.server.error.GateException;
 import com.sira.api.request.Context;

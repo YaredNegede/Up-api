@@ -3,6 +3,7 @@ package com.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
+import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.EmployeeInfo;
@@ -25,12 +27,13 @@ import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employee;
+import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 
-public class EmployeeControllerAddTest {
+public class EmployeeControllerDeleteTest {
 
-	private static Logger logger = Logger.getLogger(EmployeeControllerAddTest.class);
+	private static Logger logger = Logger.getLogger(EmployeeControllerDeleteTest.class);
 
 	private static ApplicationContext appcont = new ClassPathXmlApplicationContext("/applicationContext.xml");
 
@@ -45,8 +48,8 @@ public class EmployeeControllerAddTest {
 		}
 	}
 
-	@Test
-	public void testAdd() throws GateException, APIException {
+	@Test(expected=NoResultException.class)
+	public void testDelete() throws GateException, APIException {
 
 		Server server = new EmployeeController();
 
@@ -102,18 +105,16 @@ public class EmployeeControllerAddTest {
 
 		employee.setProfile(profile );
 
+		employeeInfo.getEntitimanager().persist(employee);
+		
 		JsonElement element = gson.toJsonTree(employee);
 
 		logger.info(element.toString());
 		ResourceRequest resourceRequest = new ResourceRequest(element);
-		server.add(resourceRequest );
-
-		Query q = employeeInfo.getEntitimanager().createQuery("from Employee as emplr where emplr.firstName='"+employee.getFirstName()+"'");
+		server.delete(resourceRequest );
 		
-		Employee e = (Employee) q.getSingleResult();
-		
-		Assert.assertTrue(e.equals(employee));
-
+		Query q = employeeInfo.getEntitimanager().createQuery("from Employee as epr where epr.username='"+employee.getUsername()+"'");
+		Employer epr = (Employer) q.getSingleResult();
 	}
 
 	boolean exp = false;
