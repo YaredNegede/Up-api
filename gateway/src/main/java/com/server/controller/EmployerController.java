@@ -132,4 +132,60 @@ public class EmployerController extends Server {
 		return je;
 	}
 
+
+	@Override
+	public void addSkill(ResourceRequest resourceRequest) throws GateException {
+		
+		
+	}
+	
+
+	@Override
+	public void addProfile(ResourceRequest resourceRequest) throws GateException {
+		
+		
+	}
+	
+
+	@Override
+	public JsonElement viewSkill(ResourceRequest resourceRequest) throws GateException {
+		
+		return null;
+	}
+	
+
+	@Override
+	public JsonElement viewProfile(ResourceRequest resourceRequest) throws GateException {
+		
+		return null;
+	}
+	
+
+	@Override
+	public JsonElement updateSkill(ResourceRequest resourceRequest) throws GateException {
+		
+		return null;
+	}
+	
+
+	@Override
+	public JsonElement updateProfile(ResourceRequest resourceRequest) throws GateException {
+		
+		return null;
+	}
+	
+
+	@Override
+	public void deleteSkill(ResourceRequest resourceRequest) throws GateException {
+		
+		
+	}
+	
+
+	@Override
+	public void deleteProfile(ResourceRequest resourceRequest) throws GateException {
+		
+		
+	}
+
 }

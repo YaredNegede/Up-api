@@ -50,6 +50,12 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 	}
 
+	public Context getContext() {
+
+		return this.context;
+
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,  IOException{
 
@@ -202,10 +208,20 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 	public abstract void delete(ResourceRequest resourceRequest) throws GateException ;
 
-	public Context getContext() {
+	public abstract void addSkill(ResourceRequest resourceRequest) throws GateException;
 
-		return this.context;
+	public abstract void addProfile(ResourceRequest resourceRequest) throws GateException;
 
-	}
+	public abstract JsonElement viewSkill(ResourceRequest resourceRequest) throws GateException;
 
+	public abstract JsonElement viewProfile(ResourceRequest resourceRequest) throws GateException;
+
+	public abstract JsonElement updateSkill(ResourceRequest resourceRequest) throws GateException;
+
+	public abstract JsonElement updateProfile(ResourceRequest resourceRequest) throws GateException;
+
+	public abstract void deleteSkill(ResourceRequest resourceRequest) throws GateException;
+
+	public abstract void deleteProfile(ResourceRequest resourceRequest) throws GateException;
+	
 }
