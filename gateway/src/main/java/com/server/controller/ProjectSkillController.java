@@ -23,7 +23,7 @@ public class ProjectSkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.ProjectSkill.name());
 
 			dataAccess.Add(resourceRequest.getJsonElement());
 
@@ -44,7 +44,7 @@ public class ProjectSkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.ProjectSkill.name());
 
 			je = dataAccess.View(resourceRequest.getJsonElement());
 
@@ -64,7 +64,7 @@ public class ProjectSkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.ProjectSkill.name());
 
 			dataAccess.Update(resourceRequest.getJsonElement());
 
@@ -84,7 +84,7 @@ public class ProjectSkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.ProjectSkill.name());
 
 			dataAccess.Delete(resourceRequest.getJsonElement());
 
@@ -106,7 +106,7 @@ public class ProjectSkillController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.ProjectSkill.name());
 
 			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 

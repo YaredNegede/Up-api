@@ -74,16 +74,55 @@
 		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
 	</bean>
 
+	<bean id="EmployeeSkill" class="com.sira.api.EmployeeSkillInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Skill" />
+	</bean>
+
+	<bean id="EmployeeProfile" class="com.sira.api.EmployeeProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Profile" />
+	</bean>
+
 	<bean id="Employer" class="com.sira.api.EmployerInfo">
 		<constructor-arg ref="siraEntityManagerFactoryBean" />
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
 	</bean>
 
+	<bean id="EmployerSkill" class="com.sira.api.EmployerSkillInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Skill" />
+	</bean>
+
+	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Profile" />
+	</bean>
+
+
 	<bean id="Project" class="com.sira.api.ProjectInfo">
 		<constructor-arg ref="siraEntityManagerFactoryBean" />
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Project" />
 	</bean>
+
+
+	<bean id="ProjectSkill" class="com.sira.api.ProjectSkillInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Skill" />
+	</bean>
+
+	<bean id="ProjectProfile" class="com.sira.api.ProjectProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Profile" />
+	</bean>
+
 
 </beans>
