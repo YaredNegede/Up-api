@@ -30,6 +30,65 @@
 
 	</jaxb:bindings>
 
+	<jaxb:bindings schemaLocation="project.xsd" node="xs:complexType[@name='Project']">
+
+		<hj:persistence>
+			<hj:default-one-to-many fetch="EAGER">
+				<orm:join-column />
+				<orm:cascade>
+					<orm:cascade-all />
+				</orm:cascade>
+			</hj:default-one-to-many>
+			<hj:default-many-to-many fetch="EAGER">
+				<orm:join-table />
+				<orm:cascade>
+					<orm:cascade-merge />
+				</orm:cascade>
+			</hj:default-many-to-many>
+			<hj:default-element-collection fetch="EAGER" />
+		</hj:persistence>
+
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="employee.xsd" node="xs:complexType[@name='Employee']">
+		<hj:persistence>
+			<hj:default-one-to-many fetch="EAGER">
+				<orm:join-column />
+				<orm:cascade>
+					<orm:cascade-all />
+				</orm:cascade>
+			</hj:default-one-to-many>
+			<hj:default-many-to-many fetch="EAGER">
+				<orm:join-table />
+				<orm:cascade>
+					<orm:cascade-merge />
+				</orm:cascade>
+			</hj:default-many-to-many>
+			<hj:default-element-collection fetch="EAGER" />
+		</hj:persistence>
+
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="employer.xsd" node="xs:complexType[@name='Employer']">
+
+		<hj:persistence>
+			<hj:default-one-to-many fetch="EAGER">
+				<orm:join-column />
+				<orm:cascade>
+					<orm:cascade-all />
+				</orm:cascade>
+			</hj:default-one-to-many>
+			<hj:default-many-to-many fetch="EAGER">
+				<orm:join-table />
+				<orm:cascade>
+					<orm:cascade-merge />
+				</orm:cascade>
+			</hj:default-many-to-many>
+			<hj:default-element-collection fetch="EAGER" />
+		</hj:persistence>
+
+	</jaxb:bindings>
+
 	<jaxb:globalBindings localScoping="toplevel">
 
 		<jaxb:javaType name="java.util.Calendar" xmlType="xs:dateTime"

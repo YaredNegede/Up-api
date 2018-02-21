@@ -18,7 +18,6 @@ import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
@@ -58,14 +57,6 @@ public class EmployerInfoTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
-
 		employer.setAddress(address );
 
 		Profile profile = new Profile();
@@ -82,7 +73,10 @@ public class EmployerInfoTest {
 
 		profile.setSkills(skills );
 
-		employer.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		
+		employer.setProfile(profiles );
 
 
 		JsonElement data = gson.toJsonTree(employer);
@@ -117,14 +111,6 @@ public class EmployerInfoTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
-
 		employer.setAddress(address );
 
 		Profile profile = new Profile();
@@ -140,8 +126,10 @@ public class EmployerInfoTest {
 		skills.add(skill );
 
 		profile.setSkills(skills );
-
-		employer.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		
+		employer.setProfile(profiles );
 
 
 		JsonElement data = gson.toJsonTree(employer);
@@ -169,7 +157,7 @@ public class EmployerInfoTest {
 
 		Account account = new Account();
 
-		account.setNumber("1231");
+		account.setNumber("1230001");
 
 		account.setType("premium");
 
@@ -178,14 +166,6 @@ public class EmployerInfoTest {
 		Address address = new Address();
 
 		address.setCity("Addis Ababa");
-
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
 
 		employer.setAddress(address );
 
@@ -202,12 +182,15 @@ public class EmployerInfoTest {
 		skills.add(skill );
 
 		profile.setSkills(skills );
-
-		employer.setProfile(profile );
-
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		
+		employer.setProfile(profiles );
 
 		JsonElement data = gson.toJsonTree(employer);
 
+		employerInfo.Add(data );
+		
 		logger.info(data);
 
 		employerInfo.Delete(data );
@@ -238,14 +221,6 @@ public class EmployerInfoTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
-
 		employer.setAddress(address );
 
 		Profile profile = new Profile();
@@ -261,8 +236,10 @@ public class EmployerInfoTest {
 		skills.add(skill );
 
 		profile.setSkills(skills );
-
-		employer.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		
+		employer.setProfile(profiles );
 
 		JsonElement data = gson.toJsonTree(employer);
 
@@ -304,14 +281,6 @@ public class EmployerInfoTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
-
 		employee.setAddress(address );
 
 		Profile profile = new Profile();
@@ -327,8 +296,10 @@ public class EmployerInfoTest {
 		skills.add(skill );
 
 		profile.setSkills(skills );
-
-		employee.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		
+		employee.setProfile(profiles );
 
 		JsonElement data = gson.toJsonTree(employee);
 

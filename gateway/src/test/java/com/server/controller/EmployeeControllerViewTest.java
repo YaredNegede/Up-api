@@ -3,8 +3,6 @@ package com.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
@@ -24,9 +22,7 @@ import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employee;
-import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 
@@ -78,13 +74,6 @@ public class EmployeeControllerViewTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
 
 		employee.setAddress(address );
 
@@ -102,7 +91,9 @@ public class EmployeeControllerViewTest {
 
 		profile.setSkills(skills );
 
-		employee.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		employee.setProfile(profiles );
 
 		employeeInfo.getEntitimanager().persist(employee);
 		

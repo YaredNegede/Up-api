@@ -6,7 +6,6 @@ import javax.persistence.EntityManagerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
-import com.sira.api.request.ViewAllquery;
 import com.sira.api.security.Security;
 
 public abstract class DataAccess {
@@ -42,9 +41,9 @@ public abstract class DataAccess {
 	}
 
 	public Gson getGson() {
-	
+
 		return gson;
-		
+
 	}
 
 	private Class<? extends Object> getType() {
@@ -59,8 +58,8 @@ public abstract class DataAccess {
 
 	public abstract void Delete(JsonElement data) throws APIException ;
 
+
 	public abstract JsonElement View(JsonElement data) throws APIException;
 
 	public abstract JsonElement ViewAll(JsonElement data) throws APIException ;
-
 }

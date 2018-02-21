@@ -19,7 +19,6 @@ import com.server.error.GateException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
@@ -61,14 +60,6 @@ public class EmployeTest {
 		
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-		
-		country.setCode("123");
-		
-		country.setName("Ethiopia");
-		
-		address.setCountry(country );
-		
 		employee.setAddress(address );
 		
 		Profile profile = new Profile();
@@ -85,8 +76,10 @@ public class EmployeTest {
 		
 		profile.setSkills(skills );
 		
-		employee.setProfile(profile );
-
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		employee.setProfile(profiles );
+		
 		JsonElement element = gson.toJsonTree(employee);
 
 		logger.info(element);

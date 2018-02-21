@@ -24,7 +24,6 @@ import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
@@ -65,10 +64,6 @@ public class EmployerControllerDeleteTest {
 		Address address = new Address();
 		address.setCity("Addis ababa");
 
-		Country ethiopia = new Country();
-		ethiopia.setCode("ET");
-		ethiopia.setName("Ethiopia");
-		address.setCountry(ethiopia );
 		employer.setAddress(address );
 
 		Profile profile = new Profile();
@@ -81,7 +76,9 @@ public class EmployerControllerDeleteTest {
 		skills.add(skill );
 
 		profile.setSkills(skills );
-		employer.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		employer.setProfile(profiles );
 
 		employerInfo.getEntitimanager().persist(employer);
 		

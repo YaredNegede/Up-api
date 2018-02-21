@@ -9,6 +9,12 @@
 
 	<xs:element name="Address" />
 
+	<xs:element name="ProjectDetail" />
+
+	<xs:element name="Skill" />
+
+	<xs:element name="Profile" />
+
 	<xs:simpleType name="ID">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
@@ -21,18 +27,12 @@
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:complexType name="Country">
-		<xs:sequence>
-			<xs:element name="Name" type="xs:string" default="ETHIOPIA" />
-		</xs:sequence>
-		<xs:attribute name="code" type="xs:language">
-			<xs:annotation>
-				<xs:documentation>The registered IANA country code of the format
-					xx-xx. For example: en-us.
-				</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
+	<xs:simpleType name="Country">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
 
 	<xs:simpleType name="City">
 		<xs:restriction base="xs:string">
@@ -107,6 +107,18 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="Description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProjectDetail">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="dxescription" type="xs:string" />
+			<xs:element minOccurs="0" name="status" type="xs:string" />
+			<xs:element minOccurs="0" name="managedBy" type="xs:string" />
+			<xs:element minOccurs="0" name="specifiedBy" type="xs:string" />
+			<xs:element minOccurs="0" name="initiatedDate" type="xs:string" />
+			<xs:element minOccurs="0" name="completedDate" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 

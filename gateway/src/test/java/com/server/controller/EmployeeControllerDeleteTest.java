@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +16,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.EmployeeInfo;
@@ -25,7 +23,6 @@ import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
@@ -79,13 +76,6 @@ public class EmployeeControllerDeleteTest {
 
 		address.setCity("Addis Ababa");
 
-		Country country = new Country();
-
-		country.setCode("123");
-
-		country.setName("Ethiopia");
-
-		address.setCountry(country );
 
 		employee.setAddress(address );
 
@@ -103,7 +93,9 @@ public class EmployeeControllerDeleteTest {
 
 		profile.setSkills(skills );
 
-		employee.setProfile(profile );
+		List<Profile> profiles = new ArrayList<Profile>();
+		profiles.add(profile);
+		employee.setProfile(profiles );
 
 		employeeInfo.getEntitimanager().persist(employee);
 		

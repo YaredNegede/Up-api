@@ -68,7 +68,7 @@ public abstract class Server extends HttpServlet  implements Controller{
 		try {
 
 			 resourceRequest = this.getContext().getGson().fromJson(req.getReader(), ResourceRequest.class);
-
+			 
 			 this.add(resourceRequest);
 
 			 resourceResponce = new ResourceResponce("", "OK", js);
@@ -208,20 +208,5 @@ public abstract class Server extends HttpServlet  implements Controller{
 
 	public abstract void delete(ResourceRequest resourceRequest) throws GateException ;
 
-	public abstract void addSkill(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract void addProfile(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract JsonElement viewSkill(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract JsonElement viewProfile(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract JsonElement updateSkill(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract JsonElement updateProfile(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract void deleteSkill(ResourceRequest resourceRequest) throws GateException;
-
-	public abstract void deleteProfile(ResourceRequest resourceRequest) throws GateException;
 	
 }

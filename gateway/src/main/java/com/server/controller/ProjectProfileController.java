@@ -4,32 +4,33 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
+import com.sira.api.error.APIException;
 import com.sira.api.request.RequestedEntity;
 
-public class EmployerController extends Server {
+public class ProjectProfileController extends Server {
+
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(EmployerController.class);
+	private static Logger logger = Logger.getLogger(ProjectProfileController.class);
 
 	public void add(ResourceRequest resourceRequest) throws GateException {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Add(resourceRequest.getJsonElement());
 
-		} catch (Exception e) {
+		} catch (APIException e) {
 
 			logger.error(e);
-
+			
 			throw new GateException(e.getLocalizedMessage());
 
 		}
@@ -40,27 +41,22 @@ public class EmployerController extends Server {
 	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
 
 		JsonElement je = null;
-		
+
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
-			JsonElement jem = dataAccess.View(resourceRequest.getJsonElement());
-			
-			ResourceResponce resourceResponce = new ResourceResponce("Found employer", "OK", jem);
-			
-			je = this.getContext().getGson().toJsonTree(resourceResponce);
+			je = dataAccess.View(resourceRequest.getJsonElement());
 
-		} catch (Exception e) {
+		} catch (APIException e) {
 
 			logger.error(e);
 			
 			throw new GateException(e.getLocalizedMessage());
-			
+
 		}
-		
+
 		return je;
-		
 	}
 
 	@Override
@@ -68,11 +64,11 @@ public class EmployerController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Update(resourceRequest.getJsonElement());
 
-		} catch (Exception e) {
+		} catch (APIException e) {
 
 			logger.error(e);
 
@@ -85,19 +81,21 @@ public class EmployerController extends Server {
 	@Override
 	public void delete(ResourceRequest resourceRequest) throws GateException {
 
+
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			dataAccess.Delete(resourceRequest.getJsonElement());
 
-		} catch (Exception e) {
+		} catch (APIException e) {
 
 			logger.error(e);
 
 			throw new GateException(e.getLocalizedMessage());
-			
+
 		}
+
 
 	}
 
@@ -106,25 +104,16 @@ public class EmployerController extends Server {
 
 		JsonElement je = null;
 
-		logger.info("View all requested");
-		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
-			JsonElement jem = dataAccess.ViewAll(resourceRequest.getJsonElement());
-			
-			logger.debug(jem);
-			
-			ResourceResponce resourceResponce = new ResourceResponce("Found Employeers", "OK", jem);
-			
-			je=this.getContext().getGson().toJsonTree(resourceResponce);
-			
+			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
 
-		} catch (Exception e) {
+		} catch (APIException e) {
 
 			logger.error(e);
-			
+
 			throw new GateException(e.getLocalizedMessage());
 
 		}

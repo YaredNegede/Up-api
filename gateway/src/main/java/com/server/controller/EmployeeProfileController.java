@@ -10,11 +10,11 @@ import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.request.RequestedEntity;
 
-public class EmployeeController extends Server{
+public class EmployeeProfileController extends Server{
 
 	private static final long serialVersionUID = 1L;
 	
-	private static Logger logger = Logger.getLogger(EmployeeController.class);
+	private static Logger logger = Logger.getLogger(EmployeeProfileController.class);
 
 	@Override
 	public void add(ResourceRequest resourceRequest) throws GateException {

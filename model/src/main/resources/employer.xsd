@@ -12,14 +12,28 @@
 
 	<xs:element name="Employer" />
 
-	<!-- Employee -->
+	<!-- Employer -->
 
 	<xs:complexType name="Employer">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
+			<xs:element name="userName" type="xs:string" />
 			<xs:element name="address" type="Address" />
 			<xs:element name="account" type="Account" />
-			<xs:element name="profile" type="Profile" />
+			<xs:element name="number" type="xs:string" />
+			<xs:element name="tradename" type="xs:string"/>
+			<xs:element name="address1" type="xs:string" />
+			<xs:element name="address2" type="xs:string"/>
+			<xs:element name="address3" type="xs:string"/>
+			<xs:element name="contact" type="xs:string"/>
+			<xs:element name="phone" type="xs:string"/>
+			<xs:element name="fax" type="xs:string"/>			
+			<xs:element name="profile" type="Profile" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="projects" type="ProjectDetail"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="skills" type="Skill" minOccurs="0"
+				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 

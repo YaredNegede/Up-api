@@ -1,8 +1,5 @@
 package com.sira.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -16,14 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
-import com.sira.model.stateschema.model.Account;
-import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Country;
-import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
-import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Project;
-import com.sira.model.stateschema.model.Skill;
 
 public class ProjectInfoTest {
 

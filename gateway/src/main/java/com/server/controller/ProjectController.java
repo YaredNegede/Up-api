@@ -1,7 +1,6 @@
 package com.server.controller;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.RequestEntity;
 
 import com.google.gson.JsonElement;
 import com.server.ResourceRequest;
@@ -45,7 +44,7 @@ public class ProjectController extends Server {
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Project.name());
 
 			je = dataAccess.View(resourceRequest.getJsonElement());
 
@@ -122,60 +121,5 @@ public class ProjectController extends Server {
 		return je;
 	}
 
-
-	@Override
-	public void addSkill(ResourceRequest resourceRequest) throws GateException {
-		
-		
-	}
-	
-
-	@Override
-	public void addProfile(ResourceRequest resourceRequest) throws GateException {
-		
-		
-	}
-	
-
-	@Override
-	public JsonElement viewSkill(ResourceRequest resourceRequest) throws GateException {
-		
-		return null;
-	}
-	
-
-	@Override
-	public JsonElement viewProfile(ResourceRequest resourceRequest) throws GateException {
-		
-		return null;
-	}
-	
-
-	@Override
-	public JsonElement updateSkill(ResourceRequest resourceRequest) throws GateException {
-		
-		return null;
-	}
-	
-
-	@Override
-	public JsonElement updateProfile(ResourceRequest resourceRequest) throws GateException {
-		
-		return null;
-	}
-	
-
-	@Override
-	public void deleteSkill(ResourceRequest resourceRequest) throws GateException {
-		
-		
-	}
-	
-
-	@Override
-	public void deleteProfile(ResourceRequest resourceRequest) throws GateException {
-		
-		
-	}
 
 }

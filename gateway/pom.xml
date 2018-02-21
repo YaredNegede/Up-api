@@ -17,11 +17,17 @@
 			<artifactId>dto</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.sira</groupId>
 			<artifactId>model</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.19.4</version>
 		</dependency>
 
 		<dependency>
@@ -132,7 +138,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>org.jmockit</groupId>
 			<artifactId>jmockit</artifactId>
