@@ -113,13 +113,48 @@
 	<xs:complexType name="ProjectDetail">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
-			<xs:element name="dxescription" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
 			<xs:element minOccurs="0" name="status" type="xs:string" />
 			<xs:element minOccurs="0" name="managedBy" type="xs:string" />
 			<xs:element minOccurs="0" name="specifiedBy" type="xs:string" />
 			<xs:element minOccurs="0" name="initiatedDate" type="xs:string" />
 			<xs:element minOccurs="0" name="completedDate" type="xs:string" />
+			<xs:element name="skills" type="Skill" minOccurs="1"
+				maxOccurs="unbounded" />
+
 		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="user" type="User" />
+
+	<xs:complexType name="User">
+		<xs:choice>
+			<xs:element name="username" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+			<xs:element name="email" type="xs:string" />
+			<xs:element name="status" type="xs:boolean" default="false" />
+			<xs:element name="statusToken" type="xs:string" />
+			<xs:element name="currentUser" type="UserBase" />
+			<xs:element name="userType" type="UserType" />
+			<xs:element name="createTime" type="xs:dateTime" />
+			<xs:element name="expireTime" type="xs:dateTime" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:simpleType name="UserType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:enumeration value="Employer" />
+			<xs:enumeration value="Employee" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="UserBase" abstract="true">
+		<xs:choice>
+			<xs:element name="status" type="xs:boolean" default="false" />
+			<xs:element name="user" type="User" />
+			<xs:element name="project" type="ProjectDetail" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:choice>
 	</xs:complexType>
 
 </xs:schema>

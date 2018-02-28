@@ -89,10 +89,5 @@
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
 	</bean>
 
-	<bean id="Project" class="com.sira.api.ProjectInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Project" />
-	</bean>
 
 </beans>

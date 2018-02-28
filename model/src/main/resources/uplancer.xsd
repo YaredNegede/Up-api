@@ -7,22 +7,11 @@
 	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
 	elementFormDefault="qualified">
 
-	<xs:import schemaLocation="common.xsd"
+	<xs:import schemaLocation="employee.xsd"
 		namespace="http://www.model.sira.com/stateschema/model" />
 
-	<xs:element name="project" type="Project" />
+	<xs:import schemaLocation="employer.xsd"
+		namespace="http://www.model.sira.com/stateschema/model" />
 
-	<xs:complexType name="Project">
-		<xs:sequence>
-			<xs:element name="id" type="ID" />
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="profile" type="Profile" minOccurs="0"
-				maxOccurs="unbounded"/>
-			<xs:element name="projects" type="ProjectDetail"  minOccurs="0"
-				maxOccurs="unbounded"/>
-			<xs:element name="skills" type="Skill" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
 
 </xs:schema>

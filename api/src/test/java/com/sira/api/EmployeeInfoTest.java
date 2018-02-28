@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
@@ -42,10 +41,6 @@ public class EmployeeInfoTest {
 	public void testAdd() throws APIException {
 
 		Employee employee = new Employee();
-
-		employee.setUsername("username");
-
-		employee.setPassword("password");
 
 		employee.setFirstName("Yared");
 
@@ -85,14 +80,9 @@ public class EmployeeInfoTest {
 		profiles.add(profile);
 		employee.setProfile(profiles  );
 
+		employeeInfo.Add(employee);
 
-		JsonElement data = gson.toJsonTree(employee);
-
-		logger.info(data);
-
-		employeeInfo.Add(data );
-
-		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.username='username'");
+		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='Yared'");
 		Employee emp = (Employee) query.getSingleResult();
 
 		Assert.assertTrue(employee.equals(emp));
@@ -104,10 +94,6 @@ public class EmployeeInfoTest {
 
 		Employee employee = new Employee();
 
-		employee.setUsername("username");
-
-		employee.setPassword("password");
-
 		employee.setFirstName("Yared");
 
 		employee.setMiddleName("Negede");
@@ -147,16 +133,14 @@ public class EmployeeInfoTest {
 		
 		employee.setProfile(profiles );
 
-
-		JsonElement data = gson.toJsonTree(employee);
-		employeeInfo.Add(data );
+		employeeInfo.Add(employee);
 
 		employee.setFirstName("Sarkis");
 
-		JsonElement data2 = gson.toJsonTree(employee);
-		employeeInfo.Update(data2 );
+		employeeInfo.Update(employee);
 
 		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='Sarkis'");
+		
 		Employee emp = (Employee) query.getSingleResult();
 
 		Assert.assertTrue(employee.equals(emp));
@@ -168,33 +152,29 @@ public class EmployeeInfoTest {
 
 		Employee employee = new Employee();
 
-		employee.setUsername("yared.negede");
+		employee.setFirstName("Yared2");
 
-		employee.setPassword("password");
+		employee.setMiddleName("Negede2");
 
-		employee.setFirstName("Yared");
-
-		employee.setMiddleName("Negede");
-
-		employee.setLastName("Yeshitla");
+		employee.setLastName("Yeshitla2");
 
 		Account account = new Account();
 
-		account.setNumber("1231");
+		account.setNumber("12312");
 
-		account.setType("premium");
+		account.setType("premium2");
 
 		employee.setAccount(account );
 
 		Address address = new Address();
 
-		address.setCity("Addis Ababa");
+		address.setCity("Addis Ababa2");
 
 		employee.setAddress(address );
 
 		Profile profile = new Profile();
 
-		profile.setName("javascript");
+		profile.setName("javascript2");
 
 		List<Skill> skills = new ArrayList<Skill>();
 
@@ -211,13 +191,11 @@ public class EmployeeInfoTest {
 		
 		employee.setProfile(profiles );
 
-		JsonElement data = gson.toJsonTree(employee);
 
-		logger.info(data);
+		employeeInfo.Delete(employee);
 
-		employeeInfo.Delete(data );
-
-		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.username='"+employee.getUsername()+"'");
+		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"
+		+employee.getFirstName()+"'");
 
 		Assert.assertEquals(query.getResultList().size(),0);
 
@@ -229,10 +207,6 @@ public class EmployeeInfoTest {
 
 		Employee employee = new Employee();
 
-		employee.setUsername("yared.negede@sira.com");
-
-		employee.setPassword("password");
-
 		employee.setFirstName("Yared");
 
 		employee.setMiddleName("Negede");
@@ -272,80 +246,14 @@ public class EmployeeInfoTest {
 		
 		employee.setProfile(profiles );
 
-		JsonElement data = gson.toJsonTree(employee);
+		employeeInfo.Add(employee);
 
-		logger.info(data);
+		Employee emp = (Employee) employeeInfo.View(employee);
 
-		employeeInfo.Add(data );
-
-		JsonElement emp = employeeInfo.View(data );
-
-		Employee e = this.gson.fromJson(emp, Employee.class);
-
-		Assert.assertTrue(employee.equals(e));
+		Assert.assertTrue(employee.equals(emp));
 
 	}
 
-	@Test
-	public void testViewAll() throws APIException {
-		Employee employee = new Employee();
-
-		employee.setUsername("username");
-
-		employee.setPassword("password");
-
-		employee.setFirstName("Yared");
-
-		employee.setMiddleName("Negede");
-
-		employee.setLastName("Yeshitla");
-
-		Account account = new Account();
-
-		account.setNumber("1231");
-
-		account.setType("premium");
-
-		employee.setAccount(account );
-
-		Address address = new Address();
-
-		address.setCity("Addis Ababa");
-
-		employee.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
-
-		JsonElement data = gson.toJsonTree(employee);
-
-		logger.info(data);
-
-		employeeInfo.Add(data );
-
-		JsonElement emp = employeeInfo.ViewAll(data );
-
-		logger.info(emp);
-
-		Assert.assertNotNull(emp);
-
-	}
 
 	boolean exp = false;
 
@@ -359,8 +267,7 @@ public class EmployeeInfoTest {
 	public void testError02() throws APIException {
 		exp=true;
 		Employer empr = new  Employer();
-		JsonElement data = gson.toJsonTree(empr);
-		employeeInfo.View(data );
+		employeeInfo.View(empr );
 	}
 
 	@Test(expected=APIException.class)
@@ -375,11 +282,6 @@ public class EmployeeInfoTest {
 		employeeInfo.Delete(null);
 	}
 
-	@Test(expected=APIException.class)
-	public void testError05() throws APIException {
-		exp=true;
-		employeeInfo.ViewAll(null );
-	}
 
 	@After
 	public  void tearDown(){

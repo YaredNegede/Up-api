@@ -14,11 +14,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
@@ -79,11 +77,8 @@ public class EmployerInfoTest {
 		employer.setProfile(profiles );
 
 
-		JsonElement data = gson.toJsonTree(employer);
 
-		logger.info(data);
-
-		employerInfo.Add(data );
+		employerInfo.Add(employer);
 
 		Query query   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='username'");
 		Employer emp = (Employer) query.getSingleResult();
@@ -131,15 +126,12 @@ public class EmployerInfoTest {
 		
 		employer.setProfile(profiles );
 
-
-		JsonElement data = gson.toJsonTree(employer);
 		
-		employerInfo.Add(data );
+		employerInfo.Add(employer );
 
 		employer.setName("Sarkis");
 
-		JsonElement data2 = gson.toJsonTree(employer);
-		employerInfo.Update(data2 );
+		employerInfo.Update(employer);
 
 		Query query   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='Sarkis'");
 		Employer emp = (Employer) query.getSingleResult();
@@ -153,13 +145,13 @@ public class EmployerInfoTest {
 
 		Employer employer = new Employer();
 
-		employer.setName("username");
+		employer.setName("employer2");
 
 		Account account = new Account();
 
-		account.setNumber("1230001");
+		account.setNumber("12300012");
 
-		account.setType("premium");
+		account.setType("premium2");
 
 		employer.setAccount(account );
 
@@ -187,15 +179,15 @@ public class EmployerInfoTest {
 		
 		employer.setProfile(profiles );
 
-		JsonElement data = gson.toJsonTree(employer);
-
-		employerInfo.Add(data );
+		employerInfo.Add(employer );
 		
-		logger.info(data);
+		Query query1   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
+		
+		Employer empl = (Employer) query1.getSingleResult();
 
-		employerInfo.Delete(data );
+		employerInfo.Delete(empl);
 
-		Query query   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
+		Query query = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
 
 		Assert.assertEquals(query.getResultList().size(),0);
 
@@ -241,77 +233,11 @@ public class EmployerInfoTest {
 		
 		employer.setProfile(profiles );
 
-		JsonElement data = gson.toJsonTree(employer);
+		employerInfo.Add(employer );
 
-		logger.info(data);
+		Employer emp = (Employer) employerInfo.View(employer);
 
-		employerInfo.Add(data );
-
-		JsonElement emp = employerInfo.View(data );
-
-		Employer e = this.gson.fromJson(emp, Employer.class);
-
-		Assert.assertTrue(employer.equals(e));
-
-	}
-
-	@Test
-	public void testViewAll() throws APIException {
-		Employee employee = new Employee();
-
-		employee.setUsername("username");
-
-		employee.setPassword("password");
-
-		employee.setFirstName("Yared");
-
-		employee.setMiddleName("Negede");
-
-		employee.setLastName("Yeshitla");
-
-		Account account = new Account();
-
-		account.setNumber("1231");
-
-		account.setType("premium");
-
-		employee.setAccount(account );
-
-		Address address = new Address();
-
-		address.setCity("Addis Ababa");
-
-		employee.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
-
-		JsonElement data = gson.toJsonTree(employee);
-
-		logger.info(data);
-
-		employerInfo.Add(data );
-
-		JsonElement emp = employerInfo.ViewAll(data );
-
-		logger.info(emp);
-
-		Assert.assertNotNull(emp);
+		Assert.assertTrue(employer.equals(emp));
 
 	}
 
@@ -327,8 +253,7 @@ public class EmployerInfoTest {
 	public void testError02() throws APIException {
 		exp=true;
 		Employer empr = new  Employer();
-		JsonElement data = gson.toJsonTree(empr);
-		employerInfo.View(data );
+		employerInfo.View(empr);
 	}
 
 	@Test(expected=APIException.class)
@@ -341,12 +266,6 @@ public class EmployerInfoTest {
 	public void testError04() throws APIException {
 		exp=true;
 		employerInfo.Delete(null);
-	}
-
-	@Test(expected=APIException.class)
-	public void testError05() throws APIException {
-		exp=true;
-		employerInfo.ViewAll(null );
 	}
 
 	@After

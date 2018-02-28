@@ -9,15 +9,16 @@ import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.request.RequestedEntity;
+import com.sira.model.stateschema.model.UserBase;
 
-public class EmployeeSkillController extends Server{
+public class EmployeeSkillController extends Server  implements Controller{
 
 	private static final long serialVersionUID = 1L;
 	
 	private static Logger logger = Logger.getLogger(EmployeeSkillController.class);
 
 	@Override
-	public void add(ResourceRequest resourceRequest) throws GateException {
+	public void add(UserBase userBase) throws GateException {
 	
 		DataAccess dataAccess = null;
 		
@@ -25,9 +26,7 @@ public class EmployeeSkillController extends Server{
 			
 			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
 
-			logger.info("recieved request [ "+resourceRequest.getJsonElement()+" ]");
-			
-			dataAccess.Add(resourceRequest.getJsonElement());
+			dataAccess.Add(userBase);
 			
 		} catch (Exception e) {
 
@@ -38,21 +37,19 @@ public class EmployeeSkillController extends Server{
 	}
 
 	@Override
-	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
+	public JsonElement view(UserBase userBase) throws GateException {
 	
 		JsonElement je;
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.EmployeeSkill.name());
 			
-			JsonElement jem = dataAccess.View(resourceRequest.getJsonElement());
+			UserBase uBase = dataAccess.View(userBase);
 			
-			ResourceResponce resourceResponce = new ResourceResponce("Employee foound ", "OK", jem);
+			je = this.getContext().getGson().toJsonTree(uBase);
 			
-			je = this.getContext().getGson().toJsonTree(resourceResponce);
-			
-			logger.debug(jem);
+			logger.debug(je);
 			 
 		} catch (Exception e) {
 
@@ -65,49 +62,15 @@ public class EmployeeSkillController extends Server{
 		return je;
 	}
 
-	@Override
-	public JsonElement viewAll(ResourceRequest resourceRequest) throws GateException {
-	
-		JsonElement je;
-		
-		ResourceResponce resourceResponce ;
-		
-		DataAccess dataAccess = null;
-		
-		try {
-
-			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
-			
-			je = dataAccess.ViewAll(resourceRequest.getJsonElement());
-			
-			resourceResponce = new ResourceResponce("", "OK", je);
-			
-			logger.debug(je);
-			
-		} catch (Exception e) {
-
-			logger.error(e);
-			
-			resourceResponce = new ResourceResponce("", "ERROR", null);
-			
-			throw new GateException(e.getLocalizedMessage());
-			
-			
-		}
-		
-		return je;
-	}
 
 	@Override
-	public void update(ResourceRequest resourceRequest) throws GateException {
+	public void update(UserBase userBase) throws GateException {
 		
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
 			
-			logger.debug(resourceRequest.getJsonElement());
-			
-			dataAccess.Update(resourceRequest.getJsonElement());
+			dataAccess.Update(userBase);
 			
 			
 		} catch (Exception e) {
@@ -121,15 +84,13 @@ public class EmployeeSkillController extends Server{
 	}
 
 	@Override
-	public void delete(ResourceRequest resourceRequest) throws GateException {
+	public void delete(UserBase userBase) throws GateException {
 		
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
 			
-			logger.debug(resourceRequest.getJsonElement());
-			
-			dataAccess.Delete(resourceRequest.getJsonElement());
+			dataAccess.Delete(userBase);
 			
 			
 		} catch (Exception e) {
@@ -142,6 +103,7 @@ public class EmployeeSkillController extends Server{
 		}
 		
 	}
+
 
 	
 }

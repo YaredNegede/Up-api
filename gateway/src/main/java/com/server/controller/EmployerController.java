@@ -9,8 +9,9 @@ import com.server.Server;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.request.RequestedEntity;
+import com.sira.model.stateschema.model.UserBase;
 
-public class EmployerController extends Server {
+public class EmployerController extends Server   implements Controller{
 
 	/**
 	 * 
@@ -18,13 +19,14 @@ public class EmployerController extends Server {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 
-	public void add(ResourceRequest resourceRequest) throws GateException {
+	@Override
+	public void add(UserBase userBase) throws GateException {
 
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			dataAccess.Add(resourceRequest.getJsonElement());
+			dataAccess.Add(userBase);
 
 		} catch (Exception e) {
 
@@ -37,7 +39,7 @@ public class EmployerController extends Server {
 	}
 
 	@Override
-	public JsonElement view(ResourceRequest resourceRequest) throws GateException {
+	public JsonElement view(UserBase userBase) throws GateException {
 
 		JsonElement je = null;
 		
@@ -45,11 +47,9 @@ public class EmployerController extends Server {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			JsonElement jem = dataAccess.View(resourceRequest.getJsonElement());
+			UserBase base = dataAccess.View(userBase);
 			
-			ResourceResponce resourceResponce = new ResourceResponce("Found employer", "OK", jem);
-			
-			je = this.getContext().getGson().toJsonTree(resourceResponce);
+			je = this.getContext().getGson().toJsonTree(base);
 
 		} catch (Exception e) {
 
@@ -64,13 +64,13 @@ public class EmployerController extends Server {
 	}
 
 	@Override
-	public void update(ResourceRequest resourceRequest) throws GateException {
+	public void update(UserBase userBase) throws GateException {
 
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			dataAccess.Update(resourceRequest.getJsonElement());
+			dataAccess.Update(userBase);
 
 		} catch (Exception e) {
 
@@ -83,13 +83,13 @@ public class EmployerController extends Server {
 	}
 
 	@Override
-	public void delete(ResourceRequest resourceRequest) throws GateException {
+	public void delete(UserBase userBase) throws GateException {
 
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			dataAccess.Delete(resourceRequest.getJsonElement());
+			dataAccess.Delete(userBase);
 
 		} catch (Exception e) {
 
@@ -100,37 +100,5 @@ public class EmployerController extends Server {
 		}
 
 	}
-
-	@Override
-	public JsonElement viewAll(ResourceRequest resourceRequest) throws GateException {
-
-		JsonElement je = null;
-
-		logger.info("View all requested");
-		
-		try {
-
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
-
-			JsonElement jem = dataAccess.ViewAll(resourceRequest.getJsonElement());
-			
-			logger.debug(jem);
-			
-			ResourceResponce resourceResponce = new ResourceResponce("Found Employeers", "OK", jem);
-			
-			je=this.getContext().getGson().toJsonTree(resourceResponce);
-			
-
-		} catch (Exception e) {
-
-			logger.error(e);
-			
-			throw new GateException(e.getLocalizedMessage());
-
-		}
-
-		return je;
-	}
-
 
 }

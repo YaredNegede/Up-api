@@ -1,31 +1,51 @@
 package com.server.controller;
 
+import java.security.Security;
+import java.sql.Timestamp;
+import java.time.Instant;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
-import com.server.ResourceRequest;
 import com.server.ResourceResponce;
 import com.server.Server;
+import com.server.controller.email.Emailer;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
 import com.sira.api.request.RequestedEntity;
+import com.sira.model.stateschema.model.User;
 import com.sira.model.stateschema.model.UserBase;
 
-public class EmployerProfileController extends Server   implements Controller{
+public class UserController extends Server   implements Controller{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(EmployerProfileController.class);
+	
+	private static Logger logger = Logger.getLogger(UserController.class);
 
+	@Override
 	public void add(UserBase userBase) throws GateException {
 
 		try {
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
+			userBase.setStatus(false);
+			
+			userBase.getUser().setStatus(false);
+			
+			String toke = java.util.UUID.randomUUID().toString();
+			
+			userBase.getUser().setStatusToken(toke );
+			
 			dataAccess.Add(userBase);
+			
+			Emailer emailer = (Emailer) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			
+			emailer.sendTokenLint(userBase);
+			
 
 		} catch (Exception e) {
 
@@ -46,9 +66,15 @@ public class EmployerProfileController extends Server   implements Controller{
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			UserBase base = dataAccess.View(userBase);
+			UserBase uBase  = dataAccess.View(userBase);
 			
-			je = this.getContext().getGson().toJsonTree(base);
+			if(!uBase.getUser().getStatus()){
+			
+				throw new GateException("User not active");
+				
+			}
+			
+			je = this.getContext().getGson().toJsonTree(uBase);
 
 		} catch (Exception e) {
 
@@ -69,7 +95,27 @@ public class EmployerProfileController extends Server   implements Controller{
 
 			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
 
-			dataAccess.Update(userBase);
+			Timestamp now = Timestamp.from(Instant.now());
+			
+			UserBase foundUbase = dataAccess.View(userBase);
+			
+			if(userBase.getUser().getStatusToken().equals(foundUbase.getUser().getStatusToken())){
+				
+				userBase.getUser().setStatus(true);
+				
+				dataAccess.Update(userBase);
+
+			} if (userBase.getUser().getExpireTime().before(now)) {
+				
+				dataAccess.Delete(userBase);
+				
+				throw new GateException("token expired, sign up again");
+				
+			} else {
+				
+				throw new GateException("Invalid Token");
+				
+			}
 
 		} catch (Exception e) {
 

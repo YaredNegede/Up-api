@@ -9,7 +9,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/applicationContext.xml</param-value>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -20,19 +20,19 @@
 	<servlet>
 		<servlet-name>employee</servlet-name>
 		<servlet-class>com.server.controller.EmployeeController
-		</servlet-class>		
+		</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>employeeskill</servlet-name>
 		<servlet-class>com.server.controller.EmployeeSkillController
-		</servlet-class>		
+		</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>employeeprofile</servlet-name>
 		<servlet-class>com.server.controller.EmployeeProfileController
-		</servlet-class>		
+		</servlet-class>
 	</servlet>
 
 	<servlet>
@@ -40,13 +40,13 @@
 		<servlet-class>com.server.controller.EmployerController
 		</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>employerskill</servlet-name>
 		<servlet-class>com.server.controller.EmployerSkillController
 		</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>employerprofile</servlet-name>
 		<servlet-class>com.server.controller.EmployerProfileController
@@ -58,17 +58,39 @@
 		<servlet-class>com.server.controller.ProjectController</servlet-class>
 	</servlet>
 
+
 	<servlet>
-		<servlet-name>skill</servlet-name>
-		<servlet-class>com.server.controller.SkillController</servlet-class>
+		<servlet-name>projectprofile</servlet-name>
+		<servlet-class>com.server.controller.ProjectProfileController
+		</servlet-class>
 	</servlet>
+
+	<servlet>
+		<servlet-name>projectskill</servlet-name>
+		<servlet-class>com.server.controller.ProjectSkillController
+		</servlet-class>
+	</servlet>
+
 
 	<!--***************************** Controller mapping ***************************** -->
 
+	<!-- ***************************Employee******************************* -->
 	<servlet-mapping>
 		<servlet-name>employee</servlet-name>
 		<url-pattern>/employee</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>employeeprofile</servlet-name>
+		<url-pattern>/employee/profile</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>employeeskill</servlet-name>
+		<url-pattern>/employee/skill</url-pattern>
+	</servlet-mapping>
+
+	<!-- ***************************Employeer******************************* -->
 
 	<servlet-mapping>
 		<servlet-name>employer</servlet-name>
@@ -76,17 +98,35 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
+		<servlet-name>employerprofile</servlet-name>
+		<url-pattern>/employer/profile</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>employerskill</servlet-name>
+		<url-pattern>/employer/skill</url-pattern>
+	</servlet-mapping>
+
+	<!-- ****************************Project****************************** -->
+
+	<servlet-mapping>
 		<servlet-name>project</servlet-name>
 		<url-pattern>/project</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>skill</servlet-name>
-		<url-pattern>/skill</url-pattern>
+		<servlet-name>projectskill</servlet-name>
+		<url-pattern>/project/skill</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>projectskill</servlet-name>
+		<url-pattern>/project/skill</url-pattern>
+	</servlet-mapping>
+
 
 	<!--***************************** Controller mapping end ***************************** -->
 	<welcome-file-list id="WelcomeFileList">
-		<welcome-file>index.html</welcome-file>		
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 </web-app>

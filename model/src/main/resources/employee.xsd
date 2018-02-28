@@ -15,21 +15,21 @@
 	<!-- Employee -->
 
 	<xs:complexType name="Employee">
-		<xs:sequence>
-			<xs:element name="firstName" type="xs:string" />
-			<xs:element name="middleName" type="xs:string" />
-			<xs:element name="lastName" type="xs:string" />
-			<xs:element name="username" type="xs:string" />
-			<xs:element name="password" type="xs:string" />
-			<xs:element name="address" type="Address" />
-			<xs:element name="account" type="Account" />
-			<xs:element name="profile" type="Profile" minOccurs="0"
-				maxOccurs="unbounded"/>
-			<xs:element name="projects" type="ProjectDetail"  minOccurs="0"
-				maxOccurs="unbounded"/>
-			<xs:element name="skills" type="Skill" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="UserBase">
+				<xs:choice>
+					<xs:element name="firstName" type="xs:string" />
+					<xs:element name="middleName" type="xs:string" />
+					<xs:element name="lastName" type="xs:string" />
+					<xs:element name="address" type="Address" />
+					<xs:element name="account" type="Account" />
+					<xs:element name="profile" type="Profile" minOccurs="0"
+						maxOccurs="unbounded" />
+					<xs:element name="skills" type="Skill" minOccurs="0"
+						maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 </xs:schema>

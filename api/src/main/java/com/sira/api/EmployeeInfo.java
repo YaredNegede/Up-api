@@ -1,14 +1,11 @@
 package com.sira.api;
 
-import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 
-import com.google.gson.JsonElement;
 import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.model.Employee;
+import com.sira.model.stateschema.model.UserBase;
 
 public class EmployeeInfo extends DataAccess{
 
@@ -17,11 +14,11 @@ public class EmployeeInfo extends DataAccess{
 	}
 
 	@Override
-	public void Add(JsonElement data) throws APIException {
+	public void Add(UserBase userBase) throws APIException {
 
 		try {
-
-			Employee employee = this.getGson().fromJson(data, Employee.class);
+			
+			Employee employee = (Employee) userBase;
 
 			this.getEntitimanager().persist(employee);
 
@@ -33,11 +30,11 @@ public class EmployeeInfo extends DataAccess{
 	}
 
 	@Override
-	public void Update(JsonElement data) throws APIException {
+	public void Update(UserBase userBase) throws APIException {
 
 		try {
-
-			Employee employee = this.getGson().fromJson(data, Employee.class);
+			
+			Employee employee = (Employee) userBase;
 			
 			this.getEntitimanager().merge(employee);
 
@@ -48,34 +45,31 @@ public class EmployeeInfo extends DataAccess{
 	}
 
 	@Override
-	public void Delete(JsonElement data) throws APIException {
+	public void Delete(UserBase userBase) throws APIException {
 
 		try {
-
-			Employee employee = this.getGson().fromJson(data, Employee.class);
-
-			Query query = this.getEntitimanager().createQuery("delete from Employee as emp where emp.username='"+employee.getUsername()+"'");
 			
-			query.executeUpdate();
+			Employee employee = (Employee) userBase;
+
+			this.getEntitimanager().remove(employee);
 
 		} catch (Exception e) {
 
 			throw new APIException(e.getLocalizedMessage());
+			
 		}
 	}
 
 	@Override
-	public JsonElement View(JsonElement data) throws APIException {
+	public UserBase View(UserBase userBase) throws APIException {
 		
 		Employee employee;
 		
 		try {
 
-			employee = this.getGson().fromJson(data, Employee.class);
+			employee = (Employee) userBase;
 
-			Query query = this.getEntitimanager().createQuery("from Employee as emp where emp.username='"+employee.getUsername()+"'");
-		
-			employee = (Employee) query.getResultList().get(0);
+			employee = this.getEntitimanager().find(Employee.class, employee.getHjid());
 
 		} catch (Exception e) {
 
@@ -83,40 +77,7 @@ public class EmployeeInfo extends DataAccess{
 			
 		}
 
-		return this.getGson().toJsonTree(employee);
-	}
-
-	@Override
-	public JsonElement ViewAll( JsonElement data) throws APIException {
-
-		List<Employee> employees;
-
-		try {
-
-			Employee employee = this.getGson().fromJson(data, Employee.class);
-
-			Query query = this.getEntitimanager().createQuery("from Employee as emp where "
-					+ "emp.firstName=:firstName"	
-					+ " or emp.middleName=:middleName"
-					+ " or emp.lastName=:lastName"
-					+ " or emp.username=:username");
-			
-			query.setParameter("firstName", employee.getFirstName());
-			query.setParameter("middleName", employee.getMiddleName());
-			query.setParameter("lastName", employee.getLastName());
-			query.setParameter("username", employee.getUsername());
-
-			employees = query.getResultList();
-
-
-		} catch (Exception e) {
-			
-			throw new APIException(e.getLocalizedMessage());
-
-		}
-
-		return this.getGson().toJsonTree(employees);
-
+		return employee;
 	}
 
 }

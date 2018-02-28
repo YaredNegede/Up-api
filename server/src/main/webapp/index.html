@@ -4,17 +4,15 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
 
-	<title>Home</title>
+<title>Home</title>
 
 <script type="text/js" src="minAjax.js"></script>
 
 <style type="text/css">
-
-	.header {
-		width: 100%;
-		background-color: blue;
-	}
-
+.header {
+	width: 100%;
+	background-color: blue;
+}
 </style>
 
 </head>
@@ -23,37 +21,49 @@
 
 	<div id="header"></div>
 
-
 	<div id="content">
 
-	<hr/>
+		<hr />
 
 		<center>
 
 			<p>
 				<form method="post" action="/server/employer">
+				
 					<button type="submit" value="submit" onclick="postEmployer()">employer</button>
+					
+				</form>
+
+			</p>
+			<p>
+				<form method="post" action="/server/employer/skill">
+				
+					<button type="submit" value="submit" onclick="postEmployer()">employer</button>
+					
 				</form>
 
 			</p>
 			<p>
 
 				<form method="post" action="/server/employee">
+				
 					<button type="submit" value="submit">employee</button>
+					
 				</form>
 			</p>
 			<p>
 				<form method="post" action="/server/project">
+				
 					<button type="submit" value="submit">project</button>
+					
 				</form>
 
 			</p>
 
-
 		</center>
-		
-		<hr/>
-		
+
+		<hr />
+
 		<center>
 
 			<p>
@@ -78,12 +88,12 @@
 
 		</center>
 
-	<hr/>
+		<hr />
 
 	</div>
 
 	<div id="footer" class="header"></div>
-<script>
+	<script>
 	
 	function postEmployer() {
 		alert();
