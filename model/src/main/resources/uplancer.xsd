@@ -13,5 +13,14 @@
 	<xs:import schemaLocation="employer.xsd"
 		namespace="http://www.model.sira.com/stateschema/model" />
 
+	<xs:complexType name="Uplancer">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" default="uplancer"/>
+			<xs:element name="contact" type="xs:string" default="admin"/>
+			<xs:element name="filesDir" type="xs:string" default="filesDir"/>
+			<xs:element name="tradename" type="xs:string" default="www.uplancer.io"/>
+			<xs:element name="email" type="xs:string" default="admin@uplancer.io"/>
+		</xs:sequence>
+	</xs:complexType>
 
 </xs:schema>

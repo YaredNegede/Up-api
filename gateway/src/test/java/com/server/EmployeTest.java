@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.server.controller.Controller;
 import com.server.controller.EmployeeController;
 import com.server.error.GateException;
 import com.sira.api.request.Context;
@@ -38,9 +39,6 @@ public class EmployeTest {
 
 		Employee employee = new Employee();
 
-		employee.setUsername("username");
-
-		employee.setPassword("password");
 		
 		employee.setFirstName("Yared");
 		
@@ -84,21 +82,12 @@ public class EmployeTest {
 
 		logger.info(element);
 		
-		ResourceRequest resourceRequest = new ResourceRequest(element);
 
-		String reqRes = gson.toJson(resourceRequest);
+		EmployeeController controller = new  EmployeeController();
+
+		controller.context = new Context(appcont );
 		
-		logger.info("reuest is "+ reqRes);
-		
-		byte[] content =  reqRes.getBytes();
-
-		req.setContent(content);
-
-		Server server = new  EmployeeController();
-
-		server.context = new Context(appcont );
-		
-		server.add(resourceRequest);
+		controller.add(employee);
 		
 	}
 

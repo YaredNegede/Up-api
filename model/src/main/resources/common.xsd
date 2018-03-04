@@ -151,8 +151,8 @@
 	<xs:complexType name="UserBase" abstract="true">
 		<xs:choice>
 			<xs:element name="status" type="xs:boolean" default="false" />
-			<xs:element name="user" type="User" />
-			<xs:element name="project" type="ProjectDetail" minOccurs="0"
+			<xs:element name="user" type="User"/>
+			<xs:element name="project" type="xs:long" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:choice>
 	</xs:complexType>

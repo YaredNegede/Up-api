@@ -6,15 +6,30 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.server.error.GateException;
+import com.sira.api.deamon.UplancerInfo;
+import com.sira.api.error.APIException;
+import com.sira.model.stateschema.model.Uplancer;
 import com.sira.model.stateschema.model.UserBase;
 
 public class Emailer {
 
 	private static Logger logger = Logger.getLogger(Emailer.class);
 	
-	public void sendTokenLint(UserBase userBase) throws GateException{
+	public void sendTokenLint(UserBase userBase, UplancerInfo uplancerInfo) throws GateException{
 		
 		logger.info("Email Sent to [ "+userBase.getUser().getEmail()+" ]");
+		
+		Uplancer uplancer;
+		
+		try {
+			
+			uplancer = uplancerInfo.getUplancer();
+			
+		} catch (APIException e1) {
+
+			throw new GateException(e1.getLocalizedMessage());
+			
+		}
 		
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		
@@ -22,7 +37,7 @@ public class Emailer {
 		
 		simpleMessage.setText(userBase.getUser().getStatusToken());
 		
-		simpleMessage.setFrom("system@uplancer.io");
+		simpleMessage.setFrom(uplancer.getEmail());
 		
 		simpleMessage.setTo(userBase.getUser().getEmail());
 		
@@ -35,7 +50,6 @@ public class Emailer {
 			throw new  GateException(e.getLocalizedMessage());
 			
 		}
-
 		
 	}
 
