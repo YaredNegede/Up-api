@@ -89,5 +89,17 @@
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
 	</bean>
 
+	<bean id="Skill" class="com.sira.api.EmployeeSkillInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
+	</bean>
+
+
+	<bean id="Profile" class="com.sira.api.EmployeeProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
+	</bean>
 
 </beans>

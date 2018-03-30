@@ -1,7 +1,6 @@
 package com.sira.api;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 
 import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
@@ -18,8 +17,14 @@ public class EmployeeProfileInfo extends DataAccess{
 	public void Add(UserBase userBase) throws APIException {
 
 		try {
-			
+
 			Employee employee = (Employee) userBase;
+
+			for (int i = 0; i < employee.getProfile().size(); i++) {
+
+				this.getEntitimanager().persist(employee.getProfile().get(i));
+
+			}
 
 			Employee empFound = this.getEmployee(employee);
 
@@ -30,6 +35,7 @@ public class EmployeeProfileInfo extends DataAccess{
 		} catch (Exception e) {
 
 			throw new APIException(e.getLocalizedMessage());
+
 		}
 
 	}
@@ -41,10 +47,15 @@ public class EmployeeProfileInfo extends DataAccess{
 
 			Employee employee = (Employee) userBase;
 
+			for (int i = 0; i < employee.getProfile().size(); i++) {
+
+				this.getEntitimanager().persist(employee.getProfile().get(i));
+
+			}
 			Employee empFound = this.getEmployee(employee);
 
 			empFound.getProfile().clear();
-			
+
 			empFound.getProfile().addAll(employee.getProfile());
 
 			this.getEntitimanager().merge(empFound);
@@ -59,15 +70,15 @@ public class EmployeeProfileInfo extends DataAccess{
 	public void Delete(UserBase userBase) throws APIException {
 
 		try {
-			
+
 			Employee employee = (Employee) userBase;
 
 			Employee empFound = this.getEmployee(employee);
-			
+
 			empFound.getProfile().removeAll(employee.getProfile());
-			
+
 			this.getEntitimanager().merge(empFound);
-			
+
 
 		} catch (Exception e) {
 
@@ -85,9 +96,9 @@ public class EmployeeProfileInfo extends DataAccess{
 			employee = (Employee) userBase;
 
 			Employee emp = this.getEmployee(employee);
-			
+
 			employee.setProfile(emp.getProfile());
-			
+
 
 		} catch (Exception e) {
 

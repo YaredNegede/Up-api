@@ -40,6 +40,8 @@ public class EmployeeInfoTest {
 	@Test
 	public void testAdd() throws APIException {
 
+		logger.info("adding users");
+		
 		Employee employee = new Employee();
 
 		employee.setFirstName("Yared");
