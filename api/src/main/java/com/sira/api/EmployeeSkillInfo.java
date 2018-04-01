@@ -66,7 +66,7 @@ public class EmployeeSkillInfo extends DataAccess{
 
 			empFound.getSkills().addAll(employee.getSkills());
 
-			logger.info("________updated skill "+this.getGson().toJson(empFound));
+			logger.info("________updated skill "+this.getGson().toJson(employee));
 
 			this.getEntitimanager().merge(empFound);
 
