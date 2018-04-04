@@ -98,8 +98,7 @@
 	<xs:complexType name="Profile">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
-			<xs:element name="skills" type="Skill" minOccurs="1"
-				maxOccurs="20" />
+			<xs:element name="description" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -115,19 +114,29 @@
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="description" type="xs:string" />
 			<xs:element minOccurs="0" name="status" type="xs:string" />
-			<xs:element minOccurs="0" name="managedBy" type="xs:string" />
-			<xs:element minOccurs="0" name="specifiedBy" type="xs:string" />
-			<xs:element minOccurs="0" name="initiatedDate" type="xs:string" />
-			<xs:element minOccurs="0" name="completedDate" type="xs:string" />
+			<xs:element name="managedBy" type="xs:string" />
+			<xs:element name="specifiedBy" type="xs:string" />
+			<xs:element name="initiatedDate" type="xs:string" />
+			<xs:element name="completedDate" type="xs:string" />
 			<xs:element name="skills" type="Skill" minOccurs="1"
 				maxOccurs="unbounded" />
-
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:element name="user" type="User" />
 
 	<xs:complexType name="User">
+		<xs:annotation>
+			<xs:appinfo>
+				<hj:entity>
+					<orm:table>
+						<orm:unique-constraint>
+							<orm:column-name>email</orm:column-name>
+						</orm:unique-constraint>
+					</orm:table>
+				</hj:entity>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:choice>
 			<xs:element name="username" type="xs:string" />
 			<xs:element name="password" type="xs:string" />
@@ -151,7 +160,7 @@
 	<xs:complexType name="UserBase" abstract="true">
 		<xs:choice>
 			<xs:element name="status" type="xs:boolean" default="false" />
-			<xs:element name="user" type="User"/>
+			<xs:element name="user" type="User" />
 			<xs:element name="project" type="xs:long" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:choice>

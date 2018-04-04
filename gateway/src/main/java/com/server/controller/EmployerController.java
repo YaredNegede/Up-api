@@ -3,12 +3,10 @@ package com.server.controller;
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
-import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
+import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.request.RequestedEntity;
 import com.sira.model.stateschema.model.UserBase;
 
 public class EmployerController extends Server   implements Controller{
@@ -50,6 +48,8 @@ public class EmployerController extends Server   implements Controller{
 			UserBase base = dataAccess.View(userBase);
 			
 			je = this.getContext().getGson().toJsonTree(base);
+			
+			logger.info(je);
 
 		} catch (Exception e) {
 

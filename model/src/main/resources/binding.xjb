@@ -8,11 +8,14 @@
 	jaxb:extensionBindingPrefixes="hj orm annox">
 
 
-	<!-- Annotate the following classes with XmlRootElement -->
+	<!-- 
+	<hj:generated-id name="id" transient="false" />
+	Annotate the following classes with XmlRootElement -->
 
 	<jaxb:bindings schemaLocation="common.xsd" node="/xs:schema">
 
 		<hj:persistence>
+		
 			<hj:default-one-to-many fetch="EAGER">
 				<orm:join-column />
 				<orm:cascade>

@@ -61,23 +61,6 @@ public class EmployerInfoTest {
 
 		profile.setName("javascript");
 
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employer.setProfile(profiles );
-
-
-
 		employerInfo.Add(employer);
 
 		Query query   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='username'");
@@ -112,21 +95,6 @@ public class EmployerInfoTest {
 
 		profile.setName("javascript");
 
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employer.setProfile(profiles );
-
-		
 		employerInfo.Add(employer );
 
 		employer.setName("Sarkis");
@@ -165,20 +133,6 @@ public class EmployerInfoTest {
 
 		profile.setName("javascript");
 
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employer.setProfile(profiles );
-
 		employerInfo.Add(employer );
 		
 		Query query1   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
@@ -214,24 +168,6 @@ public class EmployerInfoTest {
 		address.setCity("Addis Ababa");
 
 		employer.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employer.setProfile(profiles );
 
 		employerInfo.Add(employer );
 

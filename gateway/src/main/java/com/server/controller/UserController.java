@@ -1,19 +1,16 @@
 package com.server.controller;
 
-import java.security.Security;
 import java.sql.Timestamp;
 import java.time.Instant;
 
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
-import com.server.ResourceResponce;
 import com.server.Server;
 import com.server.controller.email.Emailer;
+import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.request.RequestedEntity;
-import com.sira.model.stateschema.model.User;
 import com.sira.model.stateschema.model.UserBase;
 
 public class UserController extends Server   implements Controller{
@@ -30,19 +27,9 @@ public class UserController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
-
-			userBase.setStatus(false);
+		
 			
-			userBase.getUser().setStatus(false);
-			
-			String toke = java.util.UUID.randomUUID().toString();
-			
-			userBase.getUser().setStatusToken(toke );
-			
-			dataAccess.Add(userBase);
-			
-			Emailer emailer = (Emailer) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			Emailer emailer = (Emailer) this.getContext().getApplicationContext().getBean(RequestedEntity.User.name());
 			
 			emailer.sendTokenLint(userBase);
 			
@@ -64,7 +51,7 @@ public class UserController extends Server   implements Controller{
 		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.User.name());
 
 			UserBase uBase  = dataAccess.View(userBase);
 			
@@ -93,7 +80,7 @@ public class UserController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.User.name());
 
 			Timestamp now = Timestamp.from(Instant.now());
 			
@@ -132,7 +119,7 @@ public class UserController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.User.name());
 
 			dataAccess.Delete(userBase);
 

@@ -91,14 +91,12 @@ public class EmployeeControllerViewTest {
 		employeeInfo.getEntitimanager().persist(employee);
 		
 		employee.setFirstName("Daniel");
-		JsonElement element = gson.toJsonTree(employee);
-
 		 
 		JsonElement js = server.view(employee );
 		
 		Employee e = gson.fromJson(js,Employee.class);
 		
-		Assert.assertTrue(e.equals(employee));
+		Assert.assertTrue(js.toString(),e.equals(employee));
 
 	}
 

@@ -70,14 +70,6 @@ public class EmployeeInfoTest {
 
 		List<Skill> skills = new ArrayList<Skill>();
 
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-
 		List<Profile> profiles = new ArrayList<Profile>();
 		profiles.add(profile);
 		employee.setProfile(profiles  );
@@ -127,13 +119,6 @@ public class EmployeeInfoTest {
 		skill.setDescription("very good in javacript");
 
 		skills.add(skill );
-
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
 
 		employeeInfo.Add(employee);
 
@@ -186,14 +171,6 @@ public class EmployeeInfoTest {
 
 		skills.add(skill );
 
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
-
-
 		employeeInfo.Delete(employee);
 
 		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"
@@ -232,21 +209,6 @@ public class EmployeeInfoTest {
 		Profile profile = new Profile();
 
 		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
 
 		employeeInfo.Add(employee);
 

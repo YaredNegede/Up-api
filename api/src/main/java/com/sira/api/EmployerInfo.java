@@ -20,8 +20,6 @@ public class EmployerInfo extends DataAccess{
 		Employer employer = (Employer) userBase;
 
 		try {
-
-			
 			
 			this.getEntitimanager().persist(employer);
 

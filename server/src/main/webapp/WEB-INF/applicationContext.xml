@@ -17,14 +17,14 @@
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
-			<value>WEB-INF/config.properties</value>
+			<value>WEB-INF/server.properties</value>
 		</property>
 		<property name="nullValue" value="@null" />
 	</bean>
 
 	<bean id="properties"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="WEB-INF/config.properties" />
+		<property name="location" value="WEB-INF/server.properties" />
 	</bean>
 
 	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
@@ -92,37 +92,10 @@
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
 	</bean>
 
-	<bean id="EmployerSkill" class="com.sira.api.EmployerSkillInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Skill" />
-	</bean>
-
 	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
 		<constructor-arg ref="siraEntityManagerFactoryBean" />
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Profile" />
 	</bean>
-
-
-	<bean id="Project" class="com.sira.api.ProjectInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Project" />
-	</bean>
-
-
-	<bean id="ProjectSkill" class="com.sira.api.ProjectSkillInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Skill" />
-	</bean>
-
-	<bean id="ProjectProfile" class="com.sira.api.ProjectProfileInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Profile" />
-	</bean>
-
 
 </beans>

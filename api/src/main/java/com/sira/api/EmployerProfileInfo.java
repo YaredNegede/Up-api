@@ -17,20 +17,27 @@ public class EmployerProfileInfo extends DataAccess{
 	public void Add(UserBase userBase) throws APIException {
 
 		try {
-			
-			
 
 			Employer employer =  (Employer) userBase;
 
+			for (int i = 0; i < employer.getProfile().size(); i++) {
+
+				this.getEntitimanager().merge(employer.getProfile().get(i));
+
+			}
+
 			Employer empFound = this.getEmployer(employer);
 
-			empFound.setProfile(employer.getProfile());
+			empFound.getProfile().addAll(employer.getProfile());
 
 			this.getEntitimanager().merge(empFound);
 
 		} catch (Exception e) {
-
+			
+			e.printStackTrace();
+		
 			throw new APIException(e.getLocalizedMessage());
+		
 		}
 
 	}
@@ -39,16 +46,20 @@ public class EmployerProfileInfo extends DataAccess{
 	public void Update(UserBase userBase) throws APIException {
 
 		try {
-			
-			
-			
+
 			Employer employer =  (Employer) userBase;
+			
+			for (int i = 0; i < employer.getProfile().size(); i++) {
+
+				this.getEntitimanager().persist(employer.getProfile().get(i));
+
+			}
 
 			Employer empFound = this.getEmployer(employer);
 
 			empFound.getProfile().clear();
-			
-			empFound.setProfile(employer.getProfile());
+
+			empFound.getProfile().addAll(employer.getProfile());
 
 			this.getEntitimanager().merge(empFound);
 
@@ -63,8 +74,8 @@ public class EmployerProfileInfo extends DataAccess{
 
 		try {
 
-			
-			
+
+
 			Employer employer = (Employer) userBase;
 
 			Employer empFound = this.getEmployer(employer);
@@ -87,8 +98,8 @@ public class EmployerProfileInfo extends DataAccess{
 
 		try {
 
-			
-			
+
+
 			employer = (Employer) userBase;
 
 			Employer empFound = this.getEmployer(employer);

@@ -101,5 +101,11 @@
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
 	</bean>
+	
+	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
+	</bean>
 
 </beans>

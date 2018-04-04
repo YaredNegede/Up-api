@@ -3,12 +3,10 @@ package com.server.controller;
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
-import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
+import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.request.RequestedEntity;
 import com.sira.model.stateschema.model.UserBase;
 
 public class EmployeeSkillController extends Server  implements Controller{
@@ -24,12 +22,14 @@ public class EmployeeSkillController extends Server  implements Controller{
 		
 		try {
 			
-			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
-
+			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
+			
 			dataAccess.Add(userBase);
 			
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new GateException(e.getLocalizedMessage());
 			
 		}
@@ -43,7 +43,8 @@ public class EmployeeSkillController extends Server  implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.EmployeeSkill.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
+			
 			
 			UserBase uBase = dataAccess.View(userBase);
 			
@@ -62,13 +63,12 @@ public class EmployeeSkillController extends Server  implements Controller{
 		return je;
 	}
 
-
 	@Override
 	public void update(UserBase userBase) throws GateException {
 		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 			
 			dataAccess.Update(userBase);
 			
@@ -88,7 +88,7 @@ public class EmployeeSkillController extends Server  implements Controller{
 		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Skill.name());
 			
 			dataAccess.Delete(userBase);
 			
@@ -103,7 +103,5 @@ public class EmployeeSkillController extends Server  implements Controller{
 		}
 		
 	}
-
-
 	
 }

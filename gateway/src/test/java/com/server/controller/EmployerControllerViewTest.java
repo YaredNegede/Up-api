@@ -79,8 +79,8 @@ public class EmployerControllerViewTest {
 		
 		JsonElement element = gson.toJsonTree(employer);
 		JsonElement emp = server.view(employer );
-		Employee e = gson.fromJson(emp, Employee.class);
-		Assert.assertTrue(employer.equals(e));
+		Employer e = gson.fromJson(emp, Employer.class);
+		Assert.assertTrue(e.equals(employer));
 
 	}
 	

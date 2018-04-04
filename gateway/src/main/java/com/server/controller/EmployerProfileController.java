@@ -3,12 +3,10 @@ package com.server.controller;
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
-import com.server.ResourceRequest;
-import com.server.ResourceResponce;
 import com.server.Server;
+import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.request.RequestedEntity;
 import com.sira.model.stateschema.model.UserBase;
 
 public class EmployerProfileController extends Server   implements Controller{
@@ -23,7 +21,7 @@ public class EmployerProfileController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
 
 			dataAccess.Add(userBase);
 
@@ -44,7 +42,7 @@ public class EmployerProfileController extends Server   implements Controller{
 		
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
 
 			UserBase base = dataAccess.View(userBase);
 			
@@ -67,7 +65,7 @@ public class EmployerProfileController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
 
 			dataAccess.Update(userBase);
 
@@ -86,7 +84,7 @@ public class EmployerProfileController extends Server   implements Controller{
 
 		try {
 
-			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employer.name());
+			DataAccess dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
 
 			dataAccess.Delete(userBase);
 

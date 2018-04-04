@@ -4,9 +4,9 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
 import com.server.Server;
+import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
-import com.sira.api.request.RequestedEntity;
 import com.sira.model.stateschema.model.UserBase;
 
 public class EmployeeController extends Server  implements Controller{
@@ -21,13 +21,19 @@ public class EmployeeController extends Server  implements Controller{
 		DataAccess dataAccess = null;
 		
 		try {
+
+			logger.info("Adding employee");
 			
 			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Employee.name());
-
+			
 			dataAccess.Add(userBase);
+
+			logger.info("Adding employee completed");
 			
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new GateException(e.getLocalizedMessage());
 			
 		}

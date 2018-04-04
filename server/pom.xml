@@ -18,9 +18,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.sira</groupId>
-			<artifactId>dto</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -39,6 +39,12 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.191</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 	</dependencies>

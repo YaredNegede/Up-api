@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
+	jaxb:extensionBindingPrefixes="hj orm annox"
+	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	elementFormDefault="qualified">
+
+	<xs:import schemaLocation="common.xsd"
+		namespace="http://www.model.sira.com/stateschema/model" />
+
+	<xs:element name="job" type="JobDetail" />
+
+	<xs:complexType name="JobDetail">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="status" type="xs:string" />
+			<xs:element name="startTime" type="xs:dateTime" />
+			<xs:element name="endTime" type="xs:dateTime" />
+			<xs:element name="skills" type="Skill" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

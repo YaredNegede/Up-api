@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.server.error.GateException;
 import com.sira.api.EmployeeInfo;
 import com.sira.api.error.APIException;
@@ -89,8 +88,8 @@ public class EmployeeControllerAddTest {
 		profiles.add(profile);
 		employee.setProfile(profiles );
 
-		JsonElement element = gson.toJsonTree(employee);
-
+		server.add(employee);
+		
 		Query q = employeeInfo.getEntitimanager().createQuery("from Employee as emplr where emplr.firstName='"+employee.getFirstName()+"'");
 		
 		Employee e = (Employee) q.getSingleResult();

@@ -101,7 +101,7 @@ public abstract class DataAccess {
 
 		try {
 
-			Query query = this.getEntitimanager().createQuery("from Employer as emp where emp.hjid=:hjid and emp.user.status=:status");
+			Query query = this.getEntitimanager().createQuery("from Employer as emp where emp.hjid=:hjid and emp.status=:status");
 
 			query.setParameter("status", true);
 
@@ -113,6 +113,8 @@ public abstract class DataAccess {
 
 		} catch (Exception e) {
 
+			e.printStackTrace();
+			
 			throw new APIException(e.getLocalizedMessage());
 
 		}

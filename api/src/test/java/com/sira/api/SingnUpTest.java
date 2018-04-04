@@ -51,25 +51,6 @@ public class SingnUpTest {
 
 		employee.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		profile.setSkills(skills );
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		
-		employee.setProfile(profiles );
-
 	}
 	
 	@Test
