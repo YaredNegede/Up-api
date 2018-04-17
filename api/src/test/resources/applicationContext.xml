@@ -101,11 +101,27 @@
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
 	</bean>
-	
+
 	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
 		<constructor-arg ref="siraEntityManagerFactoryBean" />
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
+	</bean>
+
+	<bean id="Job" class="com.sira.api.WorkInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.JobDetail" />
+	</bean>
+
+	<bean id="Project" class="com.sira.api.WorkInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.ProjectDetail" />
+	</bean>
+	
+	<bean id="Uplancer" class="com.sira.api.deamon.UplancerInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
 	</bean>
 
 </beans>

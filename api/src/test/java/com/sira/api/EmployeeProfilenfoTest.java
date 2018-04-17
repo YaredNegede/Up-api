@@ -1,8 +1,5 @@
 package com.sira.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -14,13 +11,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
 import com.sira.api.error.APIException;
-import com.sira.api.EmployeeProfileInfo;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.User;
-import com.sira.model.stateschema.model.UserBase;
 
 import javassist.NotFoundException;
 
@@ -73,16 +68,6 @@ public class EmployeeProfilenfoTest {
 
 		employee.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Profile> profiles = new ArrayList<Profile>();
-
-		profiles.add(profile);
-
-		employee.setProfile(profiles );
-
 		employeeProfileInfo.getEntitimanager().getTransaction().begin();
 		employeeProfileInfo.getEntitimanager().persist(employee);
 		employeeProfileInfo.getEntitimanager().getTransaction().commit();
@@ -96,63 +81,46 @@ public class EmployeeProfilenfoTest {
 	@Test
 	public void testProfile() throws APIException {
 
-		logger.info("____________Testing employee profile api");
-
-		Query qset = employeeProfileInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
-
-		Employee employeeSetUp  = (Employee) qset.getSingleResult();
-
-		logger.info("____________set up data "+gson.toJson(employeeSetUp));
-		
 		Profile profile = new Profile();
+		profile.setName("firstname");
+		profile.setDescription("first description");
+		
+		employeeProfileInfo.Add(profile );
 
-		profile.setName("new name");
+		Query qss = employeeProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'");
 
-		employee.setHjid(employeeSetUp.getHjid());
-		
-		Assert.assertFalse(employee.getProfile().size()>1);
-		
-		employee.getProfile().add(profile);
-		
-		logger.info("____________ original "+gson.toJson(employee));
-		
-		employeeProfileInfo.Add(employee);
+		Profile ProfileUpdatedFound  = (Profile) qss.getSingleResult();
 
-		Query qss = employeeProfileInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
-
-		Employee employeeupdatedFound  = (Employee) qss.getSingleResult();
-
-		Assert.assertTrue(employeeupdatedFound.getProfile().contains(profile));
+		Assert.assertTrue(ProfileUpdatedFound.equals(profile));
 		
-		logger.info("____________ added Profile "+gson.toJson(employeeupdatedFound));
+		logger.info("____________ added Profile "+gson.toJson(ProfileUpdatedFound));
 		
-		Employee newProfileEmployee = new Employee();
-		newProfileEmployee.setHjid(employee.getHjid());
-		Profile newProfile = new Profile();
-		newProfile.setName("newProfile");
-		newProfileEmployee.getProfile().add(newProfile );
+		Profile newProfileEmployee = new Profile();
+
+		newProfileEmployee.setDescription("secondProfile");
 		employeeProfileInfo.Update(newProfileEmployee );
 		
-		Query qssUpdate = employeeProfileInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
+		Query qssUpdate = employeeProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'");
 
-		Employee employeeNewupdatedFound  = (Employee) qssUpdate.getSingleResult();
+		Profile profileNewupdatedFound  = (Profile) qssUpdate.getSingleResult();
+		Assert.assertTrue(profileNewupdatedFound.equals(newProfileEmployee));
 
-		Assert.assertTrue(gson.toJson(employeeNewupdatedFound),employeeNewupdatedFound.getProfile().contains(newProfile));
-
-		Employee veiwEmployee = (Employee) employeeProfileInfo.View(employeeNewupdatedFound);
+		Profile veiwProfile = (Profile) employeeProfileInfo.View(profileNewupdatedFound);
 		
-		Assert.assertEquals(veiwEmployee.getProfile(), employeeNewupdatedFound.getProfile());
+		Assert.assertEquals(veiwProfile, profileNewupdatedFound);
 		
-		employeeProfileInfo.Delete(veiwEmployee);
+		employeeProfileInfo.Delete(veiwProfile);
 		
-		Query qssDelete = employeeProfileInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
+		Query qssDelete = employeeProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'");
 		
 		try {
 			
 			qssDelete.getSingleResult();
 			
 		} catch (Exception e) {
+			
 			Assert.assertTrue(e instanceof NotFoundException);
+		
 		}
 		
 	}
@@ -168,8 +136,7 @@ public class EmployeeProfilenfoTest {
 	@Test(expected=APIException.class)
 	public void testError02() throws APIException {
 		exp=true;
-		Employee empr = new  Employee();
-		employeeProfileInfo.View(empr );
+		employeeProfileInfo.View(null);
 	}
 
 	@Test(expected=APIException.class)

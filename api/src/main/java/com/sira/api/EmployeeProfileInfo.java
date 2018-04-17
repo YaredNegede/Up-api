@@ -1,39 +1,46 @@
 package com.sira.api;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
+
+import org.apache.log4j.Logger;
 
 import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.Employee;
-import com.sira.model.stateschema.model.UserBase;
+import com.sira.model.stateschema.model.Profile;
 
-public class EmployeeProfileInfo extends DataAccess{
+/**
+ * 
+ * @author Yared Negede
+ *
+ */
 
-	public EmployeeProfileInfo(EntityManagerFactory entitimanager, Security security, String type) throws ClassNotFoundException {
+public class EmployeeProfileInfo extends DataAccess implements EntityAction{
+
+	private static Logger logger = Logger.getLogger(EmployeeProfileInfo.class);
+	
+	public EmployeeProfileInfo(EntityManagerFactory entitimanager,
+			Security security, String type) 
+			throws ClassNotFoundException {
+		
 		super(entitimanager, security,type);
+	
 	}
 
 	@Override
-	public void Add(UserBase userBase) throws APIException {
+	public void Add(Profile profile) throws APIException {
+
+		logger.info("****************************"+this.getClass().getName()+"****************************");
 
 		try {
 
-			Employee employee = (Employee) userBase;
-
-			for (int i = 0; i < employee.getProfile().size(); i++) {
-
-				this.getEntitimanager().persist(employee.getProfile().get(i));
-
-			}
-
-			Employee empFound = this.getEmployee(employee);
-
-			empFound.getProfile().addAll(employee.getProfile());
-
-			this.getEntitimanager().merge(empFound);
+			this.getEntitimanager().persist(profile);
 
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new APIException(e.getLocalizedMessage());
 
 		}
@@ -41,72 +48,66 @@ public class EmployeeProfileInfo extends DataAccess{
 	}
 
 	@Override
-	public void Update(UserBase userBase) throws APIException {
-
+	public void Update(Profile profile) throws APIException {
+		
+		logger.info("****************************"+this.getClass().getName()+"****************************");
+		
 		try {
 
-			Employee employee = (Employee) userBase;
-
-			for (int i = 0; i < employee.getProfile().size(); i++) {
-
-				this.getEntitimanager().persist(employee.getProfile().get(i));
-
-			}
-			Employee empFound = this.getEmployee(employee);
-
-			empFound.getProfile().clear();
-
-			empFound.getProfile().addAll(employee.getProfile());
-
-			this.getEntitimanager().merge(empFound);
+			this.getEntitimanager().merge(profile);
 
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new APIException(e.getLocalizedMessage());
 		}
 	}
 
 	@Override
-	public void Delete(UserBase userBase) throws APIException {
-
+	public void Delete(Profile profile) throws APIException {
+		
+		logger.info("****************************"+this.getClass().getName()+"****************************");
+		
 		try {
 
-			Employee employee = (Employee) userBase;
-
-			Employee empFound = this.getEmployee(employee);
-
-			empFound.getProfile().removeAll(employee.getProfile());
-
-			this.getEntitimanager().merge(empFound);
-
+			this.getEntitimanager().remove(profile);
 
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new APIException(e.getLocalizedMessage());
 		}
 	}
 
 	@Override
-	public UserBase View(UserBase userBase) throws APIException {
+	public Profile View(Profile profile) throws APIException {
 
-		Employee employee;
+		logger.info("****************************"+this.getClass().getName()+"****************************");
+		
+		Profile profileres = null;
 
 		try {
 
-			employee = (Employee) userBase;
-
-			Employee emp = this.getEmployee(employee);
-
-			employee.setProfile(emp.getProfile());
-
+			profileres = this.getEmployeeProfile(profile);
 
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new APIException(e.getLocalizedMessage());
 
 		}
 
-		return employee;
+		return profileres;
+		
 	}
 
+	@Override
+	public List<Profile> ViewAll(Profile profile) throws APIException {
+		return null;
+		
+	}
+	 
 }

@@ -1,5 +1,7 @@
 package com.sira.api;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.log4j.Logger;
@@ -7,10 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.Employee;
+import com.sira.model.stateschema.model.Skill;
 import com.sira.model.stateschema.model.UserBase;
-
-public class EmployeeSkillInfo extends DataAccess{
+/**
+ * 
+ * @author Yared
+ *
+ */
+public class EmployeeSkillInfo extends DataAccess implements SkillAction{
 
 	private static Logger logger = Logger.getLogger(EmployeeSkillInfo.class);
 
@@ -18,24 +24,13 @@ public class EmployeeSkillInfo extends DataAccess{
 		super(entitimanager, security,type);
 	}
 
+	@Transactional
 	@Override
-	public void Add(UserBase userBase) throws APIException {
+	public void Add(Skill skill) throws APIException {
 
 		try {
 
-			Employee employee = (Employee) userBase;
-
-			for (int i = 0; i < employee.getSkills().size(); i++) {
-				
-				this.getEntitimanager().persist(employee.getSkills().get(i));
-				
-			}
-			
-			Employee empFound = this.getEmployee(employee);
-			
-			empFound.getSkills().addAll(employee.getSkills());
-
-			this.getEntitimanager().merge(empFound);
+			this.getEntitimanager().persist(skill);
 
 		} catch (Exception e) {
 
@@ -46,76 +41,70 @@ public class EmployeeSkillInfo extends DataAccess{
 
 	}
 
+	@Transactional
+	@Override
+	public void Update(Skill skill) throws APIException {
+
+		try {
+
+			this.getEntitimanager().merge(skill);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new APIException(e.getLocalizedMessage());
+
+		}
+	}
+
+	@Transactional
+	@Override
+	public void Delete(Skill skill) throws APIException {
+
+		try {
+
+			this.getEntitimanager().remove(skill);
+
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new APIException(e.getLocalizedMessage());
+
+		}
+	}
+
+	@Transactional
+	@Override
+	public Skill View(Skill skill) throws APIException {
+
+		Skill skill2 = null;
+
+		try {
+
+
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new APIException(e.getLocalizedMessage());
+
+		}
+
+		return skill2;
+	}
 	
-	@Override
-	public void Update(UserBase userBase) throws APIException {
-
-		try {
-
-			Employee employee = (Employee) userBase;
-			
-			for (int i = 0; i < employee.getSkills().size(); i++) {
-
-				this.getEntitimanager().persist(employee.getSkills().get(i));
-
-			}
-			
-			Employee empFound = this.getEmployee(employee);
-
-			empFound.getSkills().clear();
-
-			empFound.getSkills().addAll(employee.getSkills());
-
-			logger.info("________updated skill "+this.getGson().toJson(employee));
-
-			this.getEntitimanager().merge(empFound);
-
-		} catch (Exception e) {
-
-			logger.error(e);
-
-			throw new APIException(e.getLocalizedMessage());
-
-		}
-	}
-
 	@Transactional
 	@Override
-	public void Delete(UserBase userBase) throws APIException {
+	public List<Skill> ViewAll(Skill skill) throws APIException {
+
+		List<Skill> skill2 = null;
 
 		try {
 
-			Employee employee = (Employee) userBase;
-
-			Employee empFound = this.getEmployee(employee);
-
-			empFound.getSkills().removeAll(employee.getSkills());
-			
-			this.getEntitimanager().merge(empFound);
-
-
-		} catch (Exception e) {
-
-			logger.error(e);
-
-			throw new APIException(e.getLocalizedMessage());
-
-		}
-	}
-
-	@Transactional
-	@Override
-	public UserBase View(UserBase userBase) throws APIException {
-
-		Employee employee;
-
-		try {
-
-			employee = (Employee) userBase;
-
-			Employee empFound = this.getEmployee(employee);
-
-			employee.setSkills(empFound.getSkills());
 
 
 		} catch (Exception e) {
@@ -126,7 +115,7 @@ public class EmployeeSkillInfo extends DataAccess{
 
 		}
 
-		return employee;
+		return skill2;
 	}
 
 }

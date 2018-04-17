@@ -84,8 +84,6 @@ public class EmployeeControllerUpdateTest {
 
 		skills.add(skill );
 
-		profile.setSkills(skills );
-
 		List<Profile> profiles = new ArrayList<Profile>();
 		profiles.add(profile);
 		employee.setProfile(profiles );

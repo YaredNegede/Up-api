@@ -1,8 +1,5 @@
 package com.sira.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -17,10 +14,8 @@ import com.sira.api.error.APIException;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Employee;
-import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 import com.sira.model.stateschema.model.User;
-import com.sira.model.stateschema.model.UserBase;
 
 public class EmployeeSkillInfoTest {
 
@@ -71,16 +66,6 @@ public class EmployeeSkillInfoTest {
 
 		employee.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Profile> profiles = new ArrayList<Profile>();
-
-		profiles.add(profile);
-
-		employee.setProfile(profiles );
-
 		employeeSkillInfo.getEntitimanager().getTransaction().begin();
 		employeeSkillInfo.getEntitimanager().persist(employee);
 		employeeSkillInfo.getEntitimanager().getTransaction().commit();
@@ -94,66 +79,47 @@ public class EmployeeSkillInfoTest {
 
 		logger.info("____________Testing employee skill api");
 
-		Query qset = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
-
-		Employee employeeSetUp  = (Employee) qset.getSingleResult();
-
-		logger.info("____________set up data "+gson.toJson(employeeSetUp));
-		
 		Skill firstSkill = new Skill();
 
 		firstSkill.setName("new name");
 
 		firstSkill.setDescription("very good in javacript");
 
-		employee.setHjid(employeeSetUp.getHjid());
-		
-		Assert.assertFalse(employee.getSkills().size()>1);
-		
-		Assert.assertFalse(employee.getSkills().contains(firstSkill));
-		
-		employee.getSkills().add(firstSkill);
-		
-		logger.info("____________ original "+gson.toJson(employee));
-		
-		employeeSkillInfo.Add(employee);
+		employeeSkillInfo.Add(firstSkill);
 
-		Query qss = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
+		Query qss = employeeSkillInfo.getEntitimanager().createQuery("from Skill as emp where emp.name='"+firstSkill.getName()+"'");
 
-		Employee employeeupdatedFound  = (Employee) qss.getSingleResult();
+		Skill skillupdatedFound  = (Skill) qss.getSingleResult();
 
-		Assert.assertTrue(employeeupdatedFound.getSkills().contains(firstSkill));
+		Assert.assertTrue(skillupdatedFound.equals(firstSkill));
 		
-		logger.info("____________ added skill "+gson.toJson(employeeupdatedFound));
+		logger.info("____________ added skill "+gson.toJson(skillupdatedFound));
 		
 		
 		Skill thirdSkill = new Skill();
 		
-		thirdSkill.setName("thirdSkill");
+		skillupdatedFound.setDescription("thirdSkill desc");
 		
-		Employee employeeUpdate = new Employee();
-		employeeUpdate.setHjid(employee.getHjid());
-		employeeUpdate.getSkills().add(thirdSkill);
 		
-		employeeSkillInfo.Update(employeeUpdate );
+		employeeSkillInfo.Update(skillupdatedFound );
 
-		Query qss2 = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
+		Query qss2 = employeeSkillInfo.getEntitimanager().createQuery("from Skill as emp where emp.name='"+firstSkill.getName()+"'");
 
-		Employee employeeSKill2  = (Employee) qss2.getSingleResult();
+		Skill sKill2  = (Skill) qss2.getSingleResult();
 
-		logger.info("updated skill "+gson.toJson(employeeSKill2));
+		logger.info("updated skill "+gson.toJson(sKill2));
 
-		Assert.assertTrue(employeeSKill2.getSkills().contains(thirdSkill ));
+		Assert.assertTrue(sKill2.equals(thirdSkill ));
 		
-		Employee employeethird = (Employee) employeeSkillInfo.View(employeeUpdate );
+		Skill skillthird = (Skill) employeeSkillInfo.View(sKill2 );
 		
-		Assert.assertTrue(employeethird.getSkills().equals(employeeSKill2.getSkills()));
+		Assert.assertTrue(skillthird.equals(sKill2));
 		
-		employeeSkillInfo.Delete(employeeUpdate );
+		employeeSkillInfo.Delete(skillthird );
 
 		try {
 			
-			employeeSkillInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"+employee.getFirstName()+"'");
+			employeeSkillInfo.getEntitimanager().createQuery("from Skill as emp where emp.name='"+firstSkill.getName()+"'");
 			
 		} catch (Exception e) {
 			
@@ -178,8 +144,7 @@ public class EmployeeSkillInfoTest {
 	@Test(expected=APIException.class)
 	public void testError02() throws APIException {
 		exp=true;
-		Employee empr = new  Employee();
-		employeeSkillInfo.View(empr );
+		employeeSkillInfo.View(null);
 	}
 
 	@Test(expected=APIException.class)

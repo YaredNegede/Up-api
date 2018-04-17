@@ -12,11 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gson.Gson;
 import com.sira.api.error.APIException;
-import com.sira.model.stateschema.model.Account;
-import com.sira.model.stateschema.model.Address;
-import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
-import com.sira.model.stateschema.model.UserBase;
 
 
 public class EmployerProfileInfoTest {
@@ -42,76 +38,44 @@ public class EmployerProfileInfoTest {
 
 		logger.info("****************************"+this.getClass().getName()+"*********************************");
 
-		Employer employer = new Employer();
-
-		employer.setName("uplancer");
-
-		employer.setStatus(true);
-
-		employerProfileInfo.getEntitimanager().persist(employer);
-
-		Query querySaved   = (Query) employerProfileInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
-
-		Employer empSaved = (Employer) querySaved.getSingleResult();
-
-		Assert.assertNotNull(empSaved);
-
-		Assert.assertTrue(empSaved.equals(employer));
-
 		Profile profile = new Profile();
 
 		profile.setName("javascript");
+		
+		employerProfileInfo.Add(profile);
+		
+		Query query   = (Query) employerProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'");
 
-		Query query   = (Query) employerProfileInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
+		Profile profile2 = (Profile) query.getSingleResult();
 
-		Employer emp = (Employer) query.getSingleResult();
+		Assert.assertNotNull(profile2);
 
-		Assert.assertNotNull(emp);
+		Assert.assertTrue(profile.equals(profile2));
 
-		Assert.assertTrue(emp.getProfile().equals(employer.getProfile()));
 
-		Employer emp2 = new Employer();
-
-		emp2.setHjid(employer.getHjid());
-
-		emp2.setName(employer.getName());
-
-		emp2.getProfile().add(profile);
-
-		employerProfileInfo.Add(emp2);
-
-		Employer emp3 = new Employer();
-
-		emp3.setHjid(employer.getHjid());
-
-		emp3.setName(employer.getName());
-
-		Profile profile2 = new Profile();
-		profile2.setName("newname");
 		profile2.setDescription("new description");
-		emp3.getProfile().add(profile2 );
 		
-		employerProfileInfo.Update(emp3);
+		employerProfileInfo.Update(profile2);
 		
-		Query query3   = (Query) employerProfileInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+employer.getName()+"'");
+		Query query3   = (Query) employerProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'");
 
-		Employer empupdate = (Employer) query3.getSingleResult();
+		Profile profile3 = (Profile) query3.getSingleResult();
 		
-		Assert.assertNotNull(empupdate);
+		Assert.assertNotNull(profile3);
 
-		Assert.assertTrue(empupdate.getProfile().get(0).equals(profile2));
+		Assert.assertTrue(profile3.equals(profile2));
 		
-		Employer viewemployee = (Employer) employerProfileInfo.View(emp3);
+		Profile profile4 = (Profile) employerProfileInfo.View(profile3);
 		
-		Assert.assertNotNull(viewemployee);
+		Assert.assertNotNull(profile4);
 
-		Assert.assertTrue(viewemployee.getProfile().get(0).equals(profile2));
+		Assert.assertTrue(profile4.equals(profile2));
 
-		employerProfileInfo.Delete(viewemployee);
+		employerProfileInfo.Delete(profile4);
 		
-		Employer empdelete = (Employer) employerProfileInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='"+viewemployee.getName()+"'").getSingleResult();
+		Profile profile5 = (Profile) employerProfileInfo.getEntitimanager().createQuery("from Profile as emp where emp.name='"+profile.getName()+"'").getSingleResult();
 		
-		Assert.assertTrue(empdelete.getProfile().size()==0);
+		Assert.assertNull(profile5);
 
 	}
 	boolean exp = false;
@@ -125,8 +89,7 @@ public class EmployerProfileInfoTest {
 	@Test(expected=APIException.class)
 	public void testError02() throws APIException {
 		exp=true;
-		Employer empr = new  Employer();
-		employerProfileInfo.View(empr );
+		employerProfileInfo.View(null);
 	}
 
 	@Test(expected=APIException.class)
@@ -140,7 +103,6 @@ public class EmployerProfileInfoTest {
 		exp=true;
 		employerProfileInfo.Delete(null);
 	}
-
 
 	@After
 	public  void tearDown(){

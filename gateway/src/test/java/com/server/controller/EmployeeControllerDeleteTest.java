@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,7 @@ import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 
+
 public class EmployeeControllerDeleteTest {
 
 	private static Logger logger = Logger.getLogger(EmployeeControllerDeleteTest.class);
@@ -36,8 +38,13 @@ public class EmployeeControllerDeleteTest {
 
 	static EmployeeInfo employeeInfo = (EmployeeInfo) appcont.getBean("Employee");
 
+	EmployeeController server = new EmployeeController();
+
 	@Before
 	public  void setup(){
+
+		logger.info("***********************************"+this.getClass().getName()+"***********************************");
+
 		if(!employeeInfo.getEntitimanager().getTransaction().isActive()){
 			employeeInfo.getEntitimanager().getTransaction().begin();
 		}
@@ -45,8 +52,6 @@ public class EmployeeControllerDeleteTest {
 
 	@Test(expected=NoResultException.class)
 	public void testDelete() throws GateException, APIException {
-
-		EmployeeController server = new EmployeeController();
 
 		server.setContext(new Context(appcont ));
 
@@ -70,7 +75,6 @@ public class EmployeeControllerDeleteTest {
 
 		address.setCity("Addis Ababa");
 
-
 		employee.setAddress(address );
 
 		Profile profile = new Profile();
@@ -85,20 +89,52 @@ public class EmployeeControllerDeleteTest {
 
 		skills.add(skill );
 
-		profile.setSkills(skills );
-
 		List<Profile> profiles = new ArrayList<Profile>();
 		profiles.add(profile);
 		employee.setProfile(profiles );
 
 		employeeInfo.getEntitimanager().persist(employee);
-		
+
 		JsonElement element = gson.toJsonTree(employee);
+
+		logger.info(element);
+
 		server.delete(employee );
-		
+
 		Query q = employeeInfo.getEntitimanager().createQuery("from Employee as epr where epr.firstName='"+employee.getFirstName()+"'");
+
+
 		Employer epr = (Employer) q.getSingleResult();
+
+		Assert.assertNull(epr);
+
 	}
+
+	@Test(expected=GateException.class)
+	public void testError01() throws GateException {
+		exp=true;
+		server.add(null);
+	}
+
+	@Test(expected=GateException.class)
+	public void testError02() throws GateException {
+		exp=true;
+		Employer empr = new  Employer();
+		server.view(empr );
+	}
+
+	@Test(expected=GateException.class)
+	public void testError03() throws GateException {
+		exp=true;
+		server.update(null);
+	}
+
+	@Test(expected=GateException.class)
+	public void testError04() throws GateException {
+		exp=true;
+		server.delete(null);
+	}
+
 
 	boolean exp = false;
 	@After

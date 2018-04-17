@@ -6,8 +6,12 @@ import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.UserBase;
-
-public class EmployeeInfo extends DataAccess{
+/**
+ * 
+ * @author Yared
+ *
+ */
+public class EmployeeInfo extends DataAccess implements Action{
 
 	public EmployeeInfo(EntityManagerFactory entitimanager, Security security, String type) throws ClassNotFoundException {
 		super(entitimanager, security,type);

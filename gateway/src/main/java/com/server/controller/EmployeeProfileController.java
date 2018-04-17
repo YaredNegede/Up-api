@@ -7,6 +7,7 @@ import com.server.Server;
 import com.server.controller.entities.RequestedEntity;
 import com.server.error.GateException;
 import com.sira.api.DataAccess;
+import com.sira.api.EmployeeProfileInfo;
 import com.sira.model.stateschema.model.UserBase;
 
 public class EmployeeProfileController extends Server   implements Controller{
@@ -18,16 +19,18 @@ public class EmployeeProfileController extends Server   implements Controller{
 	@Override
 	public void add(UserBase userBase) throws GateException {
 	
-		DataAccess dataAccess = null;
+		EmployeeProfileInfo dataAccess = null;
 		
 		try {
 			
-			dataAccess = (DataAccess) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
-
+			dataAccess = (EmployeeProfileInfo) this.getContext().getApplicationContext().getBean(RequestedEntity.Profile.name());
+			
 			dataAccess.Add(userBase);
 			
 		} catch (Exception e) {
 
+			logger.error(e);
+			
 			throw new GateException(e.getLocalizedMessage());
 			
 		}

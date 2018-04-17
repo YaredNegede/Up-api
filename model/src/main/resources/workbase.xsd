@@ -12,9 +12,13 @@
 
 	<xs:element name="job" type="JobDetail" />
 
-	<xs:complexType name="JobDetail">
+	<xs:element name="project" type="ProjectDetail" />
+
+	<xs:complexType name="WorkBase" abstract="true">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
+			<xs:element name="employerId" type="xs:long" />
+			<xs:element name="employeeId" type="xs:long" />
 			<xs:element name="description" type="xs:string" />
 			<xs:element name="status" type="xs:string" />
 			<xs:element name="startTime" type="xs:dateTime" />
@@ -24,4 +28,27 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:complexType name="JobDetail">
+		<xs:complexContent>
+			<xs:extension base="WorkBase">
+				<xs:choice>
+
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ProjectDetail">
+		<xs:complexContent>
+			<xs:extension base="WorkBase">
+				<xs:sequence>
+					<xs:element name="managedBy" type="xs:string" />
+					<xs:element name="specifiedBy" type="xs:string" />
+					<xs:element name="initiatedDate" type="xs:string" />
+					<xs:element name="completedDate" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
 </xs:schema>

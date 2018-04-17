@@ -18,10 +18,12 @@ import com.google.gson.JsonElement;
 import com.server.controller.EmployeeSkillController;
 import com.server.error.GateException;
 import com.sira.api.EmployeeSkillInfo;
+import com.sira.api.error.APIException;
 import com.sira.api.request.Context;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Employee;
+import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.Skill;
 import com.sira.model.stateschema.model.User;
@@ -36,6 +38,8 @@ public class EmployeeSkillControllerTest {
 
 	static EmployeeSkillInfo employeeSkillInfo = (EmployeeSkillInfo) appcont.getBean("Skill");
 
+	EmployeeSkillController employeeSkillController = new EmployeeSkillController();
+	
 	@Before
 	public  void setup(){
 		if(!employeeSkillInfo.getEntitimanager().getTransaction().isActive()){
@@ -52,45 +56,7 @@ public class EmployeeSkillControllerTest {
 
 		employee.setStatus(true);
 		
-		User user = new User();
-		user.setStatus(true);
-		employee.setUser(user );
-		
 		employee.setFirstName("sarkis");
-
-		employee.setMiddleName("dejene");
-
-		employee.setLastName("grana");
-		
-		Account account = new Account();
-
-		account.setNumber("123167");
-
-		account.setType("premium");
-
-		employee.setAccount(account );
-
-		Address address = new Address();
-
-		address.setCity("Addis Ababa");
-
-		employee.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setName("javascript");
-		
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
-		employee.setSkills(skills );
 		
 		employeeSkillInfo.getEntitimanager().persist(employee);
 		
@@ -102,27 +68,47 @@ public class EmployeeSkillControllerTest {
 		
 		Assert.assertEquals(employee,eee);
 		
-		EmployeeSkillController employeeSkillController = new EmployeeSkillController();
-
 		employeeSkillController.setContext(new Context(appcont));
 
-		employeeSkillController.add(eee);
+		Employee employee2 = new Employee();
+		
+		employee2.setHjid(employee.getHjid());
+		
+		employee2.setFirstName(employee.getFirstName());
+		
+		List<Skill> skills = new ArrayList<Skill>();
+
+		Skill skill = new Skill();
+
+		skill.setName("javascript");
+		
+		skill.setDescription("very good in javacript");
+
+		skills.add(skill );
+
+		employee2.setSkills(skills );
+		
+		employeeSkillController.add(employee2);
 
 		Query q = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emplr where emplr.firstName='"+employee.getFirstName()+"'");
 
 		Employee e = (Employee) q.getSingleResult();
 
-		logger.info("\n_______________________________________________________________________________________________");
-		
 		Assert.assertTrue(gson.toJson(e),e.getSkills().get(0).getName().equals(employee.getSkills().get(0).getName()));
 	
-		employee.getSkills().get(0).setName("newName");
+		Employee employee3 = new Employee();
 		
-		employeeSkillController.update(employee);
+		employee3.setHjid(e.getHjid());
 		
-		q = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emplr where emplr.firstName='"+employee.getFirstName()+"'");
+		employee3.setFirstName(employee.getFirstName());
+		
+		employee3 .getSkills().add(skill);
+		
+		employeeSkillController.update(employee3);
+		
+		Query qq = employeeSkillInfo.getEntitimanager().createQuery("from Employee as emplr where emplr.firstName='"+employee.getFirstName()+"'");
 
-		Employee em = (Employee) q.getSingleResult();
+		Employee em = (Employee) qq.getSingleResult();
 		
 		Assert.assertTrue(gson.toJson(em),em.getSkills().get(0).getName().equals(employee.getSkills().get(0).getName()));
 		
@@ -134,10 +120,35 @@ public class EmployeeSkillControllerTest {
 		
 		employeeSkillController.delete(e);
 		
-		logger.info("\\n_______________________________________________________________________________________________");
+		logger.info("\n____________________________________end___________________________________________________________\n");
 		
 	}
 
+	@Test(expected=GateException.class)
+	public void testError01() throws GateException {
+		exp=true;
+		employeeSkillController.add(null);
+	}
+
+	@Test(expected=GateException.class)
+	public void testError02() throws GateException {
+		exp=true;
+		Employer empr = new  Employer();
+		employeeSkillController.view(empr );
+	}
+
+	@Test(expected=GateException.class)
+	public void testError03() throws GateException {
+		exp=true;
+		employeeSkillController.update(null);
+	}
+
+	@Test(expected=GateException.class)
+	public void testError04() throws GateException {
+		exp=true;
+		employeeSkillController.delete(null);
+	}
+	
 	boolean exp = false;
 	
 	@After

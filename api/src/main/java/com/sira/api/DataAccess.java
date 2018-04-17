@@ -11,10 +11,17 @@ import com.sira.api.error.APIException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
+import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.User;
 import com.sira.model.stateschema.model.UserBase;
 
-public abstract class DataAccess {
+/**
+ * 
+ * @author Yared Negede
+ *
+ */
+
+public abstract class DataAccess{
 
 	private static Logger logger = Logger.getLogger(DataAccess.class);
 
@@ -26,7 +33,8 @@ public abstract class DataAccess {
 
 	private Class<? extends Object>  type;
 
-	public DataAccess(EntityManagerFactory entitimanager, Security security, String type) throws ClassNotFoundException {
+	public DataAccess(EntityManagerFactory entitimanager,
+			Security security, String type) throws ClassNotFoundException {
 
 		this.entitimanager = entitimanager.createEntityManager();
 
@@ -60,14 +68,6 @@ public abstract class DataAccess {
 
 	}
 
-	public abstract void Add(UserBase userBase) throws APIException ;
-
-	public abstract void Update(UserBase userBase) throws APIException ;
-
-	public abstract void Delete(UserBase userBase) throws APIException ;
-
-	public abstract UserBase View(UserBase userBase) throws APIException;
-
 	protected boolean isActive(UserBase userBase) throws APIException{
 
 		Query query;
@@ -84,7 +84,7 @@ public abstract class DataAccess {
 
 		User user = (User) query.getSingleResult();
 
-		if(!user.getStatus()){
+		if(!user.isStatus()){
 
 			throw new APIException("User Not activated");
 
@@ -113,9 +113,9 @@ public abstract class DataAccess {
 
 		} catch (Exception e) {
 
-			e.printStackTrace();
-			
-			throw new APIException(e.getLocalizedMessage());
+			logger.error(e);
+
+			throw new APIException(e.getMessage());
 
 		}
 
@@ -128,20 +128,20 @@ public abstract class DataAccess {
 		Employee empFound = null;
 
 		try {
-			
-			if(employee==null) {
+
+			if(employee == null) {
 
 				throw new APIException("No User set");
 
 			}
-			
-			if(employee.getHjid()==null) {
+
+			if(employee.getHjid() == null) {
 
 				throw new APIException("No User found");
 
 			}
 			
-			logger.info("______________________All results in the database "+gson.toJson(this.getEntitimanager().createQuery("from Employee").getResultList()));
+			logger.info("\n\n\n\n"+this.getGson().toJsonTree(this.getEntitimanager().createQuery("from Employee").getResultList())+"\n\n\n\n");
 			
 			Query query = this.getEntitimanager().createQuery("from Employee as emp where emp.hjid=:hjid and emp.status=:status");
 
@@ -151,19 +151,24 @@ public abstract class DataAccess {
 
 			empFound = (Employee) query.getSingleResult();
 
-			logger.info("______________________Single results in the database "+gson.toJson(empFound));
-			
 			empFound.setUser(null);
 
 		} catch (Exception e) {
 
 			logger.error(e);
 
-			throw new  APIException(e.getLocalizedMessage());
+			throw new  APIException(e.getMessage());
 
 		}
 
 		return empFound;
 
 	}
+	
+	protected Profile getEmployeeProfile(Profile profile) {
+
+		return null;
+	
+	}
+
 }

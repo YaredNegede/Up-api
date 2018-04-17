@@ -72,7 +72,6 @@
 		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
 	</bean>
 
-
 	<!-- API classes -->
 
 	<bean id="security" class="com.sira.api.security.Security" />
@@ -88,11 +87,39 @@
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
 	</bean>
-	
+
 	<bean id="Skill" class="com.sira.api.EmployeeSkillInfo">
 		<constructor-arg ref="siraEntityManagerFactoryBean" />
 		<constructor-arg ref="security" />
 		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
+	</bean>
+
+	<bean id="Profile" class="com.sira.api.EmployeeProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
+	</bean>
+
+	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
+	</bean>
+
+	<bean id="Job" class="com.sira.api.WorkInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.JobDetail" />
+	</bean>
+
+	<bean id="Project" class="com.sira.api.WorkInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
+		<constructor-arg ref="security" />
+		<constructor-arg value="com.sira.model.stateschema.model.ProjectDetail" />
+	</bean>
+	
+	<bean id="Uplancer" class="com.sira.api.deamon.UplancerInfo">
+		<constructor-arg ref="siraEntityManagerFactoryBean" />
 	</bean>
 
 </beans>

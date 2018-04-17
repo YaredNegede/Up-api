@@ -57,10 +57,6 @@ public class EmployerInfoTest {
 
 		employer.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
 		employerInfo.Add(employer);
 
 		Query query   = (Query) employerInfo.getEntitimanager().createQuery("from Employer as emp where emp.name='username'");
@@ -90,10 +86,6 @@ public class EmployerInfoTest {
 		address.setCity("Addis Ababa");
 
 		employer.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
 
 		employerInfo.Add(employer );
 
@@ -128,10 +120,6 @@ public class EmployerInfoTest {
 		address.setCity("Addis Ababa");
 
 		employer.setAddress(address );
-
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
 
 		employerInfo.Add(employer );
 		

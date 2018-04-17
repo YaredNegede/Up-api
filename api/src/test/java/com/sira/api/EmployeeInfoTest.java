@@ -1,8 +1,5 @@
 package com.sira.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -20,7 +17,6 @@ import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Employee;
 import com.sira.model.stateschema.model.Employer;
 import com.sira.model.stateschema.model.Profile;
-import com.sira.model.stateschema.model.Skill;
 
 public class EmployeeInfoTest {
 
@@ -68,12 +64,6 @@ public class EmployeeInfoTest {
 
 		profile.setName("javascript");
 
-		List<Skill> skills = new ArrayList<Skill>();
-
-		List<Profile> profiles = new ArrayList<Profile>();
-		profiles.add(profile);
-		employee.setProfile(profiles  );
-
 		employeeInfo.Add(employee);
 
 		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='Yared'");
@@ -111,14 +101,6 @@ public class EmployeeInfoTest {
 		Profile profile = new Profile();
 
 		profile.setName("javascript");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
 
 		employeeInfo.Add(employee);
 
@@ -159,18 +141,6 @@ public class EmployeeInfoTest {
 
 		employee.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript2");
-
-		List<Skill> skills = new ArrayList<Skill>();
-
-		Skill skill = new Skill();
-
-		skill.setDescription("very good in javacript");
-
-		skills.add(skill );
-
 		employeeInfo.Delete(employee);
 
 		Query query   = (Query) employeeInfo.getEntitimanager().createQuery("from Employee as emp where emp.firstName='"
@@ -206,10 +176,6 @@ public class EmployeeInfoTest {
 
 		employee.setAddress(address );
 
-		Profile profile = new Profile();
-
-		profile.setName("javascript");
-
 		employeeInfo.Add(employee);
 
 		Employee emp = (Employee) employeeInfo.View(employee);
@@ -217,7 +183,6 @@ public class EmployeeInfoTest {
 		Assert.assertTrue(employee.equals(emp));
 
 	}
-
 
 	boolean exp = false;
 
@@ -245,7 +210,6 @@ public class EmployeeInfoTest {
 		exp=true;
 		employeeInfo.Delete(null);
 	}
-
 
 	@After
 	public  void tearDown(){

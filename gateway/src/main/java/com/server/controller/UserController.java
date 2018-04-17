@@ -55,7 +55,7 @@ public class UserController extends Server   implements Controller{
 
 			UserBase uBase  = dataAccess.View(userBase);
 			
-			if(!uBase.getUser().getStatus()){
+			if(!uBase.getUser().isStatus()){
 			
 				throw new GateException("User not active");
 				

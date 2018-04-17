@@ -8,9 +8,7 @@
 	elementFormDefault="qualified">
 
 	<xs:element name="Address" />
-
-	<xs:element name="ProjectDetail" />
-
+ 
 	<xs:element name="Skill" />
 
 	<xs:element name="Profile" />
@@ -109,20 +107,6 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="ProjectDetail">
-		<xs:sequence>
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="description" type="xs:string" />
-			<xs:element minOccurs="0" name="status" type="xs:string" />
-			<xs:element name="managedBy" type="xs:string" />
-			<xs:element name="specifiedBy" type="xs:string" />
-			<xs:element name="initiatedDate" type="xs:string" />
-			<xs:element name="completedDate" type="xs:string" />
-			<xs:element name="skills" type="Skill" minOccurs="1"
-				maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-
 	<xs:element name="user" type="User" />
 
 	<xs:complexType name="User">
@@ -137,7 +121,8 @@
 				</hj:entity>
 			</xs:appinfo>
 		</xs:annotation>
-		<xs:choice>
+		<xs:sequence>
+			<xs:element name="profilePicture" type="xs:string" />
 			<xs:element name="username" type="xs:string" />
 			<xs:element name="password" type="xs:string" />
 			<xs:element name="email" type="xs:string" />
@@ -147,7 +132,7 @@
 			<xs:element name="userType" type="UserType" />
 			<xs:element name="createTime" type="xs:dateTime" />
 			<xs:element name="expireTime" type="xs:dateTime" />
-		</xs:choice>
+		</xs:sequence>
 	</xs:complexType>
 
 	<xs:simpleType name="UserType">

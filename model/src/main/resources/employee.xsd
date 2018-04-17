@@ -23,9 +23,9 @@
 					<xs:element name="lastName" type="xs:string" />
 					<xs:element name="address" type="Address" />
 					<xs:element name="account" type="Account" />
-					<xs:element name="profile" type="Profile" minOccurs="0"
+					<xs:element name="profile" type="xs:long" minOccurs="0"
 						maxOccurs="unbounded" />
-					<xs:element name="skills" type="Skill" minOccurs="0"
+					<xs:element name="skills" type="xs:long" minOccurs="0"
 						maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>

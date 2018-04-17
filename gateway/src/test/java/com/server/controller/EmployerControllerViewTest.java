@@ -71,7 +71,6 @@ public class EmployerControllerViewTest {
 		skill.setName("javascript");
 		skills.add(skill );
 
-		profile.setSkills(skills );
 		List<Profile> profiles = new ArrayList<Profile>();
 		profiles.add(profile);
 		employer.setProfile(profiles );
