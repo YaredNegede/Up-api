@@ -14,17 +14,30 @@
 
 	<xs:element name="project" type="ProjectDetail" />
 
+	<xs:simpleType name="JobType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ONGOING" />
+			<xs:enumeration value="ONETIME" />
+			<xs:enumeration value="OTHER" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="JobStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW" />
+			<xs:enumeration value="INPROGRESS" />
+			<xs:enumeration value="COMPLETED" />
+			<xs:enumeration value="REJECTED" />
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:complexType name="WorkBase" abstract="true">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="employerId" type="xs:long" />
-			<xs:element name="employeeId" type="xs:long" />
-			<xs:element name="description" type="xs:string" />
-			<xs:element name="status" type="xs:string" />
-			<xs:element name="startTime" type="xs:dateTime" />
-			<xs:element name="endTime" type="xs:dateTime" />
-			<xs:element name="skills" type="Skill" minOccurs="1"
-				maxOccurs="unbounded" />
+			<xs:choice>
+				<xs:element name="jobType" type="JobType" />
+				<xs:element name="numberOfFreelancer" type="xs:integer" />
+				<xs:element name="status" type="JobStatus" />
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -32,7 +45,12 @@
 		<xs:complexContent>
 			<xs:extension base="WorkBase">
 				<xs:choice>
-
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="employerId" type="xs:long" />
+					<xs:element name="description" type="xs:string" />
+					<xs:element name="startTime" type="xs:dateTime" />
+					<xs:element name="endTime" type="xs:dateTime" />
+					<xs:element name="skills" type="Skill" minOccurs="1" maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>
@@ -50,5 +68,5 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 </xs:schema>

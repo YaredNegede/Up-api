@@ -14,6 +14,7 @@ import com.sira.api.error.APIException;
 import com.sira.model.stateschema.model.Account;
 import com.sira.model.stateschema.model.Address;
 import com.sira.model.stateschema.model.Employee;
+import com.sira.model.stateschema.model.EmployeeProfile;
 import com.sira.model.stateschema.model.Profile;
 import com.sira.model.stateschema.model.User;
 
@@ -81,7 +82,7 @@ public class EmployeeProfilenfoTest {
 	@Test
 	public void testProfile() throws APIException {
 
-		Profile profile = new Profile();
+		EmployeeProfile profile = new EmployeeProfile();
 		profile.setName("firstname");
 		profile.setDescription("first description");
 		
@@ -95,7 +96,7 @@ public class EmployeeProfilenfoTest {
 		
 		logger.info("____________ added Profile "+gson.toJson(ProfileUpdatedFound));
 		
-		Profile newProfileEmployee = new Profile();
+		Profile newProfileEmployee = new EmployeeProfile();
 
 		newProfileEmployee.setDescription("secondProfile");
 		employeeProfileInfo.Update(newProfileEmployee );

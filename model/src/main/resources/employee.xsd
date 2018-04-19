@@ -9,10 +9,62 @@
 
 	<xs:import schemaLocation="common.xsd"
 		namespace="http://www.model.sira.com/stateschema/model" />
+	<xs:import schemaLocation="workbase.xsd"
+		namespace="http://www.model.sira.com/stateschema/model" />
 
 	<xs:element name="Employee" type="Employee" />
 
 	<!-- Employee -->
+
+	<xs:complexType name="Certefication">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="score" type="xs:double" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="EmployeePortoFolio">
+		<xs:complexContent>
+			<xs:extension base="PortoFolio">
+				<xs:choice>
+					<xs:element name="name" type="xs:string" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EmployeeReview">
+		<xs:complexContent>
+			<xs:extension base="Review">
+				<xs:choice>
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="comment" type="xs:string" /><!-- This guy	is amazing -->
+					<xs:element name="star" type="Star" />
+					<xs:element name="country" type="Country" /> <!-- the country of the employer commenting -->
+					<xs:element name="time" type="xs:dateTime" />
+					<xs:element name="cost" type="xs:double" />   <!-- the cost of project -->
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EmployeeProfile">
+		<xs:complexContent>
+			<xs:extension base="Profile">
+				<xs:choice>
+					<xs:element name="jobsCompleted" type="WorkBase" />
+					<xs:element name="onTime" type="xs:integer" />
+					<xs:element name="onBudget" type="xs:integer" />
+					<xs:element name="repeatHire" type="xs:integer" />
+					<xs:element name="reviews" type="xs:integer" />
+					<xs:element name="star" type="Star" />
+					<xs:element name="title" type="xs:string" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<xs:complexType name="Employee">
 		<xs:complexContent>
@@ -23,9 +75,16 @@
 					<xs:element name="lastName" type="xs:string" />
 					<xs:element name="address" type="Address" />
 					<xs:element name="account" type="Account" />
-					<xs:element name="profile" type="xs:long" minOccurs="0"
+					<xs:element name="profile" type="Profile" />
+					<xs:element name="certefication" type="Certefication"
+						minOccurs="0" maxOccurs="20" />
+					<xs:element name="verification" type="AccountVerification"
+						minOccurs="1" maxOccurs="5" />
+					<xs:element name="reviews" type="EmployeeReview" minOccurs="0"
 						maxOccurs="unbounded" />
-					<xs:element name="skills" type="xs:long" minOccurs="0"
+					<xs:element name="employeePortoFolio" type="EmployeePortoFolio"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="skills" type="Skill" minOccurs="0"
 						maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>

@@ -14,6 +14,45 @@
 
 	<!-- Employer -->
 
+	<xs:complexType name="EmployerReview">
+		<xs:complexContent>
+			<xs:extension base="Review">
+				<xs:choice>
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="comment" type="xs:string" /><!-- This guy is amazing -->
+					<xs:element name="star" type="Star" />
+					<xs:element name="country" type="Country" /> <!-- the country of the employer commenting -->
+					<xs:element name="cost" type="xs:double" />   <!-- the cost of project -->
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EmployerProfile">
+		<xs:complexContent>
+			<xs:extension base="Profile">
+				<xs:choice>
+					<xs:element name="onTime" type="xs:integer" />
+					<xs:element name="onBudget" type="xs:integer" />
+					<xs:element name="repeatHire" type="xs:integer" />
+					<xs:element name="reviews" type="xs:integer" />
+					<xs:element name="star" type="Star" />
+					<xs:element name="title" type="xs:string" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EmployerPortoFolio">
+		<xs:complexContent>
+			<xs:extension base="PortoFolio">
+				<xs:choice>
+					<xs:element name="name" type="xs:string" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:complexType name="Employer">
 		<xs:complexContent>
 			<xs:extension base="UserBase">
@@ -24,8 +63,13 @@
 					<xs:element name="tradename" type="xs:string" />
 					<xs:element name="address" type="Address" />
 					<xs:element name="account" type="Account" />
-					<xs:element name="profile" type="xs:long" minOccurs="0"
-						maxOccurs="unbounded" />
+					<xs:element name="profile" type="EmployerProfile" />
+					<xs:element name="verification" type="AccountVerification"
+						minOccurs="1" maxOccurs="5" />
+					<xs:element name="reviews" type="EmployerReview"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="employeePortoFolio" type="EmployerPortoFolio"
+						minOccurs="0" maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>

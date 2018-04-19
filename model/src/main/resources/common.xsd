@@ -2,13 +2,15 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
 	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
-	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
+	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:annox="http://annox.dev.java.net"
 	jaxb:extensionBindingPrefixes="hj orm annox"
-	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	xmlns="http://www.model.sira.com/stateschema/model"
+	targetNamespace="http://www.model.sira.com/stateschema/model"
 	elementFormDefault="qualified">
 
 	<xs:element name="Address" />
- 
+
 	<xs:element name="Skill" />
 
 	<xs:element name="Profile" />
@@ -43,6 +45,16 @@
 		<xs:restriction base="xs:positiveInteger">
 			<xs:maxInclusive value="99999" />
 			<xs:minInclusive value="00001" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="Star">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" />
+			<xs:enumeration value="2" />
+			<xs:enumeration value="3" />
+			<xs:enumeration value="4" />
+			<xs:enumeration value="5" />
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -93,10 +105,31 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="Profile">
+	<xs:complexType name="Profile" abstract="true">
+		<xs:sequence>
+			<xs:element name="memberSince" type="xs:dateTime" />
+			<xs:element name="recomendation" type="xs:long" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="about" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PortoFolio" abstract="true">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AccountVerification">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
-			<xs:element name="description" type="xs:string"/>
+			<xs:element name="status" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Review" abstract="true">
+		<xs:sequence>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -108,6 +141,13 @@
 	</xs:complexType>
 
 	<xs:element name="user" type="User" />
+
+	<xs:simpleType name="UserType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:enumeration value="Employer" />
+			<xs:enumeration value="Employee" />
+		</xs:restriction>
+	</xs:simpleType>
 
 	<xs:complexType name="User">
 		<xs:annotation>
@@ -135,19 +175,10 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:simpleType name="UserType">
-		<xs:restriction base="xs:normalizedString">
-			<xs:enumeration value="Employer" />
-			<xs:enumeration value="Employee" />
-		</xs:restriction>
-	</xs:simpleType>
-
 	<xs:complexType name="UserBase" abstract="true">
 		<xs:choice>
 			<xs:element name="status" type="xs:boolean" default="false" />
 			<xs:element name="user" type="User" />
-			<xs:element name="project" type="xs:long" minOccurs="0"
-				maxOccurs="unbounded" />
 		</xs:choice>
 	</xs:complexType>
 

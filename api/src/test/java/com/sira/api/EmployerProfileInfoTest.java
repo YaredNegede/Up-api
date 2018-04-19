@@ -38,7 +38,7 @@ public class EmployerProfileInfoTest {
 
 		logger.info("****************************"+this.getClass().getName()+"*********************************");
 
-		Profile profile = new Profile();
+		Profile profile = new EmployerProfile();
 
 		profile.setName("javascript");
 		
