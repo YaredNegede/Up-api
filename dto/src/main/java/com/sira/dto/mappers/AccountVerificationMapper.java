@@ -1,6 +1,7 @@
 package com.sira.dto.mappers;
 
 import org.mapstruct.Context;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,6 +18,9 @@ public interface AccountVerificationMapper {
 	@Mappings({
         @Mapping(source = "id", target = "hjid")
     })
-	AccountVerification toEntity(AccountVerificationDto s, @Context JpaContext ctx);
-
+	AccountVerification toEntity(AccountVerificationDto accountVerificationDto);
+	
+	@InheritInverseConfiguration
+	AccountVerification fromEntity(AccountVerificationDto accountVerificationDto);
+	
 }

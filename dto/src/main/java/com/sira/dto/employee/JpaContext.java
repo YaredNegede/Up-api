@@ -1,5 +1,21 @@
 package com.sira.dto.employee;
 
-public class JpaContext {
+import javax.persistence.EntityManager;
 
+public class JpaContext {
+	
+	private EntityManager entityManager;
+
+	public JpaContext(EntityManager entityManager) {
+
+		this.entityManager = entityManager;
+		
+	}
+
+	public EntityManager getEntityManager() {
+		
+		return entityManager;
+		
+	}
+	
 }

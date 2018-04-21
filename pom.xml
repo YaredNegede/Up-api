@@ -13,6 +13,8 @@
 		<module>api</module>
 		<module>server</module>
 		<module>gateway</module>
+		<module>dto</module>
+		
 	</modules>
 
 	<properties>

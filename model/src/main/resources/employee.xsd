@@ -73,9 +73,9 @@
 					<xs:element name="firstName" type="xs:string" />
 					<xs:element name="middleName" type="xs:string" />
 					<xs:element name="lastName" type="xs:string" />
-					<xs:element name="address" type="Address" />
+					<xs:element name="addres" type="Addres" />
 					<xs:element name="account" type="Account" />
-					<xs:element name="profile" type="Profile" />
+					<xs:element name="profile" type="EmployeeProfile" />
 					<xs:element name="certefication" type="Certefication"
 						minOccurs="0" maxOccurs="20" />
 					<xs:element name="verification" type="AccountVerification"

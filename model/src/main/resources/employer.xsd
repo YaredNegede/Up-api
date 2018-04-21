@@ -11,15 +11,22 @@
 		namespace="http://www.model.sira.com/stateschema/model" />
 
 	<xs:element name="Employer" />
+	
+	<xs:element name="EmployerReview" />
+	
+	<xs:element name="EmployerPortoFolio" />
+	
+	<xs:element name="EmployerProfile" />
 
 	<!-- Employer -->
-
+	
 	<xs:complexType name="EmployerReview">
 		<xs:complexContent>
 			<xs:extension base="Review">
 				<xs:choice>
 					<xs:element name="name" type="xs:string" />
-					<xs:element name="comment" type="xs:string" /><!-- This guy is amazing -->
+					<xs:element name="comment" type="xs:string" /><!-- This guy 
+						is amazing -->
 					<xs:element name="star" type="Star" />
 					<xs:element name="country" type="Country" /> <!-- the country of the employer commenting -->
 					<xs:element name="cost" type="xs:double" />   <!-- the cost of project -->
@@ -61,7 +68,7 @@
 					<xs:element name="phone" type="xs:string" />
 					<xs:element name="contact" type="xs:string" />
 					<xs:element name="tradename" type="xs:string" />
-					<xs:element name="address" type="Address" />
+					<xs:element name="addres" type="Addres" />
 					<xs:element name="account" type="Account" />
 					<xs:element name="profile" type="EmployerProfile" />
 					<xs:element name="verification" type="AccountVerification"
