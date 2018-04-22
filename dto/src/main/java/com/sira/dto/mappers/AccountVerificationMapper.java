@@ -1,6 +1,5 @@
 package com.sira.dto.mappers;
 
-import org.mapstruct.Context;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -8,7 +7,6 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.employee.AccountVerificationDto;
-import com.sira.dto.employee.JpaContext;
 import com.sira.model.stateschema.model.AccountVerification;
 
 @Mapper

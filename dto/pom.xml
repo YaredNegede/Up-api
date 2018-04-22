@@ -14,10 +14,12 @@
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>com.sira</groupId>
 			<artifactId>model</artifactId>
 		</dependency>
+	
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
@@ -64,5 +66,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
