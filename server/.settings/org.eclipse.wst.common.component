@@ -16,6 +16,9 @@
         <dependent-module archiveName="api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/api/api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/controller/controller">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="server"/>
         <property name="java-output-path" value="/server/target/classes"/>
     </wb-module>

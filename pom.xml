@@ -12,7 +12,7 @@
 		<module>model</module>
 		<module>api</module>
 		<module>server</module>
-		<module>gateway</module>
+		<module>controller</module>
 		<module>dto</module>
 		
 	</modules>
