@@ -2,9 +2,10 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
 	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:cmn="http://www.model.sira.com/stateschema/common"
 	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
 	jaxb:extensionBindingPrefixes="hj orm annox"
-	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	xmlns="http://www.model.sira.com/stateschema/common" targetNamespace="http://www.model.sira.com/stateschema/common"
 	elementFormDefault="qualified">
 
 	<xs:element name="Addres" />
