@@ -2,17 +2,19 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
 	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:cmn="http://www.model.sira.com/stateschema/common"
+	xmlns:wkb="http://www.model.sira.com/stateschema/workbase"
 	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
 	jaxb:extensionBindingPrefixes="hj orm annox"
-	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	xmlns="http://www.model.sira.com/stateschema/workbase" targetNamespace="http://www.model.sira.com/stateschema/workbase"
 	elementFormDefault="qualified">
 
-	<xs:import schemaLocation="common.xsd"
-		namespace="http://www.model.sira.com/stateschema/model" />
+<xs:import schemaLocation="common.xsd"
+		namespace="http://www.model.sira.com/stateschema/common" />
+	
+	<xs:element name="job" type="wkb:JobDetail" />
 
-	<xs:element name="job" type="JobDetail" />
-
-	<xs:element name="project" type="ProjectDetail" />
+	<xs:element name="project" type="wkb:ProjectDetail" />
 
 	<xs:simpleType name="JobType">
 		<xs:restriction base="xs:string">
@@ -50,7 +52,7 @@
 					<xs:element name="description" type="xs:string" />
 					<xs:element name="startTime" type="xs:dateTime" />
 					<xs:element name="endTime" type="xs:dateTime" />
-					<xs:element name="skills" type="Skill" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element name="skills" type="cmn:Skill" minOccurs="1" maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>

@@ -2,15 +2,19 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
 	xmlns:hj="http://hyperjaxb3.jvnet.org/ejb/schemas/customizations"
+	xmlns:cmn="http://www.model.sira.com/stateschema/common"
+	xmlns:wkb="http://www.model.sira.com/stateschema/workbase"
+	xmlns:emp="http://www.model.sira.com/stateschema/employee"
 	xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:annox="http://annox.dev.java.net"
 	jaxb:extensionBindingPrefixes="hj orm annox"
-	xmlns="http://www.model.sira.com/stateschema/model" targetNamespace="http://www.model.sira.com/stateschema/model"
+	xmlns="http://www.model.sira.com/stateschema/employee" targetNamespace="http://www.model.sira.com/stateschema/employee"
 	elementFormDefault="qualified">
 
 	<xs:import schemaLocation="common.xsd"
-		namespace="http://www.model.sira.com/stateschema/model" />
+		namespace="http://www.model.sira.com/stateschema/common" />
+		
 	<xs:import schemaLocation="workbase.xsd"
-		namespace="http://www.model.sira.com/stateschema/model" />
+		namespace="http://www.model.sira.com/stateschema/workbase" />
 
 	<xs:element name="Employee" type="Employee" />
 
@@ -27,7 +31,7 @@
 
 	<xs:complexType name="EmployeePortoFolio">
 		<xs:complexContent>
-			<xs:extension base="PortoFolio">
+			<xs:extension base="cmn:PortoFolio">
 				<xs:choice>
 					<xs:element name="name" type="xs:string" />
 				</xs:choice>
@@ -37,12 +41,12 @@
 
 	<xs:complexType name="EmployeeReview">
 		<xs:complexContent>
-			<xs:extension base="Review">
+			<xs:extension base="cmn:Review">
 				<xs:choice>
 					<xs:element name="name" type="xs:string" />
 					<xs:element name="comment" type="xs:string" /><!-- This guy	is amazing -->
-					<xs:element name="star" type="Star" />
-					<xs:element name="country" type="Country" /> <!-- the country of the employer commenting -->
+					<xs:element name="star" type="cmn:Star" />
+					<xs:element name="country" type="cmn:Country" /> <!-- the country of the employer commenting -->
 					<xs:element name="time" type="xs:dateTime" />
 					<xs:element name="cost" type="xs:double" />   <!-- the cost of project -->
 				</xs:choice>
@@ -52,14 +56,14 @@
 
 	<xs:complexType name="EmployeeProfile">
 		<xs:complexContent>
-			<xs:extension base="Profile">
+			<xs:extension base="cmn:Profile">
 				<xs:choice>
-					<xs:element name="jobsCompleted" type="WorkBase" />
+					<xs:element name="jobsCompleted" type="wkb:WorkBase" />
 					<xs:element name="onTime" type="xs:integer" />
 					<xs:element name="onBudget" type="xs:integer" />
 					<xs:element name="repeatHire" type="xs:integer" />
 					<xs:element name="reviews" type="xs:integer" />
-					<xs:element name="star" type="Star" />
+					<xs:element name="star" type="cmn:Star" />
 					<xs:element name="title" type="xs:string" />
 				</xs:choice>
 			</xs:extension>
@@ -68,23 +72,23 @@
 
 	<xs:complexType name="Employee">
 		<xs:complexContent>
-			<xs:extension base="UserBase">
+			<xs:extension base="cmn:UserBase">
 				<xs:choice>
 					<xs:element name="firstName" type="xs:string" />
 					<xs:element name="middleName" type="xs:string" />
 					<xs:element name="lastName" type="xs:string" />
-					<xs:element name="addres" type="Addres" />
-					<xs:element name="account" type="Account" />
+					<xs:element name="addres" type="cmn:Addres" />
+					<xs:element name="account" type="cmn:Account" />
 					<xs:element name="profile" type="EmployeeProfile" />
 					<xs:element name="certefication" type="Certefication"
 						minOccurs="0" maxOccurs="20" />
-					<xs:element name="verification" type="AccountVerification"
+					<xs:element name="verification" type="cmn:AccountVerification"
 						minOccurs="1" maxOccurs="5" />
 					<xs:element name="reviews" type="EmployeeReview" minOccurs="0"
 						maxOccurs="unbounded" />
 					<xs:element name="employeePortoFolio" type="EmployeePortoFolio"
 						minOccurs="0" maxOccurs="unbounded" />
-					<xs:element name="skills" type="Skill" minOccurs="0"
+					<xs:element name="skills" type="cmn:Skill" minOccurs="0"
 						maxOccurs="unbounded" />
 				</xs:choice>
 			</xs:extension>
