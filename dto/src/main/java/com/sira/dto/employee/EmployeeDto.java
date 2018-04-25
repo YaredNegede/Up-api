@@ -1,6 +1,8 @@
 package com.sira.dto.employee;
 
-public class EmployeeDto {
+import com.sira.dto.common.DTO;
+
+public class EmployeeDto  extends DTO{
 
 	public Long id;
     public String firstName;

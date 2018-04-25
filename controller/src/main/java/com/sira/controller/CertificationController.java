@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.sira.api.security.Security;
 import com.sira.dto.employee.CerteficationDto;
 
-public class CertificationController implements Controller<CerteficationDto> {
+public class CertificationController implements RequestController<CerteficationDto> {
 	
 	private static Logger logger = Logger.getLogger(CertificationController.class);
 	
@@ -47,32 +47,32 @@ public class CertificationController implements Controller<CerteficationDto> {
 	}
 
 	public CerteficationDto getById(long id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public List<CerteficationDto> getAll(long userId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public List<CerteficationDto> getAllMaching() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public CerteficationDto save(CerteficationDto t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public CerteficationDto delete(CerteficationDto t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public CerteficationDto deleteMaching(CerteficationDto t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

@@ -1,6 +1,8 @@
 package com.sira.dto.employee;
 
-public class AccountVerificationDto {
+import com.sira.dto.common.DTO;
+
+public class AccountVerificationDto  extends DTO{
 	public Long id;
 	public String name;
     public boolean status;

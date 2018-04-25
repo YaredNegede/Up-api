@@ -1,6 +1,8 @@
 package com.sira.dto.employee;
 
-public class SkillDto {
+import com.sira.dto.common.DTO;
+
+public class SkillDto  extends DTO{
 	
 	public String name;
 	public String description;

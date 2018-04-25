@@ -1,6 +1,8 @@
 package com.sira.dto.employee;
 
-public class AddresDto {
+import com.sira.dto.common.DTO;
+
+public class AddresDto  extends DTO{
 
 	public Long id;
 	public Integer zip;

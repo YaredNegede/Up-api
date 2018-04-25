@@ -2,57 +2,29 @@ package com.sira.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
+import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employer.EmployerProfileDto;
 /**
  * 
- * @author Yared
+ * @author Yared Negede
  *
  */
-public class EmployerProfileController implements Controller<EmployerProfileDto>{
+public class EmployerProfileController implements RequestController<EmployerProfileDto>{
 
 	private static Logger logger = Logger.getLogger(EmployerProfileController.class);
 
-	private EntityManager entitimanager;
+	private ControllerContext controllerContext;
 
-	private Gson gson = new Gson();
-
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public EmployerProfileController(EntityManager entitimanager, Gson gson, Security security,
-			Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
-	}
-	public static Logger getLogger() {
-		return logger;
+	public ControllerContext getControllerContext() {
+		return controllerContext;
 	}
 
-	public EntityManager getEntitimanager() {
-		return entitimanager;
+	public EmployerProfileController(ControllerContext controllerContext) {
+		this.controllerContext = controllerContext;
 	}
 
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
-	}
 	public EmployerProfileDto getById(long id) {
 		
 		return null;

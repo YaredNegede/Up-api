@@ -3,7 +3,7 @@ package com.sira.dto.common;
 import com.sira.model.stateschema.model.Budget;
 import com.sira.model.stateschema.model.UserBase;
 
-public class MessageDto {
+public class MessageDto extends DTO{
 
 	public String text;
     public UserBase from;

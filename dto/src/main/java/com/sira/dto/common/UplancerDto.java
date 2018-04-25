@@ -1,6 +1,6 @@
 package com.sira.dto.common;
 
-public class UplancerDto {
+public class UplancerDto  extends DTO{
 	
 	public String name;
     public String contact;

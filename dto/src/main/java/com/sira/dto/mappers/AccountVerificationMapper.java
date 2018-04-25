@@ -6,11 +6,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.AccountVerificationDto;
 import com.sira.model.stateschema.model.AccountVerification;
 
 @Mapper
-public interface AccountVerificationMapper {
+public interface AccountVerificationMapper  extends SiraMapper{
 
 	AccountVerificationMapper MAPPER = Mappers.getMapper( AccountVerificationMapper.class );
 	@Mappings({

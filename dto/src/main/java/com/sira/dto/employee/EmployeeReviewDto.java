@@ -2,7 +2,9 @@ package com.sira.dto.employee;
 
 import java.util.Calendar;
 
-public class EmployeeReviewDto {
+import com.sira.dto.common.DTO;
+
+public class EmployeeReviewDto  extends DTO{
 	
 	public Long id;
 	public String name;

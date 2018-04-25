@@ -2,88 +2,70 @@ package com.sira.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
+import com.sira.api.repository.EmployeeRepository;
+import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employee.EmployeeDto;
+import com.sira.dto.employee.mapperimpl.EmployeeMapperImpl;
+import com.sira.model.stateschema.model.Employee;
+
 /**
  * 
- * @author Yared
+ * @author Yared Negede
  *
  */
-public class EmployeeController  implements Controller<EmployeeDto>{
+@Controller
+public class EmployeeController  implements RequestController<EmployeeDto>{
 
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
-	
-	private EntityManager entitimanager;
+	private ControllerContext controllerContext;
 
-	private Gson gson = new Gson();
-
-	private Security security;
-
-	private Class<? extends Object>  type;
-	
-	public EmployeeController(EntityManager entitimanager, Gson gson, Security security, Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
+	public ControllerContext getControllerContext() {
+		return controllerContext;
 	}
 
-	public static Logger getLogger() {
-		return logger;
-	}
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
-	}
-
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
+	public EmployeeController(ControllerContext controllerContext) {
+		this.controllerContext = controllerContext;
 	}
 
 	public EmployeeDto getById(long id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public List<EmployeeDto> getAll(long userId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public List<EmployeeDto> getAllMaching() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public EmployeeDto save(EmployeeDto t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public EmployeeDto delete(EmployeeDto t) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		EmployeeMapperImpl employeeMapperImpl = new com.sira.dto.employee.mapperimpl.EmployeeMapperImpl();
+		
+		Employee ent = employeeMapperImpl.toEntity(t);
+		
+		EmployeeRepository employeeRepository = new  EmployeeRepository(getEntitimanager(), getGson(), getSecurity(), getType());
+		
+		employeeRepository.delete(ent);
+		
+		return t;
 	}
 
 	public EmployeeDto deleteMaching(EmployeeDto t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
-
-
 
 }

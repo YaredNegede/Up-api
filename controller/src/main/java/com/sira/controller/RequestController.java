@@ -2,7 +2,7 @@ package com.sira.controller;
 
 import java.util.List;
 
-public interface Controller <T>{
+public interface RequestController <T>{
 	
 	public T getById(long id);
 	

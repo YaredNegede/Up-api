@@ -1,6 +1,8 @@
 package com.sira.dto.employee;
 
-public class CerteficationDto {
+import com.sira.dto.common.DTO;
+
+public class CerteficationDto  extends DTO{
 	
 	public String name;
 	public Double score;

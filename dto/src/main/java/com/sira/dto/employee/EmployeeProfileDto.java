@@ -2,7 +2,9 @@ package com.sira.dto.employee;
 
 import java.math.BigInteger;
 
-public class EmployeeProfileDto {
+import com.sira.dto.common.DTO;
+
+public class EmployeeProfileDto  extends DTO{
 	
 	public Long id;
 	public BigInteger onTime;

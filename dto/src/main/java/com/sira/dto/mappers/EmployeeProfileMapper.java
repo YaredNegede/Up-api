@@ -6,11 +6,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.EmployeeProfileDto;
 import com.sira.model.stateschema.model.EmployeeProfile;
 
 @Mapper
-public interface EmployeeProfileMapper {
+public interface EmployeeProfileMapper  extends SiraMapper{
 
 	EmployeeProfileMapper MAPPER = Mappers.getMapper( EmployeeProfileMapper.class );
 	@Mappings({

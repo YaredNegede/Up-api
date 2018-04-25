@@ -1,7 +1,9 @@
 
 package com.sira.dto.employer;
 
-public class EmployerReviewDto {
+import com.sira.dto.common.DTO;
+
+public class EmployerReviewDto  extends DTO{
 
     public String name;
     public String comment;
