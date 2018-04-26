@@ -2,8 +2,8 @@ package com.sira.dto.common;
 
 import java.math.BigInteger;
 
-import com.sira.model.stateschema.model.JobStatus;
-import com.sira.model.stateschema.model.JobType;
+import com.sira.model.stateschema.workbase.JobStatus;
+import com.sira.model.stateschema.workbase.JobType;
 
 public class WorkBaseDto  extends DTO{
 

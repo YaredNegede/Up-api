@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.AccountVerificationDto;
-import com.sira.model.stateschema.model.AccountVerification;
+import com.sira.model.stateschema.common.AccountVerification;
 
 @Mapper
 public interface AccountVerificationMapper  extends SiraMapper{

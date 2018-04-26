@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.SkillDto;
-import com.sira.model.stateschema.model.Skill;
+import com.sira.model.stateschema.common.Skill;
 
 @Mapper
 public interface EmployeeSkillMapper  extends SiraMapper{

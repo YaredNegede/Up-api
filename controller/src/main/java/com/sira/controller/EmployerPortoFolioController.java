@@ -26,33 +26,27 @@ public class EmployerPortoFolioController implements RequestController<EmployerP
 	}
 
 	public EmployerPortoFolioDto getById(long id) {
-		
 		return null;
 	}
 
 	public List<EmployerPortoFolioDto> getAll(long userId) {
-		
 		return null;
 	}
 
 	public List<EmployerPortoFolioDto> getAllMaching() {
-		
 		return null;
+	}
 
 	public EmployerPortoFolioDto save(EmployerPortoFolioDto t) {
-		
 		return null;
 	}
 
 	public EmployerPortoFolioDto delete(EmployerPortoFolioDto t) {
-		
 		return null;
 	}
 
 	public EmployerPortoFolioDto deleteMaching(EmployerPortoFolioDto t) {
-		
 		return null;
 	}
-
 	
 }

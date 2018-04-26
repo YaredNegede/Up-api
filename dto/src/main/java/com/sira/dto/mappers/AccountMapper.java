@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.AccountDto;
-import com.sira.model.stateschema.model.Account;
+import com.sira.model.stateschema.common.Account;
 
 @Mapper
 public interface AccountMapper  extends SiraMapper {

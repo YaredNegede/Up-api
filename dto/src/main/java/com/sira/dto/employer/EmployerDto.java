@@ -2,8 +2,8 @@
 package com.sira.dto.employer;
 
 import com.sira.dto.common.DTO;
-import com.sira.model.stateschema.model.Account;
-import com.sira.model.stateschema.model.Addres;
+import com.sira.model.stateschema.common.Account;
+import com.sira.model.stateschema.common.Addres;
 
 public class EmployerDto  extends DTO{
 

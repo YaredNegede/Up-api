@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.EmployeeReviewDto;
-import com.sira.model.stateschema.model.EmployerReview;
+import com.sira.model.stateschema.employer.EmployerReview;
 
 @Mapper
 public interface EmployeeReviewMapper  extends SiraMapper{

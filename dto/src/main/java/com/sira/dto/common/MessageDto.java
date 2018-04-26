@@ -1,7 +1,7 @@
 package com.sira.dto.common;
 
-import com.sira.model.stateschema.model.Budget;
-import com.sira.model.stateschema.model.UserBase;
+import com.sira.model.stateschema.common.Budget;
+import com.sira.model.stateschema.common.UserBase;
 
 public class MessageDto extends DTO{
 

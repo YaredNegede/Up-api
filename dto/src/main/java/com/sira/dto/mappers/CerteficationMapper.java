@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.sira.dto.common.SiraMapper;
 import com.sira.dto.employee.CerteficationDto;
-import com.sira.model.stateschema.model.Certefication;
+import com.sira.model.stateschema.employee.Certefication;
 
 @Mapper
 public interface CerteficationMapper  extends SiraMapper{

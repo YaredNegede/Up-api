@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import com.sira.api.repository.EmployeeRepository;
 import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employee.EmployeeDto;
-import com.sira.dto.employee.mapperimpl.EmployeeMapperImpl;
-import com.sira.model.stateschema.model.Employee;
+
+import com.sira.model.stateschema.employee.Employee;
 
 /**
  * 
@@ -51,14 +51,6 @@ public class EmployeeController  implements RequestController<EmployeeDto>{
 	}
 
 	public EmployeeDto delete(EmployeeDto t) {
-		
-		EmployeeMapperImpl employeeMapperImpl = new com.sira.dto.employee.mapperimpl.EmployeeMapperImpl();
-		
-		Employee ent = employeeMapperImpl.toEntity(t);
-		
-		EmployeeRepository employeeRepository = new  EmployeeRepository(getEntitimanager(), getGson(), getSecurity(), getType());
-		
-		employeeRepository.delete(ent);
 		
 		return t;
 	}
