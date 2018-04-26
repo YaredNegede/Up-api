@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.Certefication;
+import com.sira.model.stateschema.employee.Certefication;
 
 public class CertificationRepository implements Repository<Certefication> {
 	

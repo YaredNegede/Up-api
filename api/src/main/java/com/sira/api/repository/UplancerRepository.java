@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.apache.log4j.Logger;
 
-import com.sira.model.stateschema.model.Uplancer;
+import com.sira.model.stateschema.uplancer.Uplancer;
 
 public class UplancerRepository implements Repository<Uplancer>{
 

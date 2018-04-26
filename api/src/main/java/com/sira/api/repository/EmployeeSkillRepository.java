@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.Skill;
+import com.sira.model.stateschema.common.Skill;
 /**
  * 
  * @author Yared

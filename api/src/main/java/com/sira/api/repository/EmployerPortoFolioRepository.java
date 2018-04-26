@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.EmployerPortoFolio;
+import com.sira.model.stateschema.employer.EmployerPortoFolio;
 
 public class EmployerPortoFolioRepository implements Repository<EmployerPortoFolio>{
 

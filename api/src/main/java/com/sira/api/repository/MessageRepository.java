@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.sira.api.security.Security;
-import com.sira.model.stateschema.model.Message;
+import com.sira.model.stateschema.common.Message;
 
 public class MessageRepository  implements Repository<Message>{
 	
