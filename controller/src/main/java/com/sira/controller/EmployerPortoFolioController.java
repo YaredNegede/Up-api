@@ -2,12 +2,9 @@ package com.sira.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
 import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employer.EmployerPortoFolioDto;
 

@@ -5,11 +5,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
-import com.sira.api.repository.EmployeeRepository;
 import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employee.EmployeeDto;
 
-import com.sira.model.stateschema.employee.Employee;
 
 /**
  * 

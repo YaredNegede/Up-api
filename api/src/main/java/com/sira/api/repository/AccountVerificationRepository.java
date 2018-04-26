@@ -49,37 +49,37 @@ public class AccountVerificationRepository implements Repository<AccountVerifica
 
 	@Override
 	public AccountVerification getById(long id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<AccountVerification> getAll(long userId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<AccountVerification> getAllMaching() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public AccountVerification save(AccountVerification t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public AccountVerification delete(AccountVerification t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public AccountVerification deleteMaching(AccountVerification t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
