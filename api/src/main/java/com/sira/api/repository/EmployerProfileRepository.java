@@ -2,93 +2,53 @@ package com.sira.api.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
+import com.sira.api.repository.error.UplancerException;
 import com.sira.model.stateschema.employer.EmployerProfile;
 /**
  * 
  * @author Yared
  *
  */
-public class EmployerProfileRepository implements Repository<EmployerProfile>{
-
+public class EmployerProfileRepository extends Repository<EmployerProfile>{
+	
 	private static Logger logger = Logger.getLogger(EmployerProfileRepository.class);
 
-	private EntityManager entitimanager;
-
-	private Gson gson = new Gson();
-
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public EmployerProfileRepository(EntityManager entitimanager, Gson gson, Security security,
-			Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
-	}
-	public static Logger getLogger() {
-		return logger;
-	}
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
-	}
-
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
-	}
-	
 	@Override
-	public EmployerProfile getById(long id) {
-		
+	public EmployerProfile getById(long id) throws UplancerException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EmployerProfile> getAll(long userId) {
-		
+	public List<EmployerProfile> getAll() throws UplancerException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EmployerProfile> getAllMaching() {
-		
+	public List<EmployerProfile> getAllMaching(EmployerProfile t) throws UplancerException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EmployerProfile save(EmployerProfile t) {
+	public void save(EmployerProfile t) throws UplancerException {
+		// TODO Auto-generated method stub
 		
-		return null;
 	}
 
 	@Override
-	public EmployerProfile delete(EmployerProfile t) {
+	public void delete(EmployerProfile t) throws UplancerException {
+		// TODO Auto-generated method stub
 		
-		return null;
 	}
 
 	@Override
-	public EmployerProfile deleteMaching(EmployerProfile t) {
+	public void deleteMaching(EmployerProfile t) throws UplancerException {
+		// TODO Auto-generated method stub
 		
-		return null;
 	}
-
 	
 }

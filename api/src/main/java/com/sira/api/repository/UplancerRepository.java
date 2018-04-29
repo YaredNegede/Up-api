@@ -7,60 +7,48 @@ import javax.persistence.EntityManagerFactory;
 
 import org.apache.log4j.Logger;
 
+import com.sira.api.repository.error.UplancerException;
 import com.sira.model.stateschema.uplancer.Uplancer;
 
-public class UplancerRepository implements Repository<Uplancer>{
+public class UplancerRepository extends Repository<Uplancer>{
 
 	private static Logger logger = Logger.getLogger(UplancerRepository.class);
+
+	@Override
+	public Uplancer getById(long id) throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Uplancer> getAll() throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Uplancer> getAllMaching(Uplancer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Uplancer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Uplancer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteMaching(Uplancer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	private EntityManager entityManager;
-
-	public UplancerRepository(EntityManagerFactory entityManager) {
-
-		logger.info("Reading global configuration");
-		
-		this.entityManager = entityManager.createEntityManager();
-		
-	}
-
-	public EntityManager getEntityManager() {
-		return this.entityManager;
-	}
-
-	@Override
-	public Uplancer getById(long id) {
-		
-		return null;
-	}
-
-	@Override
-	public List<Uplancer> getAll(long userId) {
-		
-		return null;
-	}
-
-	@Override
-	public List<Uplancer> getAllMaching() {
-		
-		return null;
-	}
-
-	@Override
-	public Uplancer save(Uplancer t) {
-		
-		return null;
-	}
-
-	@Override
-	public Uplancer delete(Uplancer t) {
-		
-		return null;
-	}
-
-	@Override
-	public Uplancer deleteMaching(Uplancer t) {
-		
-		return null;
-		
-	}
+	
 }

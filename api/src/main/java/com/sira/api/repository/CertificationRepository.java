@@ -2,85 +2,163 @@ package com.sira.api.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
+import com.sira.api.repository.allquery.UplaancerQuery;
+import com.sira.api.repository.error.UplancerException;
 import com.sira.model.stateschema.employee.Certefication;
 
-public class CertificationRepository implements Repository<Certefication> {
+public class CertificationRepository extends Repository<Certefication> {
 	
 	private static Logger logger = Logger.getLogger(CertificationRepository.class);
+
+	private RepositoryContext repositoryContext;
+
+	public CertificationRepository(RepositoryContext repositoryContext) {
+
+		this.repositoryContext = repositoryContext;
+		
+	}
+
+	public RepositoryContext getRepositoryContext() {
+		
+		return this.repositoryContext;
 	
-	private EntityManager entitimanager;
-
-	private Gson gson = new Gson();
-
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public CertificationRepository(EntityManager entitimanager, Gson gson, Security security, Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
-	}
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
-	}
-
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
 	}
 
 	@Override
-	public Certefication getById(long id) {
+	public Certefication getById(long id) throws UplancerException {
+
+		Certefication res = null;
 		
-		return null;
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getaCerteficationQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("hjid", id);
+
+			res = (Certefication) query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		
+		return res;
+
 	}
 
 	@Override
-	public List<Certefication> getAll(long userId) {
-		
-		return null;
+	public List<Certefication> getAll() throws UplancerException {
+
+		List<Certefication> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getAllCerteficationQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public List<Certefication> getAllMaching() {
-		
-		return null;
+	public List<Certefication> getAllMaching(Certefication t) throws UplancerException {
+
+		List<Certefication> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getMatchingAddresQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("name", t.getName());
+
+			query.setParameter("hjid", t.getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public Certefication save(Certefication t) {
+	public void save(Certefication t) throws UplancerException {
 		
-		return null;
+		
 	}
 
 	@Override
-	public Certefication delete(Certefication t) {
+	public void delete(Certefication t) throws UplancerException {
+
+		try {
+
+			this.getRepositoryContext().getEntityManager().remove(t);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
 		
-		return null;
 	}
 
 	@Override
-	public Certefication deleteMaching(Certefication t) {
+	public void deleteMaching(Certefication t) throws UplancerException {
 		
-		return null;
-	}
+		try {
 
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getDeleteMatchingCerteficationQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("hjid", t.getHjid());
+
+			query.setParameter("name", t.getName());
+
+			query.executeUpdate();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		
+	}
 	
 }

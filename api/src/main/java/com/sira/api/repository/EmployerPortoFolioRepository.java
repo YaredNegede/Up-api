@@ -7,79 +7,47 @@ import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.sira.api.repository.error.UplancerException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.employer.EmployerPortoFolio;
 
-public class EmployerPortoFolioRepository implements Repository<EmployerPortoFolio>{
-
+public class EmployerPortoFolioRepository extends Repository<EmployerPortoFolio>{
 	private static Logger logger = Logger.getLogger(EmployerPortoFolioRepository.class);
-	
-	private EntityManager entitimanager;
-
-	private Gson gson = new Gson();
-
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public EmployerPortoFolioRepository(EntityManager entitimanager, Gson gson, Security security, Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
-	}
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
-	}
-
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
-	}
 
 	@Override
-	public EmployerPortoFolio getById(long id) {
+	public EmployerPortoFolio getById(long id) throws UplancerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EmployerPortoFolio> getAll(long userId) {
+	public List<EmployerPortoFolio> getAll() throws UplancerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EmployerPortoFolio> getAllMaching() {
+	public List<EmployerPortoFolio> getAllMaching(EmployerPortoFolio t) throws UplancerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EmployerPortoFolio save(EmployerPortoFolio t) {
+	public void save(EmployerPortoFolio t) throws UplancerException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public EmployerPortoFolio delete(EmployerPortoFolio t) {
+	public void delete(EmployerPortoFolio t) throws UplancerException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public EmployerPortoFolio deleteMaching(EmployerPortoFolio t) {
+	public void deleteMaching(EmployerPortoFolio t) throws UplancerException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	
 }

@@ -4,24 +4,26 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-public interface Repository <T> {
+import com.sira.api.repository.error.UplancerException;
+
+public abstract class Repository <T> {
 
 	@Transactional
-	public T getById(long id);
+	public abstract T getById(long id) throws UplancerException;
 	
 	@Transactional
-	public List<T> getAll(long userId);
+	public abstract List<T> getAll()throws UplancerException;
 	
 	@Transactional
-	public List<T> getAllMaching();
+	public abstract List<T> getAllMaching(T t)throws UplancerException;
 	
 	@Transactional
-	public T save(T t);
+	public abstract void save(T t)throws UplancerException;
 	
 	@Transactional
-	public T delete(T t);
+	public abstract void delete(T t)throws UplancerException;
 	
 	@Transactional
-	public T deleteMaching(T t);
+	public abstract void deleteMaching(T t)throws UplancerException;
 	
 }

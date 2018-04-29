@@ -2,76 +2,180 @@ package com.sira.api.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
+import com.sira.api.repository.allquery.UplaancerQuery;
+import com.sira.api.repository.error.UplancerException;
+import com.sira.model.stateschema.common.Account;
 import com.sira.model.stateschema.employee.EmployeePortoFolio;
 
-public class EmployeePortoFolioRepository implements Repository<EmployeePortoFolio>{
-
+public class EmployeePortoFolioRepository extends Repository<EmployeePortoFolio>{
+	
 	private static Logger logger = Logger.getLogger(EmployeePortoFolioRepository.class);
 	
-	private EntityManager entitimanager;
+	private RepositoryContext repositoryContext;
 
-	private Gson gson = new Gson();
+	public EmployeePortoFolioRepository(RepositoryContext repositoryContext) {
 
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
+		this.repositoryContext = repositoryContext;
+		
 	}
 
-	public Gson getGson() {
-		return gson;
+	public RepositoryContext getRepositoryContext() {
+		
+		return this.repositoryContext;
+	
 	}
 
-	public Security getSecurity() {
-		return security;
-	}
 
-	public Class<? extends Object> getType() {
-		return type;
+	@Override
+	public EmployeePortoFolio getById(long id) throws UplancerException {
+
+		EmployeePortoFolio res = null;
+		
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getaAcountQuery());
+
+			query.setParameter("id", id);
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			res = (EmployeePortoFolio) query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		return res;
+
+	
+
 	}
 
 	@Override
-	public EmployeePortoFolio getById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<EmployeePortoFolio> getAll() throws UplancerException {
+
+		List<EmployeePortoFolio> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getAllAcountVerificationQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public List<EmployeePortoFolio> getAll(long userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<EmployeePortoFolio> getAllMaching(EmployeePortoFolio t) throws UplancerException {
+
+		List<EmployeePortoFolio> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getMatchingAcountQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("name", t.getName());
+
+			query.setParameter("hjid", t.getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public List<EmployeePortoFolio> getAllMaching() {
-		// TODO Auto-generated method stub
-		return null;
+	public void save(EmployeePortoFolio t) throws UplancerException {
+
+
+		try {
+
+			this.getRepositoryContext().getEntityManager().persist(t);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
 	}
 
 	@Override
-	public EmployeePortoFolio save(EmployeePortoFolio t) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(EmployeePortoFolio t) throws UplancerException {
+
+		try {
+
+			this.getRepositoryContext().getEntityManager().remove(t);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		
 	}
 
 	@Override
-	public EmployeePortoFolio delete(EmployeePortoFolio t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void deleteMaching(EmployeePortoFolio t) throws UplancerException {
+		
+		List<EmployeePortoFolio> res = null;
 
-	@Override
-	public EmployeePortoFolio deleteMaching(EmployeePortoFolio t) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getDeleteMatchingAcountQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("hjid", t.getHjid());
+
+			query.setParameter("number", t.getName());
+
+			query.executeUpdate();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		
 	}
 	
 }

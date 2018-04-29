@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.sira.api.repository.error.UplancerException;
 import com.sira.api.security.Security;
 import com.sira.model.stateschema.employer.Employer;
 /**
@@ -14,80 +15,45 @@ import com.sira.model.stateschema.employer.Employer;
  * @author Yared
  *
  */
-public class EmployerRepository implements Repository<Employer>{
+public class EmployerRepository extends Repository<Employer>{
 
 	private static Logger logger = Logger.getLogger(EmployerRepository.class);
 
-	private EntityManager entitimanager;
+	@Override
+	public Employer getById(long id) throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	private Gson gson = new Gson();
+	@Override
+	public List<Employer> getAll() throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	private Security security;
+	@Override
+	public List<Employer> getAllMaching(Employer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	private Class<? extends Object>  type;
+	@Override
+	public void save(Employer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Employer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteMaching(Employer t) throws UplancerException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
-	public static Logger getLogger() {
-		return logger;
-	}
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
-	}
-
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
-	}
-
-	public EmployerRepository(EntityManager entitimanager, Gson gson, Security security, Class<? extends Object> type) {
-		super();
-		this.entitimanager = entitimanager;
-		this.gson = gson;
-		this.security = security;
-		this.type = type;
-	}
-
-	@Override
-	public Employer getById(long id) {
-		
-		return null;
-	}
-
-	@Override
-	public List<Employer> getAll(long userId) {
-		
-		return null;
-	}
-
-	@Override
-	public List<Employer> getAllMaching() {
-		
-		return null;
-	}
-
-	@Override
-	public Employer save(Employer t) {
-		
-		return null;
-	}
-
-	@Override
-	public Employer delete(Employer t) {
-		
-		return null;
-	}
-
-	@Override
-	public Employer deleteMaching(Employer t) {
-		
-		return null;
-	}
-
 }

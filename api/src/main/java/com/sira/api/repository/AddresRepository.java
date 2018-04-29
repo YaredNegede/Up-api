@@ -2,76 +2,182 @@ package com.sira.api.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.sira.api.security.Security;
-import com.sira.model.stateschema.common.*;
+import com.sira.api.repository.allquery.UplaancerQuery;
+import com.sira.api.repository.error.UplancerException;
+import com.sira.model.stateschema.common.Addres;
 
-public class AddresRepository implements Repository<Addres> {
+public class AddresRepository extends Repository<Addres> {
 	
 	private static Logger logger = Logger.getLogger(AddresRepository.class);
 	
-	private EntityManager entitimanager;
+	private RepositoryContext repositoryContext;
 
-	private Gson gson = new Gson();
+	public AddresRepository(RepositoryContext repositoryContext) {
 
-	private Security security;
-
-	private Class<? extends Object>  type;
-
-	public EntityManager getEntitimanager() {
-		return entitimanager;
+		this.repositoryContext = repositoryContext;
+		
 	}
 
-	public Gson getGson() {
-		return gson;
-	}
-
-	public Security getSecurity() {
-		return security;
-	}
-
-	public Class<? extends Object> getType() {
-		return type;
+	public RepositoryContext getRepositoryContext() {
+		
+		return repositoryContext;
+	
 	}
 
 	@Override
-	public Addres getById(long id) {
+	public Addres getById(long id) throws UplancerException {
+
+		Addres res = null;
 		
-		return null;
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getaAddresQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("hjid", id);
+
+			res = (Addres) query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		return res;
+
+	
+
+	
+		
 	}
 
 	@Override
-	public List<Addres> getAll(long userId) {
-		
-		return null;
+	public List<Addres> getAll() throws UplancerException {
+
+		List<Addres> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getAllAddresQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public List<Addres> getAllMaching() {
-		
-		return null;
+	public List<Addres> getAllMaching(Addres t) throws UplancerException {
+
+		List<Addres> res = null;
+
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getMatchingAddresQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("number", t.getPhone());
+
+			query.setParameter("hjid", t.getHjid());
+
+			res = query.getResultList();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+		return res;
+	
 	}
 
 	@Override
-	public Addres save(Addres t) {
+	public void save(Addres t) throws UplancerException {
+
+		try {
+
+			this.getRepositoryContext().getEntityManager().persist(t);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+
+	
 		
-		return null;
 	}
 
 	@Override
-	public Addres delete(Addres t) {
+	public void delete(Addres t) throws UplancerException {
+
+		try {
+
+			this.getRepositoryContext().getEntityManager().remove(t);
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
 		
-		return null;
 	}
 
 	@Override
-	public Addres deleteMaching(Addres t) {
+	public void deleteMaching(Addres t) throws UplancerException {
 		
-		return null;
+		try {
+
+			Query query = this.getRepositoryContext().getEntityManager()
+					.createNamedQuery(UplaancerQuery.getDeleteMatchingAcountQuery());
+
+			query.setParameter("userId", this.getRepositoryContext().getUserBase().getHjid());
+
+			query.setParameter("hjid", t.getHjid());
+
+			query.setParameter("number", t.getPhone());
+
+			query.executeUpdate();
+
+		} catch (Exception e) {
+
+			logger.error(e);
+
+			throw new UplancerException(e.getLocalizedMessage());
+
+		}
+		
+			
+		
 	}
+
 	
 }
