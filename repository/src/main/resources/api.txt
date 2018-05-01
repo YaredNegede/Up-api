@@ -1,0 +1,31 @@
+----------------------------------------.
+Account 								|
+AccountVerification 					|
+Certification							|								|
+Employee								|
+EmployeePortoFolio  					|
+EmployeeProfile							|
+EmployeeReview 							|
+Employer								|
+EmployerPortoFolio  					|
+EmployerProfile							|
+EmployerReview 							|
+JobDetail								|
+ProjectDetail							|
+Addres									|
+Message									|
+----------------------------------------.
+Currency
+Budget
+JobStatus    
+JobType     
+PortoFolio   
+Profile 
+Review
+Skill 
+Uplancer
+User  
+UserBase
+UserType
+WorkBase
+----------------------------------------|
