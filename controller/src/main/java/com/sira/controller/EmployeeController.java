@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
-import com.sira.controller.context.ControllerContext;
 import com.sira.dto.employee.EmployeeDto;
 
 
@@ -15,18 +14,9 @@ import com.sira.dto.employee.EmployeeDto;
  *
  */
 @Controller
-public class EmployeeController  implements RequestController<EmployeeDto>{
+public class EmployeeController  extends RequestController{
 
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
-	private ControllerContext controllerContext;
-
-	public ControllerContext getControllerContext() {
-		return controllerContext;
-	}
-
-	public EmployeeController(ControllerContext controllerContext) {
-		this.controllerContext = controllerContext;
-	}
 
 	public EmployeeDto getById(long id) {
 		

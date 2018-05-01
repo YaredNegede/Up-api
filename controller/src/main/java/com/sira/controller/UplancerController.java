@@ -4,26 +4,16 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.sira.controller.context.ControllerContext;
 import com.sira.dto.common.UplancerDto;
 /**
  * 
  * @author Yared Negede
  *
  */
-public class UplancerController implements RequestController<UplancerDto>{
+public class UplancerController   extends RequestController{
 
 	private static Logger logger = Logger.getLogger(UplancerController.class);
 	
-	private ControllerContext controllerContext;
-
-	public ControllerContext getControllerContext() {
-		return controllerContext;
-	}
-
-	public UplancerController(ControllerContext controllerContext) {
-		this.controllerContext = controllerContext;
-	}
 	
 	public UplancerDto getById(long id) {
 		

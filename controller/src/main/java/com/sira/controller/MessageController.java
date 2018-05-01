@@ -4,22 +4,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.sira.controller.context.ControllerContext;
 import com.sira.dto.common.MessageDto;
 
-public class MessageController  implements RequestController<MessageDto>{
+public class MessageController  extends RequestController{
 	
 	private static Logger logger = Logger.getLogger(MessageController.class);
 	
-	private ControllerContext controllerContext;
-
-	public ControllerContext getControllerContext() {
-		return controllerContext;
-	}
-
-	public MessageController(ControllerContext controllerContext) {
-		this.controllerContext = controllerContext;
-	}
 
 	public MessageDto getById(long id) {
 		
