@@ -1,93 +1,158 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>model</artifactId>
-
-	<parent>
-		<groupId>com.sira</groupId>
-		<artifactId>sira</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-
+	<groupId>com.sira</groupId>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<persistenceunit>siraPersistenceUnitName</persistenceunit>
-		<drop>false</drop>
-		<create>true</create>
+		<persistenceunit>sirapu</persistenceunit>
+		<create>false</create>
 		<export>false</export>
-		<format>true</format>
-		<outputfilename>create.sql</outputfilename>
-		<console>true</console>
-		<outputfilename>create.sql</outputfilename>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hibernate.version>5.0.5.Final</hibernate.version>
-		<hsqldb.version>2.3.2</hsqldb.version>
-		<spring.version>4.2.3.RELEASE</spring.version>
-		<slf4j.version>1.2.17</slf4j.version>
-		<atomikos.version>4.0.0M4</atomikos.version>
-		<jmockit.version>1.17</jmockit.version>
-		<hjaxb.version>0.6.1</hjaxb.version>
+		<drop>false</drop>
+		<hibernate.version>4.3.5.Final</hibernate.version>
+		<maven-jaxb2-plugin>0.13.2</maven-jaxb2-plugin>
 	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2_commons</groupId>
-				<artifactId>jaxb2-basics</artifactId>
-				<version>0.5.2</version>
-			</plugin>
-
-			<plugin>
 				<groupId>org.jvnet.hyperjaxb3</groupId>
 				<artifactId>maven-hyperjaxb3-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>model-generation</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
+						<configuration>
+							<debug>true</debug>
+							<variant>jpa2</variant>
+							<args>
+								<arg>-Xannotate</arg>
+								<arg>-Xinject-code</arg>
+							</args>
+							<extension>true</extension>
+							<episodeFile>target/classes/META-INF/sun-jaxb.episode</episodeFile>
+							<episode>true</episode>
+							<roundtripTestClassName>RoundtripTest</roundtripTestClassName>
+							<verbose>true</verbose>
+							<plugins>
+								<!-- Use latest jaxb2 instead of 13.1 version -->
+								<plugin>
+									<groupId>org.jvnet.jaxb2.maven2</groupId>
+									<artifactId>maven-jaxb2-plugin</artifactId>
+									<version>0.13.3</version>
+								</plugin>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics</artifactId>
+									<version>1.11.1</version>
+								</plugin>
+							</plugins>
+							<persistenceUnitName>${persistenceunit}</persistenceUnitName>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<args>
-						<arg>-Xannotate</arg>
-						<arg>-enableIntrospection</arg>
-					</args>
-					<packageName>com.sira.jaxb</packageName>
-					<schemaDirectory>src/main/resources</schemaDirectory>
-					<bindingDirectory>src/main/resources</bindingDirectory>
-					<generateDirectory>${project.build.directory}/</generateDirectory>
-					<specVersion>2.2</specVersion>
-					<extension>true</extension>
-					<variant>jpa2</variant>
-					<persistenceUnitName>sirapu</persistenceUnitName>
-				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-basics-tools</artifactId>
+						<version>1.11.1</version>
+					</dependency>
+					<dependency>
+						<!-- Force hperjaxb to use the latest libraries to produce the right 
+							code -->
+						<groupId>org.jvnet.hyperjaxb3</groupId>
+						<artifactId>hyperjaxb3-ejb-plugin</artifactId>
+						<version>0.6.1</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics-tools</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics-runtime</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
+
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<inherited>true</inherited>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<inherited>true</inherited>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<inherited>true</inherited>
-				<configuration>
-					<ignoredUnusedDeclaredDependencies>
-						<ignoredUnusedDeclaredDependency>
-							junit:junit
-						</ignoredUnusedDeclaredDependency>
-					</ignoredUnusedDeclaredDependencies>
-				</configuration>
+				<groupId>org.jvnet.hyperjaxb3</groupId>
+				<artifactId>maven-hyperjaxb3-plugin</artifactId>
+				<version>0.6.1</version>
+				<executions>
+					<execution>
+						<id>model-generation</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<debug>true</debug>
+							<variant>jpa2</variant>
+							<args>
+								<arg>-Xannotate</arg>
+								<arg>-Xinject-code</arg>
+							</args>
+							<extension>true</extension>
+							<episodeFile>target/classes/META-INF/sun-jaxb.episode</episodeFile>
+							<episode>true</episode>
+							<roundtripTestClassName>RoundtripTest</roundtripTestClassName>
+							<verbose>true</verbose>
+							<plugins>
+								<!-- Use latest jaxb2 instead of 13.1 version -->
+								<plugin>
+									<groupId>org.jvnet.jaxb2.maven2</groupId>
+									<artifactId>maven-jaxb2-plugin</artifactId>
+									<version>${maven-jaxb2-plugin}</version>
+								</plugin>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics</artifactId>
+									<version>1.11.1</version>
+								</plugin>
+							</plugins>
+							<persistenceUnitName>${persistenceunit}</persistenceUnitName>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-basics-tools</artifactId>
+						<version>1.11.1</version>
+					</dependency>
+					
+					<dependency>
+						<!-- Force hperjaxb to use the latest libraries to produce the right 
+							code -->
+						<groupId>org.jvnet.hyperjaxb3</groupId>
+						<artifactId>hyperjaxb3-ejb-plugin</artifactId>
+						<version>0.6.1</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics-tools</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>org.jvnet.jaxb2_commons</groupId>
+								<artifactId>jaxb2-basics-runtime</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
@@ -95,183 +160,66 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-tools</artifactId>
+			<version>1.11.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jvnet.hyperjaxb3</groupId>
 			<artifactId>hyperjaxb3-ejb-runtime</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-
-
-		<!-- Database -->
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-		</dependency>
-		<!-- Test dependencies -->
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jmockit</groupId>
-			<artifactId>jmockit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jmockit</groupId>
-			<artifactId>jmockit-coverage</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Roundtrip -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
+			<version>0.6.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jvnet.hyperjaxb3</groupId>
 			<artifactId>hyperjaxb3-ejb-roundtrip</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.hibernate.javax.persistence</groupId>
-					<artifactId>hibernate-jpa-2.0-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- Hibernate Dependencies -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jvnet.hyperjaxb3</groupId>
-			<artifactId>hyperjaxb3-ejb-runtime</artifactId>
-			<version>0.6.0</version>
-			<scope>runtime</scope>
+			<version>0.6.2</version>
 		</dependency>
 
 		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Database -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.190</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.35</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.1-Final</version>
 		</dependency>
 
-		<!-- atomikos -->
-		<dependency>
-			<groupId>com.atomikos</groupId>
-			<artifactId>transactions-jta</artifactId>
-			<version>${atomikos.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.atomikos</groupId>
-			<artifactId>transactions-jdbc</artifactId>
-			<version>${atomikos.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.atomikos</groupId>
-			<artifactId>transactions-hibernate3</artifactId>
-			<version>${atomikos.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>compile</scope>
-		</dependency>
 		<dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
-			<version>2.0.2</version>
+			<version>1.0.b2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.197</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.9</version>
+		</dependency>
 	</dependencies>
+
 </project>

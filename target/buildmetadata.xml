@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<buildmetadata xmlns="http://www.smartics.de/project/process/implementation/buildmetadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.smartics.de/project/process/implementation/buildmetadata http://www.smartics.de/project/process/implementation/buildmetadata">
+  <name>0.0.1-20180508-SNAPSHOT</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <groupId>com.sira</groupId>
+  <artifactId>sira</artifactId>
+  <date>2018-05-08T00:00:00</date>
+  <timestamp>1525791304906</timestamp>
+  <build-year>2018</build-year>
+  <project>
+    <copyright-year>2018</copyright-year>
+  </project>
+  <scm/>
+  <runtime>
+    <build-server>uplancer.io</build-server>
+    <build-user>yared</build-user>
+    <os>
+      <arch>amd64</arch>
+      <name>Linux</name>
+      <version>4.13.0-39-generic</version>
+    </os>
+    <java>
+      <name>OpenJDK Runtime Environment</name>
+      <version>1.8.0_162-8u162-b12-0ubuntu0.16.04.2-b12</version>
+      <vendor>Oracle Corporation</vendor>
+      <vm>OpenJDK 64-Bit Server VM</vm>
+      <compiler>HotSpot 64-Bit Tiered Compilers</compiler>
+    </java>
+    <maven>
+      <version>3.3.9</version>
+      <execution-project>com.sira:sira:pom:0.0.1-SNAPSHOT</execution-project>
+      <is-excution-root>true</is-excution-root>
+      <goals>
+        <goal>clean</goal>
+        <goal>install</goal>
+      </goals>
+    </maven>
+  </runtime>
+  <misc>
+    <metadata name="build.date.pattern">dd.MM.yyyy</metadata>
+  </misc>
+</buildmetadata>

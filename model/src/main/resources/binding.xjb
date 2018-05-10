@@ -33,7 +33,6 @@
 
 	</jaxb:bindings>
 
-
 	<jaxb:bindings schemaLocation="employee.xsd" node="xs:complexType[@name='Employee']">
 		<hj:persistence>
 			<hj:default-one-to-many fetch="EAGER">

@@ -3,8 +3,11 @@ package com.sira.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sira.dto.employer.EmployerDto;
+import com.sira.model.stateschema.employer.Employer;
+import com.sira.service.EmployerService;
 /**
  * 
  * @author Yared
@@ -14,6 +17,8 @@ public class EmployerController   extends RequestController{
 
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 
+	@Autowired
+	private EmployerService employerService;
 	
 	public EmployerDto getById(long id) {
 		
@@ -32,6 +37,8 @@ public class EmployerController   extends RequestController{
 
 	public EmployerDto save(EmployerDto t) {
 		
+		this.getEmployerService().save(new Employer());
+		
 		return null;
 	}
 
@@ -43,6 +50,14 @@ public class EmployerController   extends RequestController{
 	public EmployerDto deleteMaching(EmployerDto t) {
 		
 		return null;
+	}
+
+	public EmployerService getEmployerService() {
+		return employerService;
+	}
+
+	public void setEmployerService(EmployerService employerService) {
+		this.employerService = employerService;
 	}
 
 

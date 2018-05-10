@@ -6,6 +6,15 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="dto-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dto/dto">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/service/service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="repository-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/repository/repository">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/controller/target/classes"/>
         <property name="context-root" value="controller"/>
     </wb-module>

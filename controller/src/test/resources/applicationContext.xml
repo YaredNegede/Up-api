@@ -1,125 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-						http://www.springframework.org/schema/util 
-						http://www.springframework.org/schema/util/spring-util-4.2.xsd
-						http://www.springframework.org/schema/aop
-						http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
-						http://www.springframework.org/schema/tx 
-        				http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-        				http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+
+	<context:annotation-config />
+
+	<!-- used to tell spring use persistance context -->
 
 	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<value>WEB-INF/config.properties</value>
-		</property>
-		<property name="nullValue" value="@null" />
-	</bean>
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<bean id="properties"
-		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="WEB-INF/config.properties" />
-	</bean>
+	<tx:annotation-driven
+		transaction-manager="jpatransactionManager" />
 
-	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
-		init-method="init" destroy-method="close">
-		<property name="forceShutdown" value="false" />
-	</bean>
-
-	<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.J2eeUserTransaction">
-		<property name="transactionTimeout" value="300" />
-	</bean>
-
-	<bean id="jtatransactionManager"
-		class="org.springframework.transaction.jta.JtaTransactionManager"
-		depends-on="atomikosTransactionManager,atomikosUserTransaction">
-		<property name="transactionManager" ref="atomikosTransactionManager" />
-		<property name="userTransaction" ref="atomikosUserTransaction" />
-		<property name="allowCustomIsolationLevels" value="true" />
+	<bean id="jpatransactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="siraEntityManagerFactoryBean" />
 	</bean>
 
 	<bean id="siraDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${driver}" />
-		<property name="url" value="${hibernate.connection.url}" />
-		<property name="username" value="${hibernate.connection.username}" />
-		<property name="password" value="${hibernate.connection.password}" />
+		<property name="driverClassName"
+			value="org.h2.Driver" />
+		<property name="url"
+			value="jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
 	</bean>
 
 	<bean id="siraEntityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
 		<property name="dataSource" ref="siraDataSource" />
 		<property name="persistenceUnitName" value="sirapu" />
 		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+			</bean>
 		</property>
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-			</props>
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="hibernate.dialect"
+					value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+				<entry key="hibernate.hbm2ddl.auto" value="none" />
+				<entry key="hibernate.format_sql" value="true" />
+			</map>
 		</property>
-	</bean>
-
-	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="siraEntityManagerFactoryBean" />
-	</bean>
-
-	<!-- API classes -->
-
-	<bean id="security" class="com.sira.api.security.Security" />
-
-	<bean id="Employee" class="com.sira.api.EmployeeInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
-	</bean>
-
-	<bean id="Employer" class="com.sira.api.EmployerInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
-	</bean>
-
-	<bean id="Skill" class="com.sira.api.EmployeeSkillInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
-	</bean>
-
-	<bean id="Profile" class="com.sira.api.EmployeeProfileInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Employee" />
-	</bean>
-
-	<bean id="EmployerProfile" class="com.sira.api.EmployerProfileInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.Employer" />
-	</bean>
-
-	<bean id="Job" class="com.sira.api.WorkInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.JobDetail" />
-	</bean>
-
-	<bean id="Project" class="com.sira.api.WorkInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
-		<constructor-arg ref="security" />
-		<constructor-arg value="com.sira.model.stateschema.model.ProjectDetail" />
-	</bean>
-	
-	<bean id="Uplancer" class="com.sira.api.deamon.UplancerInfo">
-		<constructor-arg ref="siraEntityManagerFactoryBean" />
 	</bean>
 
 </beans>
