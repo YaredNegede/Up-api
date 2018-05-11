@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sira.dto.employee.EmployeeDto;
 
@@ -14,16 +15,17 @@ import com.sira.dto.employee.EmployeeDto;
  *
  */
 @Controller
+@RequestMapping("employee")
 public class EmployeeController  extends RequestController{
 
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
 
-	public EmployeeDto getById(long id) {
+	public String getById(long id) {
 		
 		return null;
 	}
 
-	public List<EmployeeDto> getAll(long userId) {
+	public String getAll(long userId) {
 		
 		return null;
 	}

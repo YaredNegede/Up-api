@@ -9,7 +9,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContexts.xml</param-value>
+		<param-value>/WEB-INF/spring/jpaContexts.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -17,8 +17,19 @@
 		</listener-class>
 	</listener>
 
+	<servlet>
+		<servlet-name>dispacher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/dispacher-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+
+
 	<welcome-file-list id="WelcomeFileList">
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	
+
 </web-app>

@@ -3,6 +3,7 @@ package com.sira.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 
 import com.sira.dto.common.UplancerDto;
 /**
@@ -10,6 +11,7 @@ import com.sira.dto.common.UplancerDto;
  * @author Yared Negede
  *
  */
+@Controller
 public class UplancerController   extends RequestController{
 
 	private static Logger logger = Logger.getLogger(UplancerController.class);

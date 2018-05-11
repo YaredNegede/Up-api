@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.sira.dto.employer.EmployerDto;
 import com.sira.model.stateschema.employer.Employer;
@@ -13,6 +14,7 @@ import com.sira.service.EmployerService;
  * @author Yared
  *
  */
+@Controller
 public class EmployerController   extends RequestController{
 
 	private static Logger logger = Logger.getLogger(EmployerController.class);
@@ -20,7 +22,7 @@ public class EmployerController   extends RequestController{
 	@Autowired
 	private EmployerService employerService;
 	
-	public EmployerDto getById(long id) {
+	public String getById(long id) {
 		
 		return null;
 	}

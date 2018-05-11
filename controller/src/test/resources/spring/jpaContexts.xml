@@ -12,28 +12,27 @@
 
 	<context:annotation-config />
 
-	<!-- used to tell spring use persistance context -->
-
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<tx:annotation-driven
 		transaction-manager="jpatransactionManager" />
 
-	<bean id="jpatransactionManager"
-		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory"
-			ref="siraEntityManagerFactoryBean" />
-	</bean>
 
 	<bean id="siraDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
-			value="org.h2.Driver" />
+			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE" />
-		<property name="username" value="sa" />
-		<property name="password" value="" />
+			value="jdbc:mysql://localhost:3306/sira?autoReconnect=true" />
+		<property name="username" value="root" />
+		<property name="password" value="123" />
+	</bean>
+
+	<bean id="jpatransactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="siraEntityManagerFactoryBean" />
 	</bean>
 
 	<bean id="siraEntityManagerFactoryBean"
@@ -47,14 +46,15 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-		<property name="jpaPropertyMap">
-			<map>
-				<entry key="hibernate.dialect"
-					value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-				<entry key="hibernate.hbm2ddl.auto" value="none" />
-				<entry key="hibernate.format_sql" value="true" />
-			</map>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
 		</property>
+
 	</bean>
 
 </beans>
