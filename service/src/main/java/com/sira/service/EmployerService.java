@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.sira.model.stateschema.employer.Employer;
 
-@Service
 public interface EmployerService {
 
 	public Employer save(Employer employer);

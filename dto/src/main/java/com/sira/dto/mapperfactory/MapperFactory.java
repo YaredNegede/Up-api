@@ -13,7 +13,7 @@ public class MapperFactory {
 
 	private MapperFactory() {}
 	
-	public MapperFactory CreateFactory() {
+	public MapperFactory createFactory() {
 		return new MapperFactory();
 	}
 

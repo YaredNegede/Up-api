@@ -1,10 +1,10 @@
 package com.sira.controller;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sira.dto.employee.EmployeeDto;
 
@@ -15,39 +15,46 @@ import com.sira.dto.employee.EmployeeDto;
  *
  */
 @Controller
-@RequestMapping("employee")
+@RequestMapping("/employee")
 public class EmployeeController  extends RequestController{
 
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
 
+	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)
+	@ResponseBody
 	public String getById(long id) {
 		
-		return null;
+		logger.info("getting employee");
+		
+		return "";
 	}
-
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ResponseBody
 	public String getAll(long userId) {
-		
-		return null;
+		logger.info("getting employee");
+		return "";
 	}
 
-	public List<EmployeeDto> getAllMaching() {
+	@RequestMapping(value = "/matching", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAllMachinngg(EmployeeDto t) {
 		
-		return null;
+		return "";
 	}
 
-	public EmployeeDto save(EmployeeDto t) {
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@ResponseBody
+	public String save(EmployeeDto t) {
 		
-		return null;
+		return "";
 	}
 
-	public EmployeeDto delete(EmployeeDto t) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String delete() {
 		
-		return t;
-	}
-
-	public EmployeeDto deleteMaching(EmployeeDto t) {
+		return "";
 		
-		return null;
 	}
 
 }

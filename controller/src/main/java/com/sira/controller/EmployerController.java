@@ -24,7 +24,9 @@ public class EmployerController   extends RequestController{
 	
 	public String getById(long id) {
 		
-		return null;
+		logger.info("getting employee");
+		
+		return "{}";
 	}
 
 	public List<EmployerDto> getAll(long userId) {

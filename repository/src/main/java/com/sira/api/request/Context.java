@@ -2,8 +2,6 @@ package com.sira.api.request;
 
 import org.springframework.context.ApplicationContext;
 
-import com.google.gson.Gson;
-
 public class Context {
 
 	protected ApplicationContext applicationContext;
@@ -14,11 +12,6 @@ public class Context {
 
 	}
 
-	public Gson getGson() {
-
-		return new Gson();
-
-	}
 
 	public ApplicationContext getApplicationContext() {
 

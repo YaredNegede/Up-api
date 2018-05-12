@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.sira.model.stateschema.workbase.WorkBase;
 
-@Service
 public interface JobService {
 
 

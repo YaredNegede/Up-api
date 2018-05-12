@@ -34,5 +34,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="/service"/>
 	<classpathentry kind="src" path="/model"/>
+	<classpathentry kind="src" path="/controller"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
