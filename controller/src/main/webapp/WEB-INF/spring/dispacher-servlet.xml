@@ -9,10 +9,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
 
-	<mvc:annotation-driven/>
-	
-	<context:component-scan base-package="com.sira"/>
-	
-	<jpa:repositories base-package="com.sira.api.repository"/>
-	 
+	<mvc:annotation-driven />
+
+	<mvc:default-servlet-handler />
+
+	<context:component-scan base-package="com.sira" />
+
+	<jpa:repositories
+		base-package="com.sira.api.repository" />
+
 </beans>

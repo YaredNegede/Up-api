@@ -4,15 +4,19 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sira.dto.common.MessageDto;
 
 @Controller
+@RequestMapping("/messageController")
 public class MessageController  extends RequestController{
 	
 	private static Logger logger = Logger.getLogger(MessageController.class);
 	
 	public MessageDto getById(long id) {
+		
+		logger.info(id);
 		
 		return null;
 	}

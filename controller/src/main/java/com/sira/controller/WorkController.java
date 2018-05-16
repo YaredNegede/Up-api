@@ -3,7 +3,7 @@ package com.sira.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sira.dto.common.WorkBaseDto;
 /**
@@ -11,7 +11,7 @@ import com.sira.dto.common.WorkBaseDto;
  * @author Yared
  *
  */
-@Controller
+@RestController
 public class WorkController  extends RequestController{
 
 	private static Logger logger = Logger.getLogger(WorkController.class);
