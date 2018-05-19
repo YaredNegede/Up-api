@@ -16,7 +16,7 @@ import com.sira.dto.employee.EmployeeDto;
  */
 @RestController
 @RequestMapping("/employee")
-public class EmployeeController  extends RequestController{
+public class EmployeeController{
 
 	private static Logger logger = Logger.getLogger(EmployeeController.class);
 

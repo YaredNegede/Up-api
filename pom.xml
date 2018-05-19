@@ -47,7 +47,7 @@
 		<slf4j.version>1.7.25</slf4j.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<sira.version>0.0.1-SNAPSHOT</sira.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>5.2.16.Final</hibernate.version>
 		<atomikos.version>3.8.0</atomikos.version>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>

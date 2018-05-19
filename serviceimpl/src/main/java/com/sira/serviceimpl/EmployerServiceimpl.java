@@ -1,7 +1,5 @@
 package com.sira.serviceimpl;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +7,7 @@ import com.sira.api.repository.EmployerRepository;
 import com.sira.model.stateschema.employer.Employer;
 import com.sira.service.EmployerService;
 
-@Service("employerServiceimpl")
+@Service
 public class EmployerServiceimpl implements EmployerService{
  
 	@Autowired

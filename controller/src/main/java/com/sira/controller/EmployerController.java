@@ -1,56 +1,71 @@
 package com.sira.controller;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sira.dto.employer.EmployerDto;
+
+
 /**
- * 
- * @author Yared
+ * ----------------------
+ * -@author Yared Negede-
+ * ----------------------
  *
  */
 @RestController
-@RequestMapping("/employer")
-public class EmployerController   extends RequestController{
+public class EmployerController {
 
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 
-	public String getById(long id) {
+	
+	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void delete(@PathVariable String employeeId,BindingResult res) {
 		
-		logger.info("getting employee");
-		
+		logger.info("Inside getemployerId, returned: ");
+
+	}
+
+	@RequestMapping(value = "/employer/", method = RequestMethod.GET)
+	public String getEmployers(BindingResult res) {
+
+		logger.info("Inside getAllIssuers() method...");
+
 		return "{}";
 	}
+	
+	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.GET)
+	@ResponseBody
+	public EmployerDto getEmployer(@PathVariable("employerId") String employerId,BindingResult res) {
 
-	public List<EmployerDto> getAll(long userId) {
+		logger.info("Inside getemployerId, returned: ");
+
+		EmployerDto ret = new EmployerDto();
 		
-		return null;
+		ret.name = "yared is awesome";
+		
+		return ret ;
+
 	}
 
-	public List<EmployerDto> getAllMaching() {
+	@RequestMapping(value = "/employer/", method = RequestMethod.POST)
+	@ResponseBody
+	public EmployerDto save(@ModelAttribute("employer") EmployerDto employer,BindingResult res) {
 		
-		return null;
+		logger.info("saving "+employer);
+		
+		if(res.hasErrors()) {
+			
+		}
+		
+		return employer;
 	}
-
-	public EmployerDto save(EmployerDto t) {
-		
-		
-		return null;
-	}
-
-	public EmployerDto delete(EmployerDto t) {
-		
-		return null;
-	}
-
-	public EmployerDto deleteMaching(EmployerDto t) {
-		
-		return null;
-	}
-
 
 
 }

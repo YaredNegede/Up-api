@@ -1,7 +1,9 @@
 package com.sira.service;
 
-import com.sira.model.stateschema.common.User;
+import org.springframework.stereotype.Service;
 
+import com.sira.model.stateschema.common.User;
+@Service
 public interface UserService {
 	
 	public void signup(User user);

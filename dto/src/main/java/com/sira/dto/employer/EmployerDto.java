@@ -7,11 +7,18 @@ import com.sira.model.stateschema.common.Addres;
 
 public class EmployerDto  extends DTO{
 
-    public String name;
+	public String name;
     public String phone;
     public String contact;
     public String tradename;
     public Addres addres;
     public Account account;
+    
+	@Override
+	public String toString() {
+		 
+		return "We have found {\"name\":"+name+"}";
+		
+	}
 
 }

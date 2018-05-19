@@ -10,7 +10,7 @@ import com.sira.dto.common.MessageDto;
 
 @Controller
 @RequestMapping("/messageController")
-public class MessageController  extends RequestController{
+public class MessageController{
 	
 	private static Logger logger = Logger.getLogger(MessageController.class);
 	

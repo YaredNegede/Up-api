@@ -14,7 +14,7 @@ import com.sira.dto.common.UplancerDto;
  */
 @RestController
 @RequestMapping("/uplancerController")
-public class UplancerController   extends RequestController{
+public class UplancerController {
 
 	private static Logger logger = Logger.getLogger(UplancerController.class);
 	

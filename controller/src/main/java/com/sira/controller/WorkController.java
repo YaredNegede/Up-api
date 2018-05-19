@@ -12,7 +12,7 @@ import com.sira.dto.common.WorkBaseDto;
  *
  */
 @RestController
-public class WorkController  extends RequestController{
+public class WorkController {
 
 	private static Logger logger = Logger.getLogger(WorkController.class);
 	

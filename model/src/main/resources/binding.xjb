@@ -16,38 +16,38 @@
 
 		<hj:persistence>
 		
-			<hj:default-one-to-many fetch="EAGER">
+			<hj:default-one-to-many fetch="LAZY">
 				<orm:join-column />
 				<orm:cascade>
 					<orm:cascade-all />
 				</orm:cascade>
 			</hj:default-one-to-many>
-			<hj:default-many-to-many fetch="EAGER">
+			<hj:default-many-to-many fetch="LAZY">
 				<orm:join-table />
 				<orm:cascade>
 					<orm:cascade-merge />
 				</orm:cascade>
 			</hj:default-many-to-many>
-			<hj:default-element-collection fetch="EAGER" />
+			<hj:default-element-collection fetch="LAZY" />
 		</hj:persistence>
 
 	</jaxb:bindings>
 
 	<jaxb:bindings schemaLocation="employee.xsd" node="xs:complexType[@name='Employee']">
 		<hj:persistence>
-			<hj:default-one-to-many fetch="EAGER">
+			<hj:default-one-to-many fetch="LAZY">
 				<orm:join-column />
 				<orm:cascade>
 					<orm:cascade-all />
 				</orm:cascade>
 			</hj:default-one-to-many>
-			<hj:default-many-to-many fetch="EAGER">
+			<hj:default-many-to-many fetch="LAZY">
 				<orm:join-table />
 				<orm:cascade>
 					<orm:cascade-merge />
 				</orm:cascade>
 			</hj:default-many-to-many>
-			<hj:default-element-collection fetch="EAGER" />
+			<hj:default-element-collection fetch="LAZY" />
 		</hj:persistence>
 
 	</jaxb:bindings>
@@ -55,19 +55,19 @@
 	<jaxb:bindings schemaLocation="employer.xsd" node="xs:complexType[@name='Employer']">
 
 		<hj:persistence>
-			<hj:default-one-to-many fetch="EAGER">
+			<hj:default-one-to-many fetch="LAZY">
 				<orm:join-column />
 				<orm:cascade>
 					<orm:cascade-all />
 				</orm:cascade>
 			</hj:default-one-to-many>
-			<hj:default-many-to-many fetch="EAGER">
+			<hj:default-many-to-many fetch="LAZY">
 				<orm:join-table />
 				<orm:cascade>
 					<orm:cascade-merge />
 				</orm:cascade>
 			</hj:default-many-to-many>
-			<hj:default-element-collection fetch="EAGER" />
+			<hj:default-element-collection fetch="LAZY" />
 		</hj:persistence>
 
 	</jaxb:bindings>

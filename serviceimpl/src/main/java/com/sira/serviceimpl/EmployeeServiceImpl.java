@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.sira.api.repository.EmployeeRepository;
 import com.sira.model.stateschema.employee.Employee;
 
-@Service("employeeServiceimpl")
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired

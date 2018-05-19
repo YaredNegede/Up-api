@@ -15,7 +15,7 @@ import com.sira.model.stateschema.common.User;
  */
 @RestController
 @RequestMapping("/userController")
-public class UserController  extends RequestController{
+public class UserController {
 
 	private static Logger logger = Logger.getLogger(UserController.class);
 

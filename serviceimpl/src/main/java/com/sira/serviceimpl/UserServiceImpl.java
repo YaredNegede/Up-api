@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.sira.model.stateschema.common.User;
 import com.sira.service.UserService;
 
-@Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 
 	@Override
