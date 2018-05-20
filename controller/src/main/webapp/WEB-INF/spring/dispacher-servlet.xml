@@ -12,25 +12,29 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<mvc:annotation-driven />
-
+	<!-- 
 	<mvc:default-servlet-handler />
-
-	<context:component-scan
-		base-package="com.sira.controller" />
-
-	<context:component-scan
+ -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+		
+	<context:component-scan base-package="com.sira.api.repository" />
+	
+	<jpa:repositories
 		base-package="com.sira.api.repository" />
+
 
 	<context:component-scan
 		base-package="com.sira.service" />
+		
+	<context:component-scan
+		base-package="com.sira.serviceimpl" />
 
-	<jpa:repositories
-		base-package="com.sira.api.repository" />
-	<tx:annotation-driven
-		transaction-manager="jpatransactionManager" />
-<!-- 
-	<jpa:auditing auditor-aware-ref="auditingProvider"
-		set-dates="true" />
- -->
+	<context:component-scan
+		base-package="com.sira.controller" />
+	
+
+	<!-- <jpa:auditing auditor-aware-ref="auditingProvider" set-dates="true" 
+		/> -->
 
 </beans>

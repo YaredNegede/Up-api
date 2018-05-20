@@ -12,7 +12,7 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" /> -->
 		
-	<bean id="employerService" class="com.sira.serviceimpl.EmployerServiceimpl"/>
+	<!-- <bean id="employerService" class="com.sira.serviceimpl.EmployerServiceimpl"/> -->
 
 	<bean id="siraDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -24,7 +24,7 @@
 		<property name="password" value="123" />
 	</bean>
 
-	<bean id="jpatransactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 
 		<property name="entityManagerFactory"
