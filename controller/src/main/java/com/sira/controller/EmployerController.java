@@ -1,6 +1,7 @@
 package com.sira.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sira.dto.employer.EmployerDto;
+import com.sira.model.stateschema.employer.Employer;
+import com.sira.service.EmployerService;
 
 
 /**
@@ -23,6 +26,8 @@ public class EmployerController {
 
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 
+	@Autowired
+	EmployerService employerService;
 	
 	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -60,9 +65,17 @@ public class EmployerController {
 		
 		logger.info("saving "+employer);
 		
+//		EmployeeMapperImpl mapper = new EmployeeMapperImpl();
+		
+//		employerService.save(employer)?
+		
 		if(res.hasErrors()) {
 			
+			logger.error("error found");
+			
 		}
+		
+		employerService.save(new Employer());
 		
 		return employer;
 	}
