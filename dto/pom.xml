@@ -3,7 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<version>0.0.1-SNAPSHOT</version>
-<groupId>com.sira</groupId>
+	<groupId>com.sira</groupId>
+	<packaging>jar</packaging>
 	<artifactId>dto</artifactId>
 
 	<properties>
@@ -18,7 +19,7 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
-<!-- Jackson -->
+		<!-- Jackson -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -39,14 +40,14 @@
 			<scope>provided</scope>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>
-		
-		
+
+
 	</dependencies>
 
 	<build>
