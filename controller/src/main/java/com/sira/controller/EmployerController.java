@@ -21,6 +21,7 @@ import com.sira.service.EmployerService;
  * ----------------------
  *
  */
+@RequestMapping("service")
 @RestController
 public class EmployerController {
 
@@ -47,13 +48,13 @@ public class EmployerController {
 	
 	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.GET)
 	@ResponseBody
-	public EmployerDto getEmployer(@PathVariable("employerId") String employerId,BindingResult res) {
+	public EmployerDto getEmployer(String employerId) {
 
 		logger.info("Inside getemployerId, returned: ");
 
 		EmployerDto ret = new EmployerDto();
 		
-		ret.name = "yared is awesome";
+		ret.name = employerId;
 		
 		return ret ;
 

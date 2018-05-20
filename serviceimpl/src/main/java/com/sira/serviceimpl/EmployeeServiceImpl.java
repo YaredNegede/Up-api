@@ -14,7 +14,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public Employee save(Employee employee) {
 
-		Employee employeeSaved = this.employeeRepository.saveAndFlush(employee);
+		Employee employeeSaved =  this.getEmployeeRepository().save(employee);
 		
 		return employeeSaved;
 	}
@@ -33,6 +33,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		this.employeeRepository.deleteById(employeeId);
 		
 		return true;
+	}
+
+	public EmployeeRepository getEmployeeRepository() {
+		return employeeRepository;
 	}
 
 }

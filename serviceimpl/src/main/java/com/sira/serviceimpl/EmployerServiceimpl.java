@@ -1,22 +1,22 @@
 package com.sira.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.sira.api.repository.EmployerRepository;
 import com.sira.model.stateschema.employer.Employer;
 import com.sira.service.EmployerService;
 
-@Service
+@Component
 public class EmployerServiceimpl implements EmployerService{
  
-	@Autowired
-	EmployerRepository employerRepository;
+	@Autowired(required=true)
+	private EmployerRepository employerRepository;
 	
 	@Override
 	public Employer save(Employer employer) {
 
-		Employer employee = this.employerRepository.save(employer);
+		Employer employee = this.getEmployerRepository().save(employer);
 		
 		return employee;
 	}
@@ -36,6 +36,16 @@ public class EmployerServiceimpl implements EmployerService{
 		
 		return true;
 		
+	}
+
+	
+	public EmployerRepository getEmployerRepository() {
+		return this.employerRepository;
+	}
+
+
+	public void setEmployerRepository(EmployerRepository employerRepository) {
+		this.employerRepository = employerRepository;
 	}
 
 }
