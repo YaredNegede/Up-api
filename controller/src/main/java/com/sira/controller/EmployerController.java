@@ -29,33 +29,40 @@ public class EmployerController {
 
 	@Autowired
 	EmployerService employerService;
-	
+
 	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void delete(@PathVariable String employeeId,BindingResult res) {
-		
+
 		logger.info("Inside getemployerId, returned: ");
 
 	}
 
 	@RequestMapping(value = "/employer/", method = RequestMethod.GET)
-	public String getEmployers(BindingResult res) {
+	@ResponseBody
+	public String getEmployers() {
 
 		logger.info("Inside getAllIssuers() method...");
 
 		return "{}";
 	}
-	
+
 	@RequestMapping(value = "/employer/{employerId}", method = RequestMethod.GET)
 	@ResponseBody
-	public EmployerDto getEmployer(String employerId) {
+	public EmployerDto getEmployer(@ModelAttribute("employerId") long employerId,BindingResult res) {
 
 		logger.info("Inside getemployerId, returned: ");
 
+		if(res.hasErrors()) {
+
+			logger.error("error found");
+
+		}
+		
 		EmployerDto ret = new EmployerDto();
-		
-		ret.name = employerId;
-		
+
+		ret.name = ""+employerId;
+
 		return ret ;
 
 	}
@@ -63,21 +70,21 @@ public class EmployerController {
 	@RequestMapping(value = "/employer/", method = RequestMethod.POST)
 	@ResponseBody
 	public EmployerDto save(@ModelAttribute("employer") EmployerDto employer,BindingResult res) {
-		
+
 		logger.info("saving "+employer);
-		
-//		EmployeeMapperImpl mapper = new EmployeeMapperImpl();
-		
-//		employerService.save(employer)?
-		
+
+		//		EmployeeMapperImpl mapper = new EmployeeMapperImpl();
+
+		//		employerService.save(employer)?
+
 		if(res.hasErrors()) {
-			
+
 			logger.error("error found");
-			
+
 		}
-		
+
 		employerService.save(new Employer());
-		
+
 		return employer;
 	}
 
