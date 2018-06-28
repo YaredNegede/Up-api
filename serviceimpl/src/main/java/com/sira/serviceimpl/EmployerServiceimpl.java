@@ -1,6 +1,8 @@
 package com.sira.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.sira.api.repository.EmployerRepository;
@@ -46,6 +48,11 @@ public class EmployerServiceimpl implements EmployerService{
 
 	public void setEmployerRepository(EmployerRepository employerRepository) {
 		this.employerRepository = employerRepository;
+	}
+
+	@Override
+	public Page<Employer> viewAll(Pageable pageable) {
+		return this.getEmployerRepository().findAll(pageable);
 	}
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.sira.model.stateschema.employee.Employee;
 /**
  * 
- * @author Yared
+ * @author Yared Negede - 
  *
  */
 @Repository("employeeRepository")

@@ -1,44 +1,42 @@
 package com.sira.serviceimpl;
 
-import org.springframework.stereotype.Service;
-
-import com.sira.model.stateschema.common.User;
+import com.sira.model.stateschema.common.Users;
 import com.sira.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public void signup(User user) {
+	public void signup(Users user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void login(User user) {
+	public void login(Users user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void logout(User user) {
+	public void logout(Users user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void verify(User user) {
+	public void verify(Users user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(Users user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deactivate(User user) {
+	public void deactivate(Users user) {
 		// TODO Auto-generated method stub
 
 	}

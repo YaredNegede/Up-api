@@ -14,7 +14,7 @@
 
 	<xs:element name="Message" />
 
-	<xs:element name="user" type="User" />
+	<xs:element name="users" type="Users" />
 
 	<xs:simpleType name="ID">
 		<xs:annotation>
@@ -152,13 +152,13 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="User">
+	<xs:complexType name="Users">
 		<xs:annotation>
 			<xs:appinfo>
 				<hj:entity>
 					<orm:table>
 						<orm:unique-constraint>
-							<orm:column-name>email</orm:column-name>
+							<orm:column-name>username</orm:column-name>
 						</orm:unique-constraint>
 					</orm:table>
 				</hj:entity>
@@ -169,12 +169,18 @@
 			<xs:element name="username" type="xs:string" />
 			<xs:element name="password" type="xs:string" />
 			<xs:element name="email" type="xs:string" />
-			<xs:element name="status" type="xs:boolean" default="false" />
+			<xs:element name="enabled" type="xs:boolean" default="false" />
 			<xs:element name="statusToken" type="xs:string" />
 			<xs:element name="currentUser" type="UserBase" />
 			<xs:element name="userType" type="UserType" />
 			<xs:element name="createTime" type="xs:dateTime" />
 			<xs:element name="expireTime" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Authorities">
+		<xs:sequence>
+			<xs:element name="user" type="Users" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -204,7 +210,7 @@
 	<xs:complexType name="UserBase" abstract="true">
 		<xs:choice>
 			<xs:element name="status" type="xs:boolean" default="false" />
-			<xs:element name="user" type="User" />
+			<xs:element name="user" type="Users" />
 		</xs:choice>
 	</xs:complexType>
 

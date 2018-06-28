@@ -2,20 +2,20 @@ package com.sira.service;
 
 import org.springframework.stereotype.Service;
 
-import com.sira.model.stateschema.common.User;
+import com.sira.model.stateschema.common.Users;
 @Service
 public interface UserService {
 	
-	public void signup(User user);
+	public void signup(Users user);
 	
-	public void login(User user);
+	public void login(Users user);
 	
-	public void logout(User user);
+	public void logout(Users user);
 	
-	public void verify(User user);
+	public void verify(Users user);
 	
-	public void update(User user);
+	public void update(Users user);
 	
-	public void deactivate(User user);
+	public void deactivate(Users user);
 
 }

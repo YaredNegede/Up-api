@@ -8,13 +8,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ControllerTest {
 
-	ApplicationContext context = new ClassPathXmlApplicationContext("spring/dispacher-servlet.xml","spring/jpaContexts.xml");
+	ApplicationContext context = new ClassPathXmlApplicationContext("spring/dispacher-servlet.xml", "spring/jpaContexts.xml");
 
 	@Test
 	public void test() {
 		
+		String[] beans =  context.getBeanDefinitionNames();
 		
-		Assert.assertTrue(true);
+		for (String b : beans) {
+			System.out.println(b);
+		}
+		
+		Assert.assertNotNull(beans);
 		
 	}
 

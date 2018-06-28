@@ -28,7 +28,7 @@
 		<center>
 
 			<p>
-				<form method="post" action="/controller/employer">
+				<form method="post" action="/controller/service/employer">
 				
 					<button type="submit" value="submit" onclick="postEmployer()">employer</button>
 					
@@ -94,9 +94,16 @@
 
 	<div id="footer" class="header"></div>
 	<script>
-	
+	var minAjax;
+	var config={
+			url:"/controller/service/employer/",
+			type:"POST"
+	};
+	minAjax = new minAjax(config);
 	function postEmployer() {
-		alert();
+	
+		minAjax.post();
+
 	}
 
 </script>
