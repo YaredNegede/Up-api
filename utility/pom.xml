@@ -6,12 +6,12 @@
 	<artifactId>utility</artifactId>
 	<version>1.12.1-SNAPSHOT</version>
 	
-	<parent>
+	<!-- <parent>
 		<groupId>com.sira</groupId>
 		<artifactId>sira</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
+ -->
 	<dependencies>
 	
 		<dependency>

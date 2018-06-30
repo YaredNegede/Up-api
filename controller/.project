@@ -3,11 +3,11 @@
   <name>controller</name>
   <comment>sira. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
-    <project>dto</project>
+    <project>repository</project>
     <project>model</project>
+    <project>dto</project>
     <project>serviceimpl</project>
     <project>service</project>
-    <project>repository</project>
   </projects>
   <buildSpec>
     <buildCommand>

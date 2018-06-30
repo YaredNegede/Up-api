@@ -20,7 +20,8 @@ public class HTMLParser {
 
 		File f = new File("src/test/resources/d9e8a9dd-4d53-4915-9568-b520fbaaed34.json");
 		
-
+		doc.select("p").forEach(System.out::println);
+/*
 		for (Element el : newsHeadlines) {
 			
 			System.err.println(el.data());			
@@ -29,7 +30,7 @@ public class HTMLParser {
 			
 			wr.write(el.data());
 
-		}
+		}*/
 
 	}
 	

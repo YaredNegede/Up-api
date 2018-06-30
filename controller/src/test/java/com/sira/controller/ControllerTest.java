@@ -10,7 +10,7 @@ public class ControllerTest {
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring/dispacher-servlet.xml", "spring/jpaContexts.xml");
 
-	@Test
+//	@Test
 	public void test() {
 		
 		String[] beans =  context.getBeanDefinitionNames();

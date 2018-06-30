@@ -11,7 +11,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring/spring-security.xml,
+		 	/WEB-INF/spring/spring-security.xml,
 			/WEB-INF/spring/jpaContexts.xml
 		</param-value>
 	</context-param> 
@@ -22,7 +22,7 @@
 	</listener>
 
   
-	<filter>
+	<!-- <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -30,7 +30,19 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/service/*</url-pattern>
-	</filter-mapping> 
+	</filter-mapping>  -->
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<async-supported>true</async-supported>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+   	    <dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
  
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>

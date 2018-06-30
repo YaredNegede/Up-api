@@ -16,7 +16,7 @@
 		<module>controller</module>
 		<module>dto</module>
 		<module>serviceimpl</module>
-		<module>utility</module>
+		<!-- <module>utility</module> -->
 	</modules>
 
 	<properties>
