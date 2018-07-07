@@ -17,6 +17,8 @@
 		<module>dto</module>
 		<module>serviceimpl</module>
 		<!-- <module>utility</module> -->
+		
+		<module>uplancer</module>
 	</modules>
 
 	<properties>
@@ -313,8 +315,8 @@
 						<execution>
 							<id>findbugs</id>
 							<goals>
-								<goal>check</goal>
-								<!-- <goal>findbugs</goal> -->
+								<!-- <goal>check</goal> -->
+								 <goal>findbugs</goal> 
 							</goals>
 						</execution>
 					</executions>
@@ -594,15 +596,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- <dependency> <groupId>org.checkerframework</groupId> <artifactId>checker-qual</artifactId> 
-			<version>2.5.1</version> </dependency> <dependency> <groupId>org.checkerframework</groupId> 
-			<artifactId>checker</artifactId> <version>2.5.1</version> </dependency> -->
-
-		<dependency>
-			<groupId>org.checkerframework</groupId>
-			<artifactId>jdk8</artifactId>
-			<version>2.5.1</version>
-		</dependency>
 	</dependencies>
 
 </project>

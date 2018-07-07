@@ -95,4 +95,8 @@ public class EmployerController<EmployerDto> {
 	
 	}
 
+	public static void setLogger(Logger logger) {
+		EmployerController.logger = logger;
+	}
+
 }

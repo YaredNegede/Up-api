@@ -3,13 +3,13 @@ package com.sira.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.sira.api.repository.EmployerRepository;
 import com.sira.model.stateschema.employer.Employer;
 import com.sira.service.EmployerService;
 
-@Component
+@Service
 public class EmployerServiceimpl implements EmployerService{
  
 	@Autowired(required=true)

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sira.model.stateschema.employer.Employer;
 
-@Service("employerService")
+@Service
 public interface EmployerService {
 
 	@Transactional

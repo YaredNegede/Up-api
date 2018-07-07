@@ -5,6 +5,7 @@
 	<artifactId>controller</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>controller</name>
 
 	<parent>
 		<groupId>com.sira</groupId>
@@ -13,6 +14,12 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>runtime</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.sira</groupId>
@@ -25,11 +32,8 @@
 			<artifactId>dto</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sira</groupId>
-			<artifactId>serviceimpl</artifactId>
-			<scope>runtime</scope> 
-		</dependency>
+		<!-- <dependency> <groupId>com.sira</groupId> <artifactId>serviceimpl</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>com.sira</groupId>
@@ -46,13 +50,20 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>5.0.5.RELEASE</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.0.5.RELEASE</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>5.0.5.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -133,8 +144,8 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<scope>runtime</scope>
 			<version>${spring.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -150,21 +161,24 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>mysql</groupId>

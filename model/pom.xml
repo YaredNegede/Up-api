@@ -189,13 +189,6 @@
 			<version>0.6.2</version>
 		</dependency>
 
-	<!-- 	<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			
-			<version>3.5.1-Final</version>
-		</dependency> -->
-
 		<dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
@@ -207,8 +200,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-
-
+		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

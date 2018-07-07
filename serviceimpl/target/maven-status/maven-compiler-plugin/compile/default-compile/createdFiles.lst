@@ -1,7 +1,3 @@
-com/sira/serviceimpl/UserServiceImpl.class
-com/sira/serviceimpl/util/UserDetail.class
-com/sira/serviceimpl/EmployeeServiceImpl.class
-com/sira/serviceimpl/JobServiceimpl.class
-com/sira/serviceimpl/util/UserServiceImpl.class
-com/sira/serviceimpl/MessageServiceimpl.class
 com/sira/serviceimpl/EmployerServiceimpl.class
+com/sira/serviceimpl/MessageServiceimpl.class
+com/sira/serviceimpl/EmployeeServiceImpl.class
