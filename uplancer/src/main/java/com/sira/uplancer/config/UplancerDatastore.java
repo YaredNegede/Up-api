@@ -18,7 +18,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.sira.model","com.sira.service","com.sira.controller" })
+@ComponentScan({"com.sira.service","com.sira.api,repository" })
 @PropertySource(value = { "classpath:application.properties" })
 @EnableJpaRepositories("com.sira.api.repository")
 public class UplancerDatastore {

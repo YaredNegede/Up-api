@@ -13,11 +13,8 @@
 		<module>model</module>
 		<module>repository</module>
 		<module>service</module>
-		<module>controller</module>
 		<module>dto</module>
 		<module>serviceimpl</module>
-		<!-- <module>utility</module> -->
-		
 		<module>uplancer</module>
 	</modules>
 
@@ -212,7 +209,7 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.6</version>
 					<configuration>
-						<failOnMissingWebXml>true</failOnMissingWebXml>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
 						<webResources>
 							<resource>
 								<directory>${basedir}/src/main/webapp/WEB-INF</directory>

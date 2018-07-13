@@ -15,7 +15,7 @@ import com.sira.model.stateschema.employee.Employee;
  *
  */
 @RestController("userController")
-@RequestMapping("/services/user/")
+@RequestMapping("/api/user")
 public class UserController {
 
 	private static Logger logger = Logger.getLogger(UserController.class);
