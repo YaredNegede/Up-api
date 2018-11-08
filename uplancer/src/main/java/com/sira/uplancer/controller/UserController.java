@@ -1,6 +1,8 @@
 package com.sira.uplancer.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +22,7 @@ public class UserController {
 
 	private static Logger logger = Logger.getLogger(UserController.class);
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public Employee getById(long id) {
 		
 		logger.info("getting user ["+id+" ]");
@@ -28,19 +30,19 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping(value = "/signup",  method = RequestMethod.POST)
+	@PostMapping(value = "/signup")
 	public Users signup(Users user) {
 		
 		return null;
 	}
 
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	@PostMapping(value = "/login")
 	public Users login(Users user) {
 		
 		return null;
 	}
 	
-	@RequestMapping(value = "/forget", method = RequestMethod.POST)	
+	@PostMapping(value = "/forget")	
 	public Users forget(Users user) {
 		
 		return null;

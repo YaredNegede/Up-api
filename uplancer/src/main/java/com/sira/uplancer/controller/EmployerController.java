@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sira.dto.employer.EmployerDto;
 import com.sira.model.stateschema.employer.Employer;
 import com.sira.service.EmployerService;
 
@@ -29,14 +29,14 @@ import com.sira.service.EmployerService;
  */
 @RestController("employerController")
 @RequestMapping("/api/employer")
-public class EmployerController<EmployerDto> {
+public class EmployerController {
 
 	private static Logger logger = Logger.getLogger(EmployerController.class);
 
 	@Autowired
 	EmployerService employerService;
 
-	@DeleteMapping(value = "/{employerId}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{employerId}")
 	public void delete(@PathVariable Long employeeId) {
 
 		logger.info("deleting employer "+employeeId);
@@ -45,7 +45,7 @@ public class EmployerController<EmployerDto> {
 
 	}
 
-	@GetMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/")
 	@ResponseBody
 	public List<EmployerDto> getEmployers() {
 
@@ -62,18 +62,18 @@ public class EmployerController<EmployerDto> {
 		return employerDtos;
 	}
 
-	@GetMapping(value = "/{employerId}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{employerId}")
 	public EmployerDto getEmployer(@PathVariable long employerId) {
 
 		logger.info("Inside getemployerId, returned: ");
 
-//		EmployerDto ret = new EmployerDto();
-
-		return null ;
+		EmployerDto ret = new EmployerDto();
+		
+		return ret ;
 
 	}
 
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping
 	public EmployerDto save(EmployerDto employer) {
 
 		logger.info("saving "+employer);

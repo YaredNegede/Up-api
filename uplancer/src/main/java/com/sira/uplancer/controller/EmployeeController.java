@@ -1,8 +1,10 @@
 package com.sira.uplancer.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,21 +26,21 @@ public class EmployeeController {
 
 	@GetMapping(value = "/{employeeId}")
 	@ResponseBody
-	public String getById(long id) {
+	public String getById(@PathVariable Long employeeId) {
 
-		logger.info("getting employee");
+		logger.info("getting employee" + employeeId);
 
 		return "";
 	}
 
 	@GetMapping
 	@ResponseBody
-	public String getAll(long userId) {
+	public String getAll(@PathVariable Long userId) {
 		logger.info("getting employee");
 		return "";
 	}
 
-	@PostMapping()
+	@PostMapping
 	@ResponseBody
 	public String save(EmployeeDto t) {
 

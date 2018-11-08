@@ -18,7 +18,7 @@ public class MessageController{
 	
 	private static Logger logger = Logger.getLogger(MessageController.class);
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public MessageDto getById(long id) {
 		
 		return null;
